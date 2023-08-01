@@ -1,38 +1,139 @@
-.App {
-  text-align: center;
+
+
+
+
+
+.dh11 {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./images/ob2.webp");
+  background-size: cover;
+}
+.dh1{
+  position: fixed;
+  width: 100vw;
+  z-index: 3;
+  backdrop-filter: blur(4px);
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dh1 h1{
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.hn1{
+  background: rgb(0, 0, 0 , 0.5);
+  height: 15vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.hn1 #a1{
+  color:#FFCF00;
+  text-decoration: solid;
+  font-weight: bolder;
+  font-size: xx-large;
+  
+}
+
+.hn1 #a1:hover{
+  color: #ffdc3d;
+  font-size: 2.5rem;
+}
+
+.dh2{
+  width: 20vw;
+}
+
+.dh2 a{
+  color: white;
+}
+.dh2 a:hover{
+  color:#FFCF00;
+  font-size: large;
+}
+
+/* Product Component */
+
+.dp1{
+  background: #acacac;
+  padding: 15px;
+  padding-top: 20vh;
+  
+}
+
+
+
+.dp1 h1 , .cd2 h1{
+  color: #FFCF00;
+  -webkit-text-stroke: black;
+  -webkit-text-stroke-width: 0.5px;
+  letter-spacing:2px;
+  background: #616161;
+  box-shadow: 0px 10px 0px rgb(232, 232, 232);
+  padding-left: 7px;
+}
+
+
+
+.fd1{
+  list-style: none;
+}
+
+.fd1 a{
+  text-decoration: none;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar-nav > .active > a {
+  color: red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bgd1 {
+  width: 100vw;
+  /* height: 100vh; */
+  background-image: url("./images/bg2.jpg");
+  /* background-size: cover; */
+  background-repeat: repeat-y;
+  /* background-position:bottom; */
+}
+
+/* Cart */
+.cd1{
+  margin-top: 15vh;
+}
+
+.cd2{
+  padding-top: 20vh;
+}
+
+/* Login */
+.ld1{
+  padding-top: 20vh;
+}
+
+.ld2{
+  height: 85vh;
+}
+
+/* BAnana */
+
+.fb1{
+  padding-top: 15vh;
+}
+
+.c1{
+color: yellow;
+}
+
+.dh7{
+  list-style: none;
+}
+
+/* Badge */
+.db1{
+  position: relative;
+  bottom : 5px  ;
+  left: 15px;
+}
+::-webkit-scrollbar {
+  width: 0px;
 }
