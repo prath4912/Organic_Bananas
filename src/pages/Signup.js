@@ -15,7 +15,7 @@ function Signup() {
         e.preventDefault();
 
         
-        const data = await axios.post("http://localhost:5000/api/auth/createuser" ,{
+        const data = await axios.post("http://192.168.80.79:5000/api/auth/createuser" ,{
         name : credentials.name , email : credentials.email , password : credentials.password
           }, {
             headers: {
@@ -58,7 +58,7 @@ function Signup() {
 
                              </div> 
                              <div className='form-floating mt-2'>
-                             <input type="text" className="form-control" id="pasword" onChange={onChange1} value={credentials.password}  name='password' placeholder="name@example.com" />
+                             <input type="password" className="form-control" id="pasword" onChange={onChange1} value={credentials.password}  name='password' placeholder="name@example.com" />
                              <label htmlFor="password">Enter Password</label>
 
                              </div> 

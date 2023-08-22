@@ -3,7 +3,7 @@ import { Link ,useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import { useState } from "react";
 
-const Login = () => {
+const Login = (props) => {
 
     const [credentials, setCredentials] = useState({  email: "", password: "" }) 
     let history = useHistory();
@@ -23,11 +23,37 @@ const Login = () => {
         if (json.success){
             // Save the auth token and redirect
             localStorage.setItem('token', json.authtoken); 
+            props.setcount(props.count+1) ;
+
             history.push("/home");
         }
         else{
             alert("Invalid credentials");
         }
+    }
+    const handleadminlogin = async (e)=>{
+
+        e.preventDefault();
+
+        const data = await axios.post("http://localhost:5000/api/admin/login" ,{
+         email : credentials.email , password : credentials.password
+          }, {
+            headers: {
+              'Content-Type': 'application/json'
+            }}) ;
+
+        const json = await data.data
+        if (json.success){
+            // Save the auth token and redirect
+            localStorage.setItem('token', json.authtoken); 
+            localStorage.setItem("admin" ,true) ;
+            props.setcount(props.count+1) ;
+            history.push("/dashboard");
+        }
+        else{
+            alert("Invalid credentials");
+        }
+
     }
 
     const onChange1 = (e)=>{
@@ -47,11 +73,11 @@ const Login = () => {
     return (
         <div className="d-flex justify-content-center ld1">
            
-            <form onSubmit={handlelogin} >
+            <form onSubmit={props.title==="Login" ? handlelogin : handleadminlogin} >
                 <div className="w-100">
                 {/* <div className=" position-absolute top-50 start-50 translate-middle  "> */}
                     <div className="rounded-3 bg-warning p-4">
-                        <h5>Login</h5>
+                        <h5>{props.title}</h5>
                 <div className="mb-3 ">
                     <label htmlFor="email" className="form-label">
                         Email address

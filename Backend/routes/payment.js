@@ -4,6 +4,9 @@ const crypto = require("crypto") ;
 const PAYMENT = require("../models/PayId") ;
 const Order = require("../models/Orders") ;
 const dotenv =  require("dotenv") ; 
+const order = require("../models/Orders");
+const fetchuser = require("../middleware/fetchuser");
+const { error } = require("console");
 
 dotenv.config({path : "./config/config.env"}) ;
 
@@ -16,6 +19,7 @@ var instance = new Razorpay({
   }); 
  
 
+
 router.post('/checkout' , async (req,res)=>{
     var options = {
                 amount: Number( req.body.amount*100),  
@@ -25,16 +29,17 @@ router.post('/checkout' , async (req,res)=>{
                 receipt: "order_rcptid_11"
               };
               const order = await instance.orders.create(options);
-              // console.log(order) ;
+              console.log(order) ;
               res.status(200).json({
                 success: true,
                 order
               } ) ;
 }) ;
 
-router.post("/paymentv" ,  async (req , res)=>{
+
+router.post("/paymentv" , fetchuser ,  async (req , res)=>{
     console.log(req.body);
-    const {razorpay_payment_id , razorpay_order_id , razorpay_signature  } = req.body ;
+    const {razorpay_payment_id , razorpay_order_id , razorpay_signature ,add1 ,cart1 } = req.body ;
     const body = razorpay_order_id + "|" + razorpay_payment_id ;
 
     const generated_signature = crypto
@@ -45,15 +50,31 @@ router.post("/paymentv" ,  async (req , res)=>{
         const isMatch = razorpay_signature===generated_signature ;
         if(isMatch)
         {
-          await PAYMENT.create({ 
+          const pay = await PAYMENT.create({ 
             razorpay_payment_id , razorpay_order_id , razorpay_signature
           }) ;
+          console.log("payment created") ;
 
+          try{
+            const cart = JSON.parse(cart1) ;
+          const order = await Order.create({
+            products : cart[0].product._id , payment : pay.id , buyer : req.user.id , pay_status : true ,
+          })
+          console.log(order) ;
+          }catch(error){
+            console.log(error) ;
+          }
           
-        res.redirect(`http://localhost:3000/payment?referance=${razorpay_payment_id}`)
+        res.status(200).json({success:true} );
           
         }else
         {
+          const cart = JSON.parse(cart1) ;
+
+          const order = await Order.create({
+            products :cart[0].product._id , payment : null , buyer : req.user.id , pay_status : true ,
+          })
+          console.log(order);
           res.status(400).json({
             success:false ,
           });

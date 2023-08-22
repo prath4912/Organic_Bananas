@@ -4,7 +4,7 @@ import useQuery from '../hooks/useQuery'
 export default function Paymentsucces() {
     const query = useQuery() ;
     const ref = query.get("referance") ;
-    console.log(ref) ;
+    console.log('evavf');
   return (
     <div>
         <div className='h-50'>

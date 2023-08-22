@@ -1,34 +1,37 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const fruitschema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+  desc: {
+    type: String,
+  },
+  image: {
+    data : Buffer,
+    contentType : String ,
+  },
+  stock :{
+    type: Number
+  },
+  available : {
+    type : Boolean ,
+    default : true
+  },
+  rating: {
+    type: Number,
+  },
+  reviews: {
+    type: Array,
+  },
 
-    name : {
-        type : String ,
-        required : true ,
-        
-    },
-    amount: {
-        type :Number ,
-        required : true ,
-    },
-    desc : {
-        type : String ,
-    },
+  
+});
+const Fruit = mongoose.model("Fruit", fruitschema);
 
-    rating : {
-        type : Number 
-    },
-
-    reviews : {
-        type : Array
-    }
-
-    // available : {
-
-    // }
-
-}); 
-const Fruit = mongoose.model('Fruit', fruitschema );
-
-module.exports = Fruit ;
-
+module.exports = Fruit;

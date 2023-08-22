@@ -40,7 +40,7 @@
 }
 
 .dh2{
-  width: 20vw;
+  width: 40vw;
 }
 
 .dh2 a{
@@ -67,11 +67,16 @@
   -webkit-text-stroke: black;
   -webkit-text-stroke-width: 0.5px;
   letter-spacing:2px;
-  background: #616161;
-  box-shadow: 0px 10px 0px rgb(232, 232, 232);
+  /* box-shadow: 0px 10px 0px rgb(232, 232, 232); */
+
   padding-left: 7px;
 }
 
+.dp21{
+  background: #616161;
+
+
+}
 
 
 .fd1{
@@ -133,6 +138,28 @@ color: yellow;
   position: relative;
   bottom : 5px  ;
   left: 15px;
+}
+
+.dd1{
+  padding-top: 15vh;
+}
+
+
+/* input[type="file"] {
+  display: none;
+} */
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+
+}
+
+/* Map */
+.map-container{
+  width: 50vh;
+  height: 50vh;
 }
 ::-webkit-scrollbar {
   width: 0px;
