@@ -12,7 +12,9 @@ const Login = (props) => {
 
         e.preventDefault();
 
-        const data = await axios.post("http://localhost:5000/api/auth/login" ,{
+        // const data = await axios.post("http://localhost:5000/api/auth/login" ,{
+            const data = await axios.post("https://ob-1.onrender.com/api/auth/login" ,{
+
          email : credentials.email , password : credentials.password
           }, {
             headers: {
@@ -35,7 +37,9 @@ const Login = (props) => {
 
         e.preventDefault();
 
-        const data = await axios.post("http://localhost:5000/api/admin/login" ,{
+        // const data = await axios.post("http://localhost:5000/api/admin/login" ,{
+            const data = await axios.post("https://ob-1.onrender.com/api/admin/login" ,{
+
          email : credentials.email , password : credentials.password
           }, {
             headers: {

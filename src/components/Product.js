@@ -33,9 +33,9 @@ try{
 
 
   return (
-    <div>
-      <div className="col ">
-    <div className="dp4 card h-100">
+    <div className='my-3 mx-2 dp4'>
+      <div className="">
+    <div className=" card h-100">
   
       <Link to={`/${props.name}`} ><img src={url ? url : ob1} height={"300px"} className="card-img-top" alt="..."  /></Link>
 

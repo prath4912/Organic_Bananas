@@ -27,7 +27,9 @@ export default function Fruitstate(props) {
       setpage(page+1) ;
       if(s1!=null)
       {
-      var url = `http://localhost:5000/api/admin/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}` }else
+      // var url = `http://localhost:5000/api/admin/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}` }else
+      var url = `https://ob-1.onrender.com/api/admin/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}` }else
+
       {
        const  url = `http://localhost:5000/api/admin/getproduct?amount[lte]=${fi1}&page=${page}` ;
       }

@@ -42,10 +42,10 @@ import Spinner from '../components/Spinner';
 
   return (
     <div className='bgd1 dp1'>
-    <div className='dp2 container'>
-      <div className='d-flex dp21'>
-        <h1 className='w-100'>Products </h1>
-        <div className="dropdown">
+    <div className='dp2 container '>
+      <div className='d-flex dp21 bg-dark'>
+        <h1 className='w-100 '>Products </h1>
+        <div className="dropdown dn">
   <button className="btn btn-secondary dropdown-toggle mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     Sort By
   </button>
@@ -58,7 +58,7 @@ import Spinner from '../components/Spinner';
 
   </ul>
   </div>
-  <div className="dropdown">
+  <div className="dropdown dn">
   <button className="btn btn-secondary dropdown-toggle mt-2 mx-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     Fliter
   </button>
@@ -76,6 +76,7 @@ import Spinner from '../components/Spinner';
   </div>
   
 </div>
+  <div>
   <InfiniteScroll
   dataLength={a.product_list.length} //This is important field to render the next data
   next={a.fetchData}
@@ -83,12 +84,14 @@ import Spinner from '../components/Spinner';
   loader={<Spinner/>}
   endMessage={
     <p style={{ textAlign: 'center' }}>
-      <b>Yay! You have seen it all</b>
+      <p className='fw-bold mt-2 p-3 bg-dark text-light'>You are done with all Products!!</p>
     </p> 
   }
   
 >
-<div className=" row row-cols-1 row-cols-md-3 g-4">
+  <div className='mad'>
+
+<div className="d-flex flex-wrap justify-content-start">
 
       {a.product_list.map( (product , index)=>
       { 
@@ -100,13 +103,14 @@ import Spinner from '../components/Spinner';
 
   }
       )}
+      </div>
+
 </div>
 
 </InfiniteScroll>
 
 
-
-
+</div>
     </div>
     </div>
   )

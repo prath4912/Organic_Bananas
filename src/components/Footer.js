@@ -10,6 +10,8 @@ export default function Footer() {
             <li><a className='text-black' href="#"><img src="" alt="" />InstaGram</a></li>
             <li><a className='text-black' href="#"><img src="" alt="" />Linkedin</a></li>
             <li><a className='text-black' href="#"><img src="" alt="" />Whatsapp</a></li>
+            <Link className='link-primary m-0 p-0 ' to="/contact_us" >Contact US</Link>
+
          </div>
 
          <div className='  text-black text-center p-2'>© 1996-2023, Amazon.com, Inc. or its affiliates</div>

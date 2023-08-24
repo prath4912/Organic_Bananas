@@ -15,6 +15,7 @@ import {
   Route,
    
 } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login"
 import { useState } from "react";
@@ -26,6 +27,7 @@ import A_Header from "./admin_pages/A_Header" ;
 import Spinner from "./components/Spinner";
 import Map from "./components/Map";
 import { useEffect } from "react";
+import Contact from "./pages/Contact_us"
 
 function App() {
 
@@ -38,8 +40,10 @@ function App() {
 
   const checkoutHandler = async(amount ,add1 ,cart)=>{
 
-    const {data:{key}} = await axios.get("http://localhost:5000/api/key") ;
-    const {data:{order}} = await axios.post("http://localhost:5000/checkout" ,{
+    // const {data:{key}} = await axios.get("http://localhost:5000/api/key") ;
+    // const {data:{order}} = await axios.post("http://localhost:5000/checkout" ,{
+      const {data:{key}} = await axios.get("https://ob-1.onrender.com/api/key") ;
+    const {data:{order}} = await axios.post("https://ob-1.onrender.com/checkout" ,{
       amount 
     }) ;
 
@@ -54,19 +58,20 @@ function App() {
       handler: async function (response){
 
         let cart1 =JSON.stringify(cart) ;
-      const {data} =  await axios.post("http://localhost:5000/paymentv" ,{
+      // const {data} =  await axios.post("http://localhost:5000/paymentv" ,{
+        const {data} =  await axios.post("https://ob-1.onrender.com/paymentv" ,{
+
     razorpay_payment_id: response.razorpay_payment_id ,razorpay_order_id:response.razorpay_order_id , razorpay_signature :response.razorpay_signature , add1 , cart1 
   },{
             headers: {
               'auth-token': localStorage.getItem("token") 
             }}) ;
-  console.log(data);
   if(data.success)
   {
+    toast.success("Payment Succesful") ;
+
+      localStorage.setItem("cart" , JSON.stringify([])) ;
       window.location.href = `/payment?referance=${response.razorpay_payment_id}` ;
-  }else
-  {
-    console.log("no")
   }
 
 },
@@ -87,17 +92,25 @@ function App() {
   var rzp1 = new window.Razorpay(options);
 
   rzp1.on('payment.failed', function (response){
-    alert(response.error.code);
-    alert(response.error.description);
-    alert(response.error.source);
-    alert(response.error.step);
-    alert(response.error.reason);
-    alert(response.error.metadata.order_id);
-    alert(response.error.metadata.payment_id);
+    // alert(response.error.code);
+    // alert(response.error.description);
+    // toast((t) => (
+    //   <span>
+    //     <b>bold</b>
+    //     <p>{response.error.description}</p>
+    //     <button onClick={() => toast.dismiss(t.id)}>
+    //       Dismiss
+    //     </button>
+    //   </span>
+    // ));
+    // alert(response.error.source);
+    // alert(response.error.step);
+    // alert(response.error.reason);
+    // alert(response.error.metadata.order_id);
+    // alert(response.error.metadata.payment_id);
 });
 
       rzp1.open();
-    console.log(order) ;
   }
 
 
@@ -134,6 +147,9 @@ function App() {
         </Route>
         <Route path="/dashboard">
           <Dashboard/>
+        </Route>
+        <Route path="/contact_us">
+          <Contact/>
         </Route>
         <Route path="/">
           <Hone />

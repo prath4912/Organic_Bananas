@@ -15,7 +15,9 @@ function Signup() {
         e.preventDefault();
 
         
-        const data = await axios.post("http://192.168.80.79:5000/api/auth/createuser" ,{
+        // const data = await axios.post("http://192.168.80.79:5000/api/auth/createuser" ,{
+            const data = await axios.post("https://ob-1.onrender.com/api/auth/createuser" ,{
+
         name : credentials.name , email : credentials.email , password : credentials.password
           }, {
             headers: {
@@ -39,8 +41,8 @@ function Signup() {
         <div>
             <div className="d-flex justify-content-center ld1">
 
-                <form onSubmit={handlesignup} className='w-25' >
-                    <div className="">
+                <form onSubmit={handlesignup} className='' >
+                    <div className="w-100">
                         {/* <div className=" position-absolute top-50 start-50 translate-middle  "> */}
                         <div className=" rounded-3 bg-warning p-4">
                             <h5>Sign Up</h5>

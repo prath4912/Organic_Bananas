@@ -8,10 +8,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
-    <Toaster
+    <Toaster 
+     
       toastOptions={{
     // Define default options
-    className: '',
+    className: 'z-5',
     duration: 5000,
     style: {
       background: '#FFCF00',

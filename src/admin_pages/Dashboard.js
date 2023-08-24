@@ -26,8 +26,10 @@ export default function Dashboard() {
       });
     
 
-      const data = await axios.post("http://localhost:5000/api/admin/insert"   ,
+      // const data = await axios.post("http://localhost:5000/api/admin/insert"   ,
+      const data = await axios.post("https://ob-1.onrender.com/api/admin/insert"   ,
       {name : fruit_data.name , amount : fruit_data.amount , desc : fruit_data.desc , stock : fruit_data.stock },{
+
         headers: {
           'Content-Type': 'application/json'
         }}) ;  

@@ -7,11 +7,11 @@ export default function Paymentsucces() {
     console.log('evavf');
   return (
     <div>
-        <div className='h-50'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quidem consequatur eum eius vero exercitationem iure nisi nemo, harum, explicabo iste. Doloribus aperiam ullam commodi, corporis tempora mollitia nesciunt nemo ipsum adipisci error quaerat, in at ad enim repellat, ex deserunt eum nihil atque architecto harum autem dolorem provident quam. Porro, delectus aliquam ipsum est, alias ipsa possimus saepe eum voluptates dolore a doloremque, libero dolorum consequatur sequi fugit quaerat.
+        <div className='text-center bg-warning' style={{paddingTop : "16vh"}}>
+        <h3 className=' bg-dark  text-light  p-3 text-center'>Order Completed </h3>
+        <button className='btn btn-dark my-5'>view Order</button>
+        <p className='p-3 text-dark fw-bold '>Payment ID : {ref}</p>
         </div>
-        <h1>Order Completed </h1>
-      <div>{ref}</div>
     </div> 
   )
 }

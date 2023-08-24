@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Fruitcontext from "../context/Fruitcontext";
 import { useContext } from "react";
 import bg1 from "../images/ORGABIC.png"
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function Cart(props) {
 
@@ -26,8 +27,8 @@ function Cart(props) {
       <div className="p-3 container bg-dark">
         <h1>Items </h1>
 
-        <div className="row">    
-        <div className="col-9">
+        <div className="d-flex flex-row flex-wrap justify-content-center ">    
+        <div className="flex-grow-1 ml">
         {a.cart.length ? (
           
           a.cart.map((cart, index) => {
@@ -36,21 +37,23 @@ function Cart(props) {
             
 
             return (
+              <div className="container-fluid">
               <div className=" card mb-3" style={{ maxWidth: "100%" }}>
-                <div className="row g-0">
-                  <div className="col-md-2">
+                <div className="d-flex flex-row g-0">
+                  <div className="">
                     <img
                       src={bg1}
-                      className="img-fluid rounded-start"
+                      className="img rounded-start"
                       alt="..."
+                      width={130}
                     />
                   </div>
-                  <div className="col-md-10">
+                  <div className="">
                     <div className="card-body">
                       <h5 className="card-title"> <b>{cart.product.name}</b> </h5>
                     </div>
-                    <div className="d-flex pt-5">
-                    <div className="me-3 ms-2" >
+                    <div className="d-flex  flex-wrap">
+                    <div className="d-flex me-3 mb-1 ms-2" >
                       <button
                         className="btn btn-warning  btn-sm rounded-circle border-black mx-1"
                         onClick={() => {
@@ -70,6 +73,7 @@ function Cart(props) {
                         +
                       </button>{" "}
                     </div>
+                    <div>
                     <button
                       onClick={() => {a.removehandle(index) } }
                       className="btn btn-sm btn-warning border-black mx-2 "
@@ -77,29 +81,36 @@ function Cart(props) {
                       Remove
                     </button>
                     </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            )
+              </div> )
           })
         ) : (
-          <div style={{ color: "white" }}>Cart Is Empty </div>
+          <div className="h-75" style={{ color: "white" }}> <p>Cart Is Empty</p>  
+          <div  className="h-50 d-flex justify-content-center align-items-center">
+           <Link to="/products" type="button"className="border-white text-center btn btn-warning ">Shop Now</Link>
+           </div>
+           
+           </div>
         )}</div> 
         
-        <div className="col  ">
-          <div className="card px-4 pb-5 border border-black" >
+        <div className="">
+          <div className="  card px-4 pb-5 border border-black" >
             <div className="card-body">
               <h5 className="card-title">Cart Details</h5>
               <p className="card-text">Total Items : {t_quantity}</p>
               <p className="card-text">Total Price : {total_cost}</p>
-              <button
+              {a.cart.length ? <button
                   type="button"
-                  className="btn btn-primary btn-sm"
+                  className="btn btn-warning border-black btn-sm"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
                 >
                   Proceed To Buy
-                </button>
+                </button> : <Link type="button"to="/products"
+                  className="border-dark btn btn-warning btn-sm">Shop Now</Link>}
               <p className="mt-2 card-text"><small className="text-body-secondary">Happy Health</small></p>
             </div>
           </div>
