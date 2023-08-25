@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link ,useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import OTPInput, { ResendOTP } from "otp-input-react";
+// import OTPInput, { ResendOTP } from "otp-input-react";
 import axios from "axios";
 
 

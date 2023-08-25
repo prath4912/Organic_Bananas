@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import Fruitcontext from './Fruitcontext'
 import axios from "axios";
 
@@ -8,7 +8,7 @@ export default function Fruitstate(props) {
   const [product_list , setproduct_list] = useState([]) ; 
   const [q1 , setq1] = useState(0) ;
 
-  const[total_page  , settotalpage] = useState(0) ;
+  // const[total_page  , settotalpage] = useState(0) ;
 
   const[total_fruits , settf] = useState(0) ;
   const[cart , setcart] = useState([]) ;
@@ -31,7 +31,7 @@ export default function Fruitstate(props) {
       var url = `https://ob-1.onrender.com/api/admin/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}` }else
 
       {
-       const  url = `http://localhost:5000/api/admin/getproduct?amount[lte]=${fi1}&page=${page}` ;
+         url = `http://localhost:5000/api/admin/getproduct?amount[lte]=${fi1}&page=${page}` ;
       }
 
       const data1 = await axios.get(url,{

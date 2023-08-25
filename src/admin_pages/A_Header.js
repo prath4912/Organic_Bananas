@@ -1,18 +1,18 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import ob1 from "../images/ORGABIC.png"
-import Fruitcontext from '../context/Fruitcontext';
+// import Fruitcontext from '../context/Fruitcontext';
 
 import {
   Link ,useHistory ,useLocation
 } from "react-router-dom";
-import { useState } from 'react';
+// import { useState } from 'react';
 
 
 export default function Header(props) {
 
   // const [q1 , setq1] = useState(0) ;
 
-  const a = useContext(Fruitcontext) ;
+  // const a = useContext(Fruitcontext) ;
 
   // a.cart.map((item)=>{
   //   setq1(q1+item.quantity) ;

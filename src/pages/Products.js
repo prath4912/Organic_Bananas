@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Product from '../components/Product'
 import Fruitcontext from '../context/Fruitcontext';
 import { useContext } from 'react';
@@ -20,7 +20,7 @@ import Spinner from '../components/Spinner';
   },[a.s1 , a.fi1])
 
   const update = (ele)=>{
-    if(a.s1==ele)
+    if(a.s1===ele)
     {
 
     }else{
@@ -30,7 +30,7 @@ import Spinner from '../components/Spinner';
     
   }
   const update1 = (ele)=>{
-    if(a.fi1==ele)
+    if(a.fi1===ele)
     {
 
     }else{

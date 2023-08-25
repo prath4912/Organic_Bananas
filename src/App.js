@@ -24,7 +24,7 @@ import Banana from "./Fruits/Banana";
 import Fruitstate from "./context/Fruitstate";
 import Dashboard from "./admin_pages/Dashboard";
 import A_Header from "./admin_pages/A_Header" ;
-import Spinner from "./components/Spinner";
+// import Spinner from "./components/Spinner";
 import Map from "./components/Map";
 import { useEffect } from "react";
 import Contact from "./pages/Contact_us"
