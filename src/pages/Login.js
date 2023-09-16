@@ -2,9 +2,11 @@ import React from "react";
 import { Link ,useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import { useState } from "react";
+import { useContext } from "react";
+import Fruitcontext from "../context/Fruitcontext";
 
 const Login = (props) => {
-
+    const a = useContext(Fruitcontext);
     const [credentials, setCredentials] = useState({  email: "", password: "" }) 
     let history = useHistory();
 
@@ -12,8 +14,7 @@ const Login = (props) => {
 
         e.preventDefault();
 
-        // const data = await axios.post("http://localhost:5000/api/auth/login" ,{
-            const data = await axios.post("https://ob-1.onrender.com/api/auth/login" ,{
+            const data = await axios.post(`${a.BaseUrl}/api/auth/login` ,{
 
          email : credentials.email , password : credentials.password
           }, {
@@ -37,8 +38,7 @@ const Login = (props) => {
 
         e.preventDefault();
 
-        // const data = await axios.post("http://localhost:5000/api/admin/login" ,{
-            const data = await axios.post("https://ob-1.onrender.com/api/admin/login" ,{
+            const data = await axios.post(`${a.BaseUrl}/api/admin/login` ,{
 
          email : credentials.email , password : credentials.password
           }, {

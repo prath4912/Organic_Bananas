@@ -2,22 +2,20 @@ import React, { useState } from 'react'
 import axios from "axios";
 import {  uploadBytes ,ref } from "firebase/storage";
 import storage from '../Firebase';
+import { useContext } from 'react';
+import Fruitcontext from '../context/Fruitcontext';
 
 export default function Dashboard() {
 
+  const a = useContext(Fruitcontext) ;
   const [image , setimage ] =useState() ;
 
 
-  const [fruit_data , setdata] = useState({name : "" , amount : 0 ,stock : 0, desc :"" , rating :"" , review : [] }) ;
+  const [fruit_data , setdata] = useState({name : "" , amount : 0 ,stock : 0, desc :"" , rating :"" , review : [] , category : "generic" }) ;
 
     const addproducts = async (e)=>{
       e.preventDefault() ;
-      // const formData = new FormData() ; 
-      // formData.append("image" , image) ;
-      // formData.append("name" , fruit_data.name) ;
-      // formData.append("amount" , fruit_data.amount) ;
-      // formData.append("desc" , fruit_data.desc) ;
-      // formData.append("stock" , fruit_data.stock) ;
+  
       const storageRef = ref(storage , `images/${fruit_data.name}`);
 
       uploadBytes(storageRef , image).then((snapshot) => {
@@ -26,9 +24,8 @@ export default function Dashboard() {
       });
     
 
-      // const data = await axios.post("http://localhost:5000/api/admin/insert"   ,
-      const data = await axios.post("https://ob-1.onrender.com/api/admin/insert"   ,
-      {name : fruit_data.name , amount : fruit_data.amount , desc : fruit_data.desc , stock : fruit_data.stock },{
+      const data = await axios.post(`${a.BaseUrl}/api/admin/insert`   ,
+      {name : fruit_data.name , amount : fruit_data.amount , desc : fruit_data.desc , stock : fruit_data.stock ,category:fruit_data.category },{
 
         headers: {
           'Content-Type': 'application/json'
@@ -38,6 +35,7 @@ export default function Dashboard() {
 
         const onchange = (e)=>{
           setdata({...fruit_data , [e.target.name] : e.target.value}) ;
+          console.log(fruit_data);
         }
 
       const onchange5 = (e)=>{
@@ -88,6 +86,14 @@ export default function Dashboard() {
 <div className="form-floating mb-3">
   <input onChange={onchange} type="Number" className="form-control" id="stock" name="stock" value={fruit_data.stock} placeholder=""/>
   <label htmlFor="stock">Enter Stock</label>
+</div>
+<div className="form mb-3">
+  <label className='mx-1' htmlFor="category">Select Category</label>
+  <select  onChange={onchange} name="category" id="category" >
+    <option value="generic">Generic</option>
+    <option value="fruit">Fruit</option>
+    <option value="vegetable">Vegetable</option>
+  </select>
 </div>
 <div>
 

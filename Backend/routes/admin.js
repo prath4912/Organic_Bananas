@@ -89,21 +89,20 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
 // router.post("/insert" ,upload.single('image') , async(req,res)=>{
   router.post("/insert" , async(req,res)=>{
 
-  console.log("reav") ;
   
   console.log(req.body) ;
 
     // we can use double cross verification using isadmins and fetchuser middeleware ;
     // if(req.admin === false)
     // console.log(req.body) ;
-    const {name , amount , desc ,stock   } = req.body ;
+    const {name , amount , desc ,stock ,category   } = req.body ;
 
     // const fruit = await Fruit.create({
     //     name , amount , desc, stock ,image :{ data: fs.readFileSync( 'uploads/' + req.file.filename ),
     //     contentType: 'image/png' } 
     // }) ;
     const fruit = await Fruit.create({
-      name , amount , desc, stock }) ;
+      name , amount , desc, stock ,category }) ;
     // fruit.save() ;
 
     // console.log(fruit) ;
@@ -115,26 +114,27 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
 
 
 router.get("/getproduct" ,async (req,res)=>{
-  const num = (Number(req.query.page)*3  );
+  const  l1 = 4 ;    // limit value
+  console.log("start ") ;
+  const num = (Number(req.query.page)*l1  );
 
    const s1 = req.query.sort  ;
-
+    var cat = [null] ;
+    if(req.query.category){   cat = JSON.parse( req.query.category) ;}
+   cat.forEach(element => {
+    console.log(element) ;
+   });
    const queryobj ={...req.query} ;
-   const exculdef = ["page" , "sort"] ;
 
+   const exculdef = ["page" , "sort","category"] ;
+  
    exculdef.forEach((ele)=>delete queryobj[ele]) ;
 
    const query1 = JSON.stringify(queryobj) ;
    const query2 = JSON.parse(query1.replace(/\b(gte|gt|lte|lt)\b/g , match=> `$${match}`) );
 
-
-  console.log(query2) ;
-  const fruits =await  Fruit.find(query2).skip(num).limit(3).sort(s1) ;
-  const c1 = await  Fruit.find(query2).countDocuments() ;
-  console.log(fruits) ;
-  // console.log(c1) ;
-  
-  // const c1 = await Fruit.find({}).countDocuments();
+  const fruits =await  Fruit.find(query2).where('category').in( cat).skip(num).limit(l1).sort(s1) ;
+  const c1 = await  Fruit.find(query2).where('category').in( cat).countDocuments() ;
   const f1 = JSON.stringify(fruits) ;
   res.status(200).send({f1 : f1 , count :c1});
 }

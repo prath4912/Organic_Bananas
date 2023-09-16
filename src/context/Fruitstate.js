@@ -1,10 +1,15 @@
 import React, {  useState } from 'react'
 import Fruitcontext from './Fruitcontext'
 import axios from "axios";
+// import dotenv from "dotenv" ;
 
 
 export default function Fruitstate(props) {
 
+  // dotenv.config({path : "./config/config.env"}) ;
+
+  const BaseUrl = process.env.REACT_APP_BASE_URL ;
+  
   const [product_list , setproduct_list] = useState([]) ; 
   const [q1 , setq1] = useState(0) ;
 
@@ -13,27 +18,32 @@ export default function Fruitstate(props) {
   const[total_fruits , settf] = useState(0) ;
   const[cart , setcart] = useState([]) ;
 
-  const[s1 , sets1] = useState("name") ;
+  const[s1 , sets1] = useState() ;
   const[fi1 , setfi1] = useState(10000000) ;
-
+  const [category , setcat] = useState([]) ;
 
   const [page ,setpage] = useState(0) ;
 
 
 
     const fetchData = (async()=>{
-
-      console.log("from fetch") ;
       setpage(page+1) ;
       if(s1!=null)
       {
-      // var url = `http://localhost:5000/api/admin/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}` }else
-      var url = `https://ob-1.onrender.com/api/admin/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}` }else
+      var url = `${BaseUrl}/api/admin/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}`;
+     }
+     else if(category.length!=0)
+     {
+      var temp = JSON.stringify(category) ;
+      var url = `${BaseUrl}/api/admin/getproduct?amount[lte]=${fi1}&category=${temp}&page=${page}&sort=${s1}`;
 
-      {
-         url = `http://localhost:5000/api/admin/getproduct?amount[lte]=${fi1}&page=${page}` ;
-      }
+     }
+     else
+     {
+         url = `${BaseUrl}/api/admin/getproduct?amount[lte]=${fi1}&page=${page}` ;
+     }
 
+     console.log(url) ;
       const data1 = await axios.get(url,{
       }, {
         headers: {
@@ -44,7 +54,9 @@ export default function Fruitstate(props) {
         temp =temp.concat(JSON.parse(data.f1));
         let temp1 =data.count ;
         settf(temp1) ;
+
         setproduct_list(temp) ;
+        console.log(temp) ;
     })
   
   
@@ -129,7 +141,7 @@ const subq = (index)=>{
 
 return (
 
-    <Fruitcontext.Provider value={{fi1,setfi1 , s1,sets1 , total_fruits , removehandle,fetchData, getcart,setcart ,page , setpage ,q1 ,addq,subq, setproduct_list, product_list , cart ,addcart }}>
+    <Fruitcontext.Provider value={{category , setcat,fi1,setfi1 , s1,sets1 , total_fruits , removehandle,fetchData, getcart,setcart ,page , setpage ,q1 ,addq,subq, setproduct_list, product_list , cart ,addcart ,BaseUrl }}>
         {props.children}
     </Fruitcontext.Provider>
 

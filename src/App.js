@@ -28,10 +28,13 @@ import A_Header from "./admin_pages/A_Header" ;
 import Map from "./components/Map";
 import { useEffect } from "react";
 import Contact from "./pages/Contact_us"
-
+import { useContext } from "react";
+import Fruitcontext from "./context/Fruitcontext";
+import Home from "./components/Home";
 function App() {
 
-
+  const a = useContext(Fruitcontext);
+  
   const [items,setitem]=useState([]) ;
   const [count , setcount] = useState(0) ;
   useEffect(()=>{
@@ -40,10 +43,9 @@ function App() {
 
   const checkoutHandler = async(amount ,add1 ,cart)=>{
 
-    // const {data:{key}} = await axios.get("http://localhost:5000/api/key") ;
-    // const {data:{order}} = await axios.post("http://localhost:5000/checkout" ,{
-      const {data:{key}} = await axios.get("https://ob-1.onrender.com/api/key") ;
-    const {data:{order}} = await axios.post("https://ob-1.onrender.com/checkout" ,{
+    
+      const {data:{key}} = await axios.get(`${a.BaseUrl}/api/key`) ;
+    const {data:{order}} = await axios.post(`${a.BaseUrl}/checkout` ,{
       amount 
     }) ;
 
@@ -58,8 +60,7 @@ function App() {
       handler: async function (response){
 
         let cart1 =JSON.stringify(cart) ;
-      // const {data} =  await axios.post("http://localhost:5000/paymentv" ,{
-        const {data} =  await axios.post("https://ob-1.onrender.com/paymentv" ,{
+        const {data} =  await axios.post(`${a.BaseUrl}/paymentv` ,{
 
     razorpay_payment_id: response.razorpay_payment_id ,razorpay_order_id:response.razorpay_order_id , razorpay_signature :response.razorpay_signature , add1 , cart1 
   },{
@@ -153,7 +154,7 @@ function App() {
         </Route>
         <Route path="/">
           <Hone />
-          <Map/>
+          <Home/>
         </Route>
       
      </Switch>

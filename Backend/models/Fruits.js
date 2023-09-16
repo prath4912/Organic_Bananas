@@ -29,6 +29,9 @@ const fruitschema = new mongoose.Schema({
   reviews: {
     type: Array,
   },
+  category : {
+    type : String ,
+  },
 
   
 });

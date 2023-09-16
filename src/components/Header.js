@@ -1,18 +1,27 @@
-import React, { } from "react";
+import React from "react";
 import ob1 from "../images/ORGABIC.png";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+import { Box, Button } from "@mui/material";
 // import Fruitcontext from "../context/Fruitcontext";
 
 import { Link, useHistory, useLocation } from "react-router-dom";
+import { useState } from "react";
 // import { useState } from "react";
 
 export default function Header(props) {
-  // const [q1 , setq1] = useState(0) ;
+  const [containerEl, setContainerEl] = useState(null);
 
-  // const a = useContext(Fruitcontext);
+  const handleOpen = (e) => {
+    setContainerEl(e.currentTarget);
+  };
 
-  // a.cart.map((item)=>{
-  //   setq1(q1+item.quantity) ;
-  // }) ;
+  const handleClose = () => {
+    setContainerEl(null);
+  };
+
+  const open = Boolean(containerEl);
+  const id = open ? "simple-popover" : "";
 
   let location = useLocation();
   const history = useHistory();
@@ -30,30 +39,42 @@ export default function Header(props) {
       <div className="dh1">
         <nav className="m-0 p-0 navbar d-flex flex-row ">
           <div className="m-0 hn1 container-fluid">
-            <div className="d-flex flex-row justify-content-between sd1
-">
-            <a className="navbar1 d-flex flex-row" id="a1" href="#">
-              <img
-                src={ob1}
-                alt="Logo"
-                width="50"
-                height="50"
-                className="d-inline-block align-text-center ms-1 me-2 img-fluid"
-              />
-              <div className="d-flex flex-row flex-wrap">
-              <p className="m-0 p-0 me-2">ORGANIC </p>
-              <p className="m-0 p-0"> BANANAS</p></div>
-            </a>
-            {/* <form className="d-flex" role="search">
+            <div
+              className="d-flex flex-row justify-content-between sd1
+"
+            >
+              <a className="navbar1 d-flex flex-row" id="a1" href="#">
+                <img
+                  src={ob1}
+                  alt="Logo"
+                  width="50"
+                  height="50"
+                  className="d-inline-block align-text-center ms-1 me-2 img-fluid"
+                />
+                <div className="d-flex flex-row flex-wrap">
+                  <p className="m-0 p-0 me-2">ORGANIC </p>
+                  <p className="m-0 p-0"> BANANAS</p>
+                </div>
+              </a>
+              {/* <form className="d-flex" role="search">
       <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
       <button className="btn btn-outline-warning btn-sm text-white" type="submit">Search</button>
     </form> */}
-            <span className="temp mb-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-</svg>
-            </span>
-
+              <span className="temp mb-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  fill="white"
+                  class="bi bi-list"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+                  />
+                </svg>
+              </span>
             </div>
             <div className="m-0 dh2">
               <ul className=" d-flex flex-row justify-content-around dh7">
@@ -102,11 +123,50 @@ export default function Header(props) {
                     </Link>
                   </li>
                 ) : (
-                  <li onClick={handlelogout} className="nav-item">
-                    <Link className="nav-link" to="/">
-                      Logout
-                    </Link>
-                  </li>
+                  <div className="nav-item">
+                      <Button aria-describedby={id} onClick={handleOpen}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="27"
+                          height="27"
+                          fill="white"
+                          class="bi bi-person-circle"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                          <path
+                            fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                          />
+                        </svg>
+                      </Button>
+                      <Popover
+                        id={id}
+                        open={open}
+                        anchorEl={containerEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "right",
+                        }}
+                        transformOrigin={{
+                          vertical: "left",
+                          horizontal: "left",
+                        }}
+                      >
+                        <Box sx={{ backgroundColor: "#FFCF00", color: "black"}}>
+                          <div className="px-4" style={{ padding: "5px"}}>
+                            <Link   className="nav-link" to="/">
+                                Profile
+                              </Link>
+                              <hr className="m-2"/>
+                              <Link onClick={handlelogout}  className="nav-link" to="/">
+                                Logout
+                              </Link>
+                          </div>
+                        </Box>
+                      </Popover>
+\                  </div>
                 )}
               </ul>
             </div>

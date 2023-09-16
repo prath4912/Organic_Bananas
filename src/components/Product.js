@@ -5,9 +5,9 @@ import Fruitcontext from '../context/Fruitcontext'
 import { useContext } from 'react';
 import { useEffect } from 'react';
 // import { ref  } from 'firebase/storage';
-// import { ref , getDownloadURL } from 'firebase/storage';
+import { ref , getDownloadURL } from 'firebase/storage';
 
-// import storage from '../Firebase';
+import storage from '../Firebase';
 import toast from 'react-hot-toast';
 
 
@@ -18,11 +18,11 @@ function Product(props) {
   
   const fun1 = async()=>{
 
-// const starsRef =ref(storage, `images/${props.name}`);
+const starsRef =ref(storage, `images/${props.name}`);
 
 try{
-// const url = await getDownloadURL(starsRef) ;
-    // seturl(url) ;
+const url = await getDownloadURL(starsRef) ;
+    seturl(url) ;
 
 } catch(error){
     alert(error) ;
@@ -62,3 +62,7 @@ try{
 }
 
 export default Product
+
+
+
+

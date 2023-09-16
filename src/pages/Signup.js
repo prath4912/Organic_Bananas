@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { Link ,useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 // import OTPInput, { ResendOTP } from "otp-input-react";
 import axios from "axios";
+import Fruitcontext from '../context/Fruitcontext';
+import { useContext } from 'react';
 
 
 function Signup() {
-    const [OTP, setOTP] = useState("");
+    
+    const a = useContext(Fruitcontext);
     
     const [credentials, setCredentials] = useState({name : "" ,email: "", password: "" }) 
     let history = useHistory();
@@ -15,8 +18,7 @@ function Signup() {
         e.preventDefault();
 
         
-        // const data = await axios.post("http://192.168.80.79:5000/api/auth/createuser" ,{
-            const data = await axios.post("https://ob-1.onrender.com/api/auth/createuser" ,{
+            const data = await axios.post( `${a.baseUrl}}/api/auth/createuser` ,{
 
         name : credentials.name , email : credentials.email , password : credentials.password
           }, {
