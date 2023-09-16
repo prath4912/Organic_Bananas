@@ -5,12 +5,13 @@ node_modules
 /.pnp
 .pnp.js
 useless.js
-.env
 # testing
 /coverage
 
 # production
 /build
+# secreats
+.env
 
 # misc
 .DS_Store
