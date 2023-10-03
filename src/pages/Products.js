@@ -192,15 +192,15 @@ const changeHandler1 = (event)=>{
               hasMore={a.product_list.length < a.total_fruits}
               loader={<Spinner />}
               endMessage={
-                <p style={{ textAlign: "center" }}>
-                  <p className="fw-bold mt-2 p-3 bg-dark text-light">
+                
+                  <p className="m-0 p-0 text-center fw-bold mt-2 p-3 bg-dark text-light">
                     You are done with all Products!!
                   </p>
-                </p>
+              
               }
             >
               <div className="mad">
-                <div className="d-flex flex-wrap justify-content-start">
+                <div className="d-flex flex-wrap justify-content-start gap-4">
                   {a.product_list.map((product, index) => {
                     return (
                       <Product

@@ -113,11 +113,6 @@ export default function Footer() {
       <div className="  text-black text-center p-2">
         © 2003-2023, organicbananas.com, Inc. or its affiliates
       </div>
-      {/* <div className="position-relative bottom-0 end-0">
-        <Link className="link-primary m-0 p-0 " to="/adminlogin">
-          Admin Login
-        </Link>
-      </div> */}
     </div>
 
 

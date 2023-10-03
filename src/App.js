@@ -5,7 +5,6 @@ import Header from "./components/Header"
 import Products from "./pages/Products";
 import Footer from "./components/Footer";
 import  "./App.css" ;
-import Hone from "./pages/Hone";
 import axios from "axios";
 import Paymentsucces from "./pages/Paymentsucces";
 import l1 from "./images/ORGABIC.png" ;
@@ -21,16 +20,13 @@ import Login from "./pages/Login"
 import { useState } from "react";
 import Signup from "./pages/Signup";
 import Banana from "./Fruits/Banana";
-import Fruitstate from "./context/Fruitstate";
-import Dashboard from "./admin_pages/Dashboard";
-import A_Header from "./admin_pages/A_Header" ;
-// import Spinner from "./components/Spinner";
-import Map from "./components/Map";
 import { useEffect } from "react";
 import Contact from "./pages/Contact_us"
 import { useContext } from "react";
 import Fruitcontext from "./context/Fruitcontext";
 import Home from "./components/Home";
+import Hone from "./pages/Hone"
+import Orders from "./pages/Orders";
 function App() {
 
   const a = useContext(Fruitcontext);
@@ -38,14 +34,12 @@ function App() {
   const [items,setitem]=useState([]) ;
   const [count , setcount] = useState(0) ;
   useEffect(()=>{
-    console.log("trtgr")
   } , []) ;
-
   const checkoutHandler = async(amount ,add1 ,cart)=>{
 
     
-      const {data:{key}} = await axios.get(`${a.BaseUrl}/api/key`) ;
-    const {data:{order}} = await axios.post(`${a.BaseUrl}/checkout` ,{
+      const {data:{key}} = await axios.get(`${a.BaseUrl}/api/payment/key`) ;
+    const {data:{order}} = await axios.post(`${a.BaseUrl}/api/payment/checkout` ,{
       amount 
     }) ;
 
@@ -60,7 +54,7 @@ function App() {
       handler: async function (response){
 
         let cart1 =JSON.stringify(cart) ;
-        const {data} =  await axios.post(`${a.BaseUrl}/paymentv` ,{
+        const {data} =  await axios.post(`${a.BaseUrl}/api/payment/verification` ,{
 
     razorpay_payment_id: response.razorpay_payment_id ,razorpay_order_id:response.razorpay_order_id , razorpay_signature :response.razorpay_signature , add1 , cart1 
   },{
@@ -118,10 +112,8 @@ function App() {
 
   return (
     <>
-    <Fruitstate>
       <Router>
-        {/* <Spinner/> */}
-      { !localStorage.getItem("admin") ? <Header count={count} setcount={setcount} /> : <A_Header count={count} setcount={setcount} /> }
+       <Header count={count} setcount={setcount} /> 
 
      <Switch>
         <Route path="/products">
@@ -133,9 +125,8 @@ function App() {
          <Route path="/login">
          <Login count={count} setcount={setcount} title = {"Login"}  />
        </Route>
-       <Route path="/adminlogin">
-          <Login count={count} setcount={setcount} title = {"Admin Login"}  />
-          
+       <Route path="/orders">
+          <Orders/>
        </Route>
        <Route path="/signup">
           <Signup/>
@@ -145,9 +136,6 @@ function App() {
        </Route>
        <Route path="/payment">
           <Paymentsucces/>
-        </Route>
-        <Route path="/dashboard">
-          <Dashboard/>
         </Route>
         <Route path="/contact_us">
           <Contact/>
@@ -160,7 +148,6 @@ function App() {
      </Switch>
      <Footer/>
      </Router>
-     </Fruitstate>
     </>
   );
 }

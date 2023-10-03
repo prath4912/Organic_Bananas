@@ -18,7 +18,7 @@ app.use(cors()) ;
 app.use(express.json()) ;  // request data from body as a middleware
 app.use(express.urlencoded({extended : true})) ;
 
-app.use("/" , require("./routes/payment")) ;
+app.use("/api/payment" , require("./routes/payment")) ;
 
 app.use('/api/admin' , require("./routes/admin")) ;
 
@@ -26,13 +26,9 @@ app.use("/api/auth" , require("./routes/auth")) ;
 
 app.use("/api/cart" , require("./routes/Cart")) ;
 
-app.get("/api/key" , (req,res)=>[
+app.use("/api/product" , require("./routes/product")) ;
 
-    res.send(process.env.RAZORPAY_API_KEY ) 
-])
-
-app.listen(process.env.PORT , ()=>{
+app.listen(PORT , ()=>{
     console.log("Server Started at" + PORT)
 }) 
 
-// use express-validator in login and signup

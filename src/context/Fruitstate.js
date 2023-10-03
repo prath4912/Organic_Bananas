@@ -30,34 +30,41 @@ export default function Fruitstate(props) {
       setpage(page+1) ;
       if(s1!=null)
       {
-      var url = `${BaseUrl}/api/admin/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}`;
+      var url = `${BaseUrl}/api/product/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}`;
      }
-     else if(category.length!=0)
+     else if(category.length!==0)
      {
       var temp = JSON.stringify(category) ;
-      var url = `${BaseUrl}/api/admin/getproduct?amount[lte]=${fi1}&category=${temp}&page=${page}&sort=${s1}`;
+       url = `${BaseUrl}/api/product/getproduct?amount[lte]=${fi1}&category=${temp}&page=${page}&sort=${s1}`;
 
      }
      else
      {
-         url = `${BaseUrl}/api/admin/getproduct?amount[lte]=${fi1}&page=${page}` ;
+         url = `${BaseUrl}/api/product/getproduct?amount[lte]=${fi1}&page=${page}` ;
      }
 
      console.log(url) ;
+     try
+     {
       const data1 = await axios.get(url,{
       }, {
         headers: {
           'Content-Type': 'application/json' ,
         }}) ;
+     
         const data = (data1.data) ;
-        var temp = product_list ;
+         temp = product_list ;
         temp =temp.concat(JSON.parse(data.f1));
         let temp1 =data.count ;
         settf(temp1) ;
 
         setproduct_list(temp) ;
         console.log(temp) ;
-    })
+      }catch(error)
+      {
+       alert(error  + "\nYou are Offline") ;
+      }
+    }) ;
   
   
 
@@ -74,14 +81,16 @@ const addcart =(p_id)=>{
   const cart1 = cart ;
   let item  ;
 
-   product_list.map((element , index)=>{
+  //  product_list.map((element , index)=>{
 
-    if(element._id===p_id)
-    {
-      item = index ;
-    }
-  }) ;
-
+   
+  // }) ;
+product_list.forEach((element,index) => {
+  if(element._id===p_id)
+  {
+    item = index ;
+  }
+});
   const temp1 = {
     product : product_list[item] ,
     user : null ,
@@ -104,6 +113,7 @@ const addcart =(p_id)=>{
     cart1.push(temp1) ;
   }
   localStorage.setItem("cart" , JSON.stringify(cart1)) ;
+
   setcart(cart1) ;
 }
 

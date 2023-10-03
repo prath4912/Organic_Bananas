@@ -58,7 +58,6 @@ router.post("/getcart" , fetchuser  , async(req,res)=>{
               else
               {
                 Cart_item.create({ product_id  : product_id ,user_id : req.user.id ,quantity : quantity})
-                // console.log(items) ;
                 res.status(200).send("ok") ;
               }
             }else

@@ -18,9 +18,13 @@ var instance = new Razorpay({
         key_secret: process.env.RAZORPAY_API_SECRET  ,
   }); 
  
+router.get("/key" , (req,res)=>{
+    res.send(process.env.RAZORPAY_API_KEY ) 
+}) ;
 
 
 router.post('/checkout' , async (req,res)=>{
+  try{
     var options = {
                 amount: Number( req.body.amount*100),  
                 // amount in the smallest currency unit
@@ -34,10 +38,17 @@ router.post('/checkout' , async (req,res)=>{
                 success: true,
                 order
               } ) ;
+            }catch(error)
+            {
+              res.status(500).send({ admin: false, success, message: "some error occured",error });  //update message and erroe code
+
+            }
 }) ;
 
 
-router.post("/paymentv" , fetchuser ,  async (req , res)=>{
+router.post("/verification" , fetchuser ,  async (req , res)=>{
+  try
+  {
     console.log(req.body);
     const {razorpay_payment_id , razorpay_order_id , razorpay_signature ,add1 ,cart1 } = req.body ;
     const body = razorpay_order_id + "|" + razorpay_payment_id ;
@@ -79,6 +90,11 @@ router.post("/paymentv" , fetchuser ,  async (req , res)=>{
             success:false ,
           });
         }
+      }catch(error)
+      {
+        res.status(500).send({ admin: false, success, message: "some error occured",error });  //update message and erroe code
+
+      }
       
 });
 

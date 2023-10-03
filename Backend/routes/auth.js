@@ -14,6 +14,7 @@ const JWT_SECRET ="iamprathmesh";
 
 router.post('/createuser' ,   [body('email', 'Plese enter proper email' ).isEmail() , body("name" ,"Enter correct name").isLength({min:3}) , body("password" ,"Enter correct Password").isLength({min:5})], async (req ,res)=>{
 
+  try{
     let success = false ;
 
     const result = validationResult(req);
@@ -58,12 +59,16 @@ success = true ;
     console.error({error : error.message}) ;
     res.status(500).send({success ,error :"some errrrror occured"});
 }
-
+  }catch(error){
+    console.error({error : error.message}) ;
+    res.status(500).send({success ,error :"some error occured"});
+  }
 }) ;
 
 
 router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  , body("password" ,"Enter correct Password").exists()], async (req ,res)=>{
 
+  try{
     let success = false ;
 
 
@@ -109,16 +114,17 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
     console.error({error : error.message}) ;
     res.status(500).send({success ,error : "some error occured"});
   }
-  
+}catch(error)
+{
+  console.error({error : error.message}) ;
+  res.status(500).send({success ,error :"some errrrror occured"});
+}
   }) ;
 
 
 //   getuser
 
   router.post('/getuser' ,fetchuser, async (req ,res)=>{
-
-  
-  
   try {
     u_id = req.user.id ;
     let user = await User.findById(u_id).select("-password") ;

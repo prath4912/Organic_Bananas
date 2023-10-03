@@ -21,8 +21,8 @@ function Product(props) {
 const starsRef =ref(storage, `images/${props.name}`);
 
 try{
-const url = await getDownloadURL(starsRef) ;
-    seturl(url) ;
+// const url = await getDownloadURL(starsRef) ;
+    seturl(null) ;
 
 } catch(error){
     alert(error) ;
