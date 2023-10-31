@@ -12,10 +12,6 @@ const fruitschema = new mongoose.Schema({
   desc: {
     type: String,
   },
-  image: {
-    data : Buffer,
-    contentType : String ,
-  },
   stock :{
     type: Number
   },
@@ -26,11 +22,10 @@ const fruitschema = new mongoose.Schema({
   rating: {
     type: Number,
   },
-  reviews: {
-    type: Array,
-  },
+  reviews: [{type : String}],
   category : {
     type : String ,
+    default : "general" ,
   },
 
   

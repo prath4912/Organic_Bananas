@@ -5,26 +5,26 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 
 export default function Orders() {
   const arr = [
-    { id: 1, status: "deliverd", Payment: "completed" },
-    { id: 1, status: "deliverd", Payment: "completed" },
-    { id: 1, status: "deliverd", Payment: "completed" },
+    { id: 1, status: "deliverd", Payment: "completed" , products : ["ac" , "e"]},
+    { id: 1, status: "deliverd", Payment: "completed" ,products : ["ac" , "e"]},
+    { id: 1, status: "deliverd", Payment: "completed" ,products : ["ac" , "e" ,"rw"]},
   ];
   return (
     <div className="cd2">
       <div className="container-sm bg-dark p-1 my-1">
-        <h1>Your Orders</h1>
+        <h1 className="fw-bold">Your Orders</h1>
         <hr className="text-light" />
         <div className="text-light">
           <ul className="d-flex ">
-            <li className="nav-link mx-2">Orders</li>
-            <li className="nav-link">Cancelled Orders</li>
+            <a className=" mx-2">Orders</a>
+            <a className="">Cancelled Orders</a>
           </ul>
         </div>
         <div className="p-4">
           {arr.map((ele) => {
             return (
               <div
-                class="card mb-3 border border-black"
+                className="card mb-3 border border-black"
                 style={{ maxWidth: "100%" }}
               >
                 <div className="row g-0 bg-secondary m-0">
@@ -75,45 +75,35 @@ export default function Orders() {
                     </p>
                   </div>
                 </div>
-
-                <div class="row g-0">
-                  <div class="col-md-2 p-5">
-                    <img
-                      src={ob}
-                      className="img-fluid rounded-start"
-                      alt="..."
-                    />
-                  </div>
-                  <div class="col-md-8 pt-5">
-                    <div class="card-body">
-                      <h5 class="card-title">Bananas</h5>
-
-                      <p class="card-text">
-                        <small class="text-body-secondary">
-                        </small>
-                      </p>
-                    </div>
-                  </div>
                  
-                </div>
-                <div class="row g-0">
-                <div class="col-md-2 p-5">
-                    <img
-                      src={ob}
-                      className="img-fluid rounded-start"
-                      alt="..."
-                    />
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">Bananas</h5>
-
-                      <p class="card-text">
-                        <small class="text-body-secondary"></small>
-                      </p>
+                
+              { ele.products.map((pro)=> {
+                return(
+                  <>
+                  <div className="d-flex my-1">
+                    <div className="p-1">
+                      <img
+                        src={ob}
+                        alt="Product Image"
+                        width={"70px"}
+                      />
                     </div>
+                    <div className="flex-fill ">
+                      <div className="card-body">
+                        <h5 className="card-title">Bananas</h5>
+                        <p className="card-text">
+                          <small className="text-body-secondary">
+                          </small>
+                        </p>
+                      </div>
+
                   </div>
-                </div>
+
+                    </div>
+                    <hr />
+                    </>
+                )
+               })}
               </div>
             );
           })}

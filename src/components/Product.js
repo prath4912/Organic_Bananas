@@ -39,7 +39,7 @@ try{
       <div className="">
     <div className=" card h-100">
   
-      <Link to={`/${props.name}`} ><img src={url ? url : ob1} height={"300px"} className="card-img-top" alt="..."  /></Link>
+      <Link to={`/fruits/${props.name}`} ><img src={url ? url : ob1} height={"300px"} className="card-img-top" alt="..."  /></Link>
 
       <div className="card-body">
         <h5 className="card-title">{props.name}</h5>
@@ -52,6 +52,20 @@ try{
     secondary: '#fff',
   },
 })}} className='btn btn-sm btn-warning border-black float-end '>Add To Cart</button>
+
+      { props.title=="wishlist" ? <button onClick={()=> { a.deletewishlist(props.p_id) ; toast.success("Itam Removed From WishList" ,{duration:1000, iconTheme: {
+          primary: '#000',
+          secondary: '#fff',
+        },
+      });  }} className='btn btn-sm btn-warning border-black float-end me-1 '>-</button>
+    :
+    <button onClick={()=> {  a.addwishlist(props.p_id) ; toast.success("Itam Added To WishList" ,{duration:1000, iconTheme: {
+      primary: '#000',
+      secondary: '#fff',
+    },
+  })}} className='btn btn-sm btn-warning border-black float-end me-1 '>+</button>
+    }
+
       </div>
  
 

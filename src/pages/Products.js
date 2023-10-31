@@ -6,9 +6,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "../components/Spinner";
 
 function Products() {
+  
   const a = useContext(Fruitcontext);
   const[ count ,setc] = useState(0) ;
   const [formdata , setfd] = useState({fruit : false , vegetable : false}) ;
+  
   useEffect(() => {
     if (a.product_list.length > 0) {
     } else {
@@ -113,7 +115,7 @@ const changeHandler1 = (event)=>{
             <div className="ms-1" style={{ listStyle: "none" }}>
               <li>
                 <input id="fruits" type="checkbox" />{" "}
-                <label htmlFor="fruits">Fruits</label>
+                <label htmlFor="fruits">10%</label>
               </li>
             </div>
           </div><div className="my-3">
@@ -127,9 +129,9 @@ const changeHandler1 = (event)=>{
           </div>
         </div>
         <div className="w-100">
-          <div className="w-100 d-flex dp21 bg-dark">
-            <h1 className="w-100 ">Products <p className="p-0 m-0 small " style={{display:"inline",fontSize:"1rem"}}>(showing 1-{a.product_list.length} items of {a.total_fruits})</p></h1>
-            <div className="dropdown dn">
+          <div className="w-100 d-flex dp21 bg-dark of ">
+            <h1 className="w-100 ">Products <p className="p-0 m-0 small  " style={{display:"inline",fontSize:"1rem"}}>(showing 1-{a.product_list.length} items of {a.total_fruits})</p></h1>
+            <div className="dropdown dn of">
               <button
                 className="btn btn-secondary dropdown-toggle mt-2 me-1"
                 type="button"

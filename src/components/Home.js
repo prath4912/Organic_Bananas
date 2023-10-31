@@ -18,19 +18,20 @@ export default function Home() {
   return (
     <>
     <div className="container d-flex justify-content-around my-5 flex-wrap gap-2">
-      {arr.map((element) => {
+      {arr.map((element,index) => {
         return (
-          <div class="card shadow-lg border border-black" style={{width: "12rem"}}>
+          <div key={index} className="card shadow-lg border border-black" style={{width: "12rem"}}>
             <img  src={element.img} className="p-3 card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="text-center card-title">{element.title}</h5>
+            <div className="card-body">
+              <h5 className="text-center card-title">{element.title}</h5>
             </div>
           </div>
         );
       })}
     </div>
     <Map/>
-    <div style={{background : "azure"}} className="container-fluid pt-4 pb-2 ">
+
+    {!localStorage.getItem("token") ?<div style={{background : "azure"}} className="container-fluid pt-4 pb-2 ">
         <div className="d-flex flex-row w-100 justify-content-around">
         <div>
       <h3>Sign Up For News Letter</h3>
@@ -40,7 +41,7 @@ export default function Home() {
         <input className="p-2 px-5" placeholder="Enter Email" type="email" name="mail" id="mail" /><button className="bg-warning p-2 px-5">Sign Up</button>
       </div>
       </div>
-    </div>
+    </div> :<></> }
     </>
   );
 }

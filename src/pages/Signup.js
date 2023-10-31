@@ -14,12 +14,11 @@ function Signup() {
     let history = useHistory();
 
     const handlesignup = async (e)=>{
-
-        e.preventDefault();
-
         
-            const data = await axios.post( `${a.baseUrl}}/api/auth/createuser` ,{
-
+        e.preventDefault();
+        const url = `${a.BaseUrl}/api/auth/createuser` ;
+        console.log(url) ;
+            const data = await axios.post( url ,{
         name : credentials.name , email : credentials.email , password : credentials.password
           }, {
             headers: {
@@ -28,8 +27,7 @@ function Signup() {
             const json = await data.data
         if (json.success){
             // Save the auth token and redirect
-            localStorage.setItem('token', json.authtoken); 
-            history.push("/home");
+            // localStorage.setItem('token', json.authtoken); 
         }
         else{
             alert("Invalid credentials");
@@ -59,7 +57,7 @@ function Signup() {
                              <div className='form-floating mt-2'>
                              <input type="email" className="form-control" id="email" onChange={onChange1} value={credentials.email} name='email' placeholder="name@example.com" />
                              <label htmlFor="email">Enter Email</label>
-
+                            
                              </div> 
                              <div className='form-floating mt-2'>
                              <input type="password" className="form-control" id="pasword" onChange={onChange1} value={credentials.password}  name='password' placeholder="name@example.com" />
@@ -72,11 +70,15 @@ function Signup() {
                             {/* <button className='btn btn-primary btn-sm'>Verify</button>
                             </div> */}
 
-                             <button type="submit" className=" btn btn-primary my-2">SignUp</button>
+                             <button type="submit" className=" btn btn-primary my-2">Verify Email</button>
                         </div>
                         
                         <div className="text-dark mb-2" >Exiting User <span><Link to="/login">Login</Link></span></div>
                         </div>
+
+
+                            
+
                 </form>
             </div>
         </div >

@@ -8,21 +8,21 @@ export default function Contact_us() {
       <div className='' >
         <h3 className='text-light'>Contact Us</h3>
         <form >
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"/>
-            <label for="floatingInput">Enter Name</label>
+        <div className="form-floating mb-3">
+            <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com"/>
+            <label htmlFor="floatingInput">Enter Name</label>
         </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"/>
-            <label for="floatingInput">Email address</label>
+        <div className="form-floating mb-3">
+            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
+            <label htmlFor="floatingInput">Email address</label>
         </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"/>
-            <label for="floatingInput">Enter Mobile Number</label>
+        <div className="form-floating mb-3">
+            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
+            <label htmlFor="floatingInput">Enter Mobile Number</label>
         </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"/>
-            <label for="floatingInput">Enter Subject</label>
+        <div className="form-floating mb-3">
+            <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com"/>
+            <label htmlFor="floatingInput">Enter Subject</label>
         </div>
         <button className='btn m-2 btn-primary '>Submit</button>
         </form>

@@ -30,9 +30,11 @@ router.get("/getproduct", async (req, res) => {
 
   const s1 = req.query.sort;
   var cat = [null];
+
   if (req.query.category) {
     cat = JSON.parse(req.query.category);
   }
+
   cat.forEach((element) => {
     console.log(element);
   });
@@ -46,7 +48,7 @@ router.get("/getproduct", async (req, res) => {
   const query2 = JSON.parse(
     query1.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`)
   );
-
+    
   const fruits = await Fruit.find(query2)
     .where("category")
     .in(cat)
@@ -57,12 +59,17 @@ router.get("/getproduct", async (req, res) => {
     .where("category")
     .in(cat)
     .countDocuments();
+
+
   const f1 = JSON.stringify(fruits);
+
   res.status(200).send({ f1: f1, count: c1 });
+
   }catch(error)
   {
     res.status(500).send({ admin: false, success, message: "some error occured",error });  //update message and erroe code
   }
 });
+
 
 module.exports = router;

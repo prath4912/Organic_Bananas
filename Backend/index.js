@@ -4,6 +4,7 @@ const cors = require("cors") ;
 var bodyParser = require('body-parser');
 const app = express() ; 
 
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -27,6 +28,8 @@ app.use("/api/auth" , require("./routes/auth")) ;
 app.use("/api/cart" , require("./routes/Cart")) ;
 
 app.use("/api/product" , require("./routes/product")) ;
+app.use("/api/wishlist" , require("./routes/Wishlist")) ;
+
 
 app.listen(PORT , ()=>{
     console.log("Server Started at" + PORT)

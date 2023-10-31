@@ -2,13 +2,10 @@ const mongoose = require("mongoose")
 
 const orderSchema = new mongoose.Schema(
   {
-    products: 
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Fruit",
-      }
-    
-    ,
+    products: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Fruit",
+    }],
     payment: {
         type : mongoose.Schema.Types.ObjectId ,
         ref : "Payment"
@@ -22,7 +19,7 @@ const orderSchema = new mongoose.Schema(
       default : false
     } ,
     shipping_address : {
-
+      type : String ,
     }
     ,
     status: {
@@ -33,6 +30,7 @@ const orderSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
 const order = mongoose.model("Order", orderSchema);
 
 module.exports = order ;

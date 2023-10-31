@@ -23,42 +23,21 @@ const Login = (props) => {
             }}) ;
 
         const json = await data.data
-        if (json.success){
+        if(json.success==3)
+        {
+            alert("Message Sent to Email Plese VErify") ;
+        }
+        else if (json.success){
             // Save the auth token and redirect
             localStorage.setItem('token', json.authtoken); 
             props.setcount(props.count+1) ;
-
             history.push("/home");
         }
         else{
             alert("Invalid credentials");
         }
     }
-    const handleadminlogin = async (e)=>{
-
-        e.preventDefault();
-
-            const data = await axios.post(`${a.BaseUrl}/api/admin/login` ,{
-
-         email : credentials.email , password : credentials.password
-          }, {
-            headers: {
-              'Content-Type': 'application/json'
-            }}) ;
-
-        const json = await data.data
-        if (json.success){
-            // Save the auth token and redirect
-            localStorage.setItem('token', json.authtoken); 
-            localStorage.setItem("admin" ,true) ;
-            props.setcount(props.count+1) ;
-            history.push("/dashboard");
-        }
-        else{
-            alert("Invalid credentials");
-        }
-
-    }
+  
 
     const onChange1 = (e)=>{
         const temp = {
@@ -77,7 +56,7 @@ const Login = (props) => {
     return (
         <div className="d-flex justify-content-center ld1">
            
-            <form onSubmit={props.title==="Login" ? handlelogin : handleadminlogin} >
+            <form onSubmit={handlelogin } >
                 <div className="w-100">
                 {/* <div className=" position-absolute top-50 start-50 translate-middle  "> */}
                     <div className="rounded-3 bg-warning p-4">
@@ -116,6 +95,7 @@ const Login = (props) => {
                 </button>
                 </div>
                 <div className="text-dark">New To Organic Bananas?<p><Link to="/signup"> Create an Acoount</Link></p></div>
+                <div className="text-dark"><p><Link to="/forgotpassword">Forgot Paaword</Link></p></div>
 
                 </div>
             </form>

@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import ob1 from "../images/ORGABIC.png";
 import Popover from "@mui/material/Popover";
 import { Box, Button } from "@mui/material";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useState } from "react";
-
+import Fruitcontext from "../context/Fruitcontext";
 export default function Header(props) {
+  const a = useContext(Fruitcontext) ;
   const [sham, setsham] = useState(false);
   const [temp, settemp] = useState(false);
   const [hn, sethn] = useState("12vh");
@@ -41,14 +42,18 @@ export default function Header(props) {
     settemp(false);
     sethl(hn);
   };
-
+  
   useEffect(() => {
+    a.getuserdata();
     closeMobileNavOnResize();
   }, []);
+
+
 
   const [containerEl, setContainerEl] = useState(null);
 
   const handleOpen = (e) => {
+    // console.log(e.currentTarget ) ;
     setContainerEl(e.currentTarget);
   };
 
@@ -64,9 +69,9 @@ export default function Header(props) {
 
   const handlelogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("admin");
     props.setcount(props.count + 1);
-
+    a.setpdata(null) ;
+    console.log(a.profileData) ;
     history.push("/login");
   };
 
@@ -136,7 +141,7 @@ export default function Header(props) {
 
                   {!localStorage.getItem("token") ? (
                     <li className="nav-item">
-                      <Link className="nav-link" to="/login">
+                      <Link  className="nav-link" to="/login">
                         Login
                       </Link>
                     </li>
@@ -148,12 +153,12 @@ export default function Header(props) {
                           width="27"
                           height="27"
                           fill="white"
-                          class="bi bi-person-circle"
+                          className="bi bi-person-circle"
                           viewBox="0 0 16 16"
                         >
                           <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
                           />
                         </svg>
@@ -167,26 +172,30 @@ export default function Header(props) {
                           vertical: "bottom",
                           horizontal: "right",
                         }}
-                        transformOrigin={{
-                          vertical: "left",
-                          horizontal: "left",
+                        transformOrigin= {{
+                          vertical: "top",
+                          horizontal: "right",
                         }}
                       >
                         <Box
-                          sx={{ backgroundColor: "#FFCF00", color: "black" }}
+                          sx={{ backgroundColor: "#fad42d", color: "black" }}
                         >
-                          <div className="px-4" style={{ padding: "5px" }}>
-                            <Link className="nav-link" to="/">
+                          <div className="py-3" style={{ padding: "5px" }}>
+                            <Link className="nav-link px-5" onClick={handleClose} to= {`/user/${a.profileData ? a.profileData.name : " "}` }>
                               Profile
                             </Link>
                             <hr className="m-2" />
-                            <Link className="nav-link" to="/orders">
+                            <Link className="nav-link px-5" onClick={handleClose} to="/wishlist">
+                              WishList
+                            </Link>
+                            <hr className="m-2" />
+                            <Link className="nav-link px-5" onClick={handleClose} to="/orders">
                               Orders
                             </Link>
                             <hr className="m-2" />
                             <Link
                               onClick={handlelogout}
-                              className="nav-link"
+                              className="nav-link px-5"
                               to="/"
                             >
                               Logout
@@ -194,7 +203,7 @@ export default function Header(props) {
                           </div>
                         </Box>
                       </Popover>
-                      \{" "}
+                      {" "}
                     </div>
                   )}
                 </ul>
@@ -225,7 +234,7 @@ export default function Header(props) {
                       width="25"
                       height="25"
                       fill="white"
-                      class="bi bi-x-lg"
+                      className="bi bi-x-lg"
                       viewBox="0 0 16 16"
                     >
                       <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
@@ -255,19 +264,19 @@ export default function Header(props) {
                           </li>
                         ) : (
                           <div className="nav-item">
-                            <Link className="m-auto nav-link" to="/">
+                            <Link className="m-auto nav-link" to="/user">
                               Profile{" "}
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="27"
                                 height="27"
                                 fill="white"
-                                class="bi bi-person-circle"
+                                className="bi bi-person-circle"
                                 viewBox="0 0 16 16"
                               >
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                                 <path
-                                  fill-rule="evenodd"
+                                  fillRule="evenodd"
                                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
                                 />
                               </svg>

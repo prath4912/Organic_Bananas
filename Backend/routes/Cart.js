@@ -53,7 +53,6 @@ router.post("/getcart" , fetchuser  , async(req,res)=>{
                 const item = await Cart_item.findByIdAndUpdate(product._id, { $set: {quantity : product.quantity + quantity}}, { new: true })
                 console.log(item) ;
                 res.status(200).send("ok1") ;
-
               }
               else
               {
@@ -72,3 +71,7 @@ router.post("/getcart" , fetchuser  , async(req,res)=>{
           
           }) ;
 module.exports = router ;
+
+
+
+

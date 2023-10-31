@@ -1,0 +1,112 @@
+.cb1{
+    position: fixed;
+    bottom: 20px;
+    right: 0;
+    height: 40vh;
+    width: 20vw;
+    background: rgb(192, 192, 249);
+    border-radius: 9px;
+    margin: 7px;
+    border: solid rgb(100, 145, 160) 2px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.bg1{
+    background: #000;
+}
+
+
+.ch1{
+    background: darkblue;
+    color: rgb(93, 0, 93);
+    font-size: 1rem;
+    color: lightblue;
+}
+
+.chh1{
+    position:sticky;
+    top: 0;
+}
+
+.cb5{
+    display: flex;
+    flex-direction: column;
+}
+.prath{
+    /* float: right; */
+    align-self: flex-end;
+    background-color: #0e123a;
+    clear: left;
+    border-radius: 4px;
+    padding: 2px 4px ;
+    margin-right: 2px;
+    max-width: 18vw;
+    color: white;
+}
+.bot{
+    /* float: left; */
+    align-self: flex-start;
+    background-color: #FFCF00;
+    clear: both;
+    border-radius: 4px;
+    padding:2px 4px;
+    margin-left: 2px;
+    max-width: 18vw;
+    overflow:hidden;
+    color: white;
+}
+
+.cb2 input{
+    height: 20px;
+    width: 17vw;
+    /* position: absolute; */
+    /* bottom: 2px; */
+    /* right: 45px; */
+    border-radius: 3px;
+    background-color: rgb(214, 223, 247) ;
+    margin-right: 2px;
+    font-size: 1rem;
+}
+
+.cb2 {
+    position: fixed;
+    bottom: 3px;
+    right: 15px;
+    z-index: 10;
+}
+
+.cb2 button{
+    height: 16px;
+    font-size: 0.8rem;
+    padding: 1px;
+    padding-bottom: 17px;
+}
+
+.cb3{
+    margin-bottom: 30px;
+}
+/* .achat{
+    overflow: scroll;
+} */
+
+.cbtn1{
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+    z-index: 10;
+}
+
+.vs1{
+    visibility: hidden;
+}
+
+.hs1{
+    visibility: visible;
+}
+.l1{
+    width: 18vw;
+}
+.ibtn{
+    display: inline;
+}
