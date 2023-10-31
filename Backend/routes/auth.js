@@ -172,27 +172,27 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
 
     router.get("/users/:id/verify/:token/", async (req, res) => {
       try {
+        console.log("er5") ;
+
         const user = await User.findOne({ _id: req.params.id });
+        console.log("er4") ;
+
         if (!user) return res.status(400).send({ message: "Invalid link" });
+        console.log("er3") ;
 
         const token = await Token.findOne({
           userId: user._id,
           token: req.params.token,
         });
+        console.log("er2.5") ;
 
         if (!token) return res.status(400).send({ message: "Invalid link" });
+        console.log("er2") ;
 
         await User.updateOne({ _id: user._id, verified: true });
         console.log("er") ;
 
-        // await token.remove({userId: user._id,
-        //   token: req.params.token} , function (err, result) { 
-        //     if (err){ 
-        //         console.log(err) 
-        //     }else{ 
-        //         console.log("Result :", result)  
-        //     } 
-        // });
+
         await Token.deleteMany({userId: user._id,
           token: req.params.token}) ;
         console.log("wefr") ;
@@ -201,6 +201,7 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
 
       } catch (error) {
         console.log('kj') ;
+        console,log(error) ;
         res.status(500).send({ error : error ,message: "Internal Server Error" });
       }
     });
