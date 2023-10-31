@@ -189,7 +189,8 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
         if (!token) return res.status(400).send({ message: "Invalid link" });
         console.log("er2") ;
 
-        await User.updateOne({ _id: user._id, verified: true });
+        await User.updateOne({ _id: user._id} ,{ verified: true });
+
         console.log("er") ;
 
 
