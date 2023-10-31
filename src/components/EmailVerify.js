@@ -1,15 +1,18 @@
-import React, { useEffect , useState} from 'react'
+import React, { useContext, useEffect , useState} from 'react'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Fruitcontext from "../context/Fruitcontext";
+
 
 export default function EmailVerify() {
+    const a = useContext(Fruitcontext) ;
     const [validUrl, setValidUrl] = useState(true);
 	const param = useParams();
     var flag = true ;
     const verifyEmailUrl = async () => {
         try {
-            const url = `http://localhost:5000/api/auth/users/${param.id}/verify/${param.token}`;
+            const url = `${a.BaseUrl}/api/auth/users/${param.id}/verify/${param.token}`;
             const { data } = await axios.get(url);
             setValidUrl(true);
             console.log(data);
