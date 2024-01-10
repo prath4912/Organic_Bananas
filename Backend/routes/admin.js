@@ -10,7 +10,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config/config.env" });
 
 const JWT_SECRET = process.env.JWT_SECRET;
-
+ 
 router.post(
   "/login",
   [
@@ -58,24 +58,7 @@ router.post(
   }
 );
 
-router.post("/insert", async (req, res) => {
 
-  const { name, amount, desc, stock, category } = req.body;
-  try
-{
-  await Fruit.create({
-    name,
-    amount,
-    desc,
-    stock,
-    category,
-  });
-  res.status(200).send("cjj");
-}catch(error)
-{
-  res.status(500).send({ admin: false, success, message: "some error occured" , erroe });  //update message and erroe code
-}
-});
 
 
 module.exports = router;

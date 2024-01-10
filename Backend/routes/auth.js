@@ -23,7 +23,6 @@ router.post('/createuser' ,   [body('email', 'Plese enter proper email' ).isEmai
     const result = validationResult(req);
   if (!result.isEmpty()) {
    return res.send({success , errors: result.array() });
-    
   }
 try { 
   let user = await User.findOne({email : req.body.email  , verified:true}) ;
@@ -49,6 +48,7 @@ try {
         userId: prathmesh._id,
         token: crypto.randomBytes(32).toString("hex"),
       }).save();
+      console.log("erav") ;
       const url = `${process.env.BASE_URL}users/${prathmesh._id}/verify/${token.token}`;
       await sendmail(prathmesh.email, "Verify Email", `<div style="padding: 50px; ;"><button style="background-color: yellow; padding: 10px; font-size: large;"><a style="text-decoration: none;" href="${url}">Verify Email</a></button><p>or</p><h1>Click on following Link To Verify</h1><p>${url}</p></div>`);
     }
@@ -72,7 +72,7 @@ try {
 }catch(error)
 {
     console.error({error : error.message}) ;
-    res.status(500).send({success ,error :"some errrrror occured"});
+    res.status(500).send({success ,error :"some errrrror occured",error});
 }
   }catch(error){
     console.error({error : error.message}) ;
@@ -158,10 +158,22 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
   }
   ) ;
 
-  router.post('/deleteuser' , async (req ,res)=>{
+  router.post('/deleteuser',fetchuser , async (req ,res)=>{
     try {
-      await User.deleteOne({email : req.body.email}) ;
-      res.send("Done")
+      if(req.user)
+      {
+        if(await User.findOne({_id : req.user.id}))
+        {
+          await User.deleteOne({_id : req.user.id}) ;
+          res.send("User Deleted Ssuccesfully") ;
+        }else
+        {
+          res.send("User Already Deleted")
+        }
+      }else
+      {
+        res.send("User Not Found") ;
+      }
     }catch(error)
     {
       console.error({error : error.message}) ;
@@ -177,7 +189,7 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
         const user = await User.findOne({ _id: req.params.id });
         console.log("er4") ;
 
-        if (!user) return res.status(400).send({ message: "Invalid link" });
+        if (!user) return res.status(400).send({ message: "Invalid linkk" });
         console.log("er3") ;
 
         const token = await Token.findOne({
@@ -208,19 +220,19 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
     });
 
 
-    router.post("/forgot" , async (req ,res)=>{
+    router.post("/forgot", async (req ,res)=>{
 
       try{
       const email = req.body.email ;
-      // console.log(email);;
+      // console.log(email);
     if(!req.body.email)
     {
       console.log("ain")
-      res.status(402).send("User Not exit") ;
+      res.status(402).send("Email Not present") ;
 
     }else
     {
-      const us1 = await User.findOne({email}) ;
+      const us1 = await User.findOne({email , verified:true}) ;
       console.log("reavpi") ;
       if(!us1)
       {
@@ -241,7 +253,7 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
       const url = `${process.env.BASE_URL}users/${us1._id}/forgot/${token.token}`;
       console.log(url) ;
       
-      // await sendmail(prathmesh.email, "Reset Password", `<div style="padding: 50px; ;"><button style="background-color: yellow; padding: 10px; font-size: large;"><a style="text-decoration: none;" href="${url}">Reset Paaword</a></button><p>or</p><h1>Click on following Link To Reset Paaword</h1><p>${url}</p></div>`);
+      await sendmail(us1.email, "Reset Password", `<div style="padding: 50px; ;"><button style="background-color: yellow; padding: 10px; font-size: large;"><a style="text-decoration: none;" href="${url}">Reset Paaword</a></button><p>or</p><h1>Click on following Link To Reset Paaword</h1><p>${url}</p></div>`);
       res.send("done") ;
   }
   }

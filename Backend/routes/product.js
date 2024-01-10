@@ -1,10 +1,10 @@
 const express = require("express");
 const Fruit = require("../models/Fruits");
 const router = express.Router();
+const isAdmin = require("../middleware/isAdmin") 
+const fetchuser = require("../middleware/fetchuser")
 
-
-
-router.post("/insert", async (req, res) => {
+router.post("/insert",fetchuser, isAdmin , async (req, res) => {
 
   const { name, amount, desc, stock, category } = req.body;
   try
@@ -16,10 +16,10 @@ router.post("/insert", async (req, res) => {
     stock,
     category,
   });
-  res.status(200).send("cjj");
+  res.status(200).send("Done Fruit Inserted");
 }catch(error)
 {
-  res.status(500).send({ admin: false, success, message: "some error occured" , erroe });  //update message and erroe code
+  res.status(500).send({ admin: false, success:false, message: "some error occured" , error });  //update message and error code
 }
 });
 

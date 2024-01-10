@@ -4,9 +4,8 @@ const crypto = require("crypto") ;
 const PAYMENT = require("../models/PayId") ;
 const Order = require("../models/Orders") ;
 const dotenv =  require("dotenv") ; 
-const order = require("../models/Orders");
 const fetchuser = require("../middleware/fetchuser");
-const { error } = require("console");
+// const { error } = require("console");
 
 dotenv.config({path : "./config/config.env"}) ;
 
@@ -35,12 +34,11 @@ router.post('/checkout' , async (req,res)=>{
               const order = await instance.orders.create(options);
               console.log(order) ;
               res.status(200).json({
-                success: true,
-                order
+                success: true , order
               } ) ;
             }catch(error)
             {
-              res.status(500).send({ admin: false, success, message: "some error occured",error });  //update message and erroe code
+              res.status(500).send({ success:false, message: "some error occured",error });  //update message and erroe code
 
             }
 }) ;
@@ -92,7 +90,7 @@ router.post("/verification" , fetchuser ,  async (req , res)=>{
         }
       }catch(error)
       {
-        res.status(500).send({ admin: false, success, message: "some error occured",error });  //update message and erroe code
+        res.status(500).send({  success:false, message: "some error occured",error });  //update message and erroe code
 
       }
       

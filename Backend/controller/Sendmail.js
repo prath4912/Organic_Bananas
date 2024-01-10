@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 // C64FC252E914ACF0E9BE2231D366D3B9A6EF
 
 const sendm = async(usermail , subjext , message)=>{
-    console.log(usermail ,subjext , message) ;
+    // console.log(usermail ,subjext , message) ;
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
@@ -21,7 +21,7 @@ const sendm = async(usermail , subjext , message)=>{
         html: message, 
       });
     
-      console.log("Message sent: %s", info.messageId);
+    //   console.log("Message sent: %s", info.messageId);
 }
 
 

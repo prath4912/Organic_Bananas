@@ -5,25 +5,37 @@ const fetchuser = require("../middleware/fetchuser");
 const router = express.Router();
 const Wish = require("../models/WishItems")
 
-
+ 
 
 router.post("/insert", fetchuser,async (req, res) => {
-
   try
 {
+  console.log(req.body) ;
     const user_id = req.user.id ;
     const product =  req.body.product ;
+    // console.log(user_id) ;
+    const w1 = await Wish.findOne({product , user : user_id}) ;
+    // console.log(w1) ;
+    if(w1)
+    {
+      res.status(200).send("Already Exists in wishlist");
 
-  await Wish.create({
-   user : user_id , product
-  });
-
-  res.status(200).send("Done");
+    }else
+    {
+      await Wish.create({
+        product , user : user_id  
+       });
+     
+       res.status(200).send("Done");
+    }
+ 
 }catch(error)
 {
   res.status(500).send({ success : false, message: error  });  //update message and erroe code
 }
 });
+
+
 
 router.post("/remove", fetchuser,async (req, res) => {
 
@@ -31,12 +43,21 @@ router.post("/remove", fetchuser,async (req, res) => {
 {
     const user_id = req.user.id ;
     const product =  req.body.product ;
+    const w1 = await Wish.findOne({  product , user : user_id}) ;
+    
+    if(w1)
+    {
+      await Wish.deleteOne({
+        user : user_id , product
+       });
+     
+       res.status(200).send("Done");
 
-  await Wish.deleteOne({
-   user : user_id , product
-  });
+    }else{
+      res.status(200).send("Not Exist in wishlist");
 
-  res.status(200).send("Done");
+    }
+
 }catch(error)
 {
   res.status(500).send({ success : false, message: error  });  //update message and erroe code
@@ -83,6 +104,7 @@ router.get("/getwishlist", fetchuser ,async (req, res) => {
     // const f1 = JSON.stringify(fruits);
 console.log("rewf") ; 
     const user_id  = req.user.id ;
+    console.log(user_id) ;
     const fruits = await Wish.find( { user : user_id } ).populate('product').select("-user -_id") ;
     const f1 = JSON.stringify(fruits);
     res.status(200).send({f1 : f1 ,count: fruits.length });
@@ -92,7 +114,5 @@ console.log("rewf") ;
     }
   });
   
-
-
 
 module.exports = router;
