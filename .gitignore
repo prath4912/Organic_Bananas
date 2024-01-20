@@ -12,6 +12,9 @@ useless.js
 /build
 # secreats
 .env
+*/config.env
+./Backend/config/config.env
+
 
 # misc
 .DS_Store

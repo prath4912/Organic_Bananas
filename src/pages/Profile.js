@@ -41,20 +41,7 @@ export default function Profile() {
               <FontAwesomeIcon icon={faPen} />
             </div>
           </div>
-          <button className="mt-3 p-1 btn btn-light w-100 ">My Orders</button>
-          <button className="mt-1 p-1 btn btn-light w-100 ">Temp</button>
-          <button className="mt-1 p-1 btn btn-light w-100 ">TEmp</button>
-
-          <div className=" mt-auto ">
-          <button onClick={handlelogout} className="btn btn-light w-100">Logout <FontAwesomeIcon icon={faRightFromBracket} /></button>
-          {/* <Link
-                              onClick={handlelogout}
-                              className="nav-link px-5"
-                              to="/"
-                            >
-                              Logout
-                            </Link> */}
-          </div>
+      
         </div>
 
         <div className="bg-secondary p-3 text-light flex-fill">

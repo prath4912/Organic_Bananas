@@ -1,54 +1,60 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ob1 from "../images/ORGABIC.png"
 import Fruitcontext from "../context/Fruitcontext";
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import toast from 'react-hot-toast';
+import axios from "axios";
+
 
 
 export default function Fruit() {
-    const a = useContext(Fruitcontext);
-    const param = useParams();
-    var index= 0 ;
-    a.product_list.forEach( (ele ,in1)=>{
-        if(ele.name==param.name)
-        {
-             index = in1;
+    const {name, id} = useParams();
+    const [item , setitem] = useState(null) ;
+   const a = useContext(Fruitcontext); 
+    const getFruit = async()=>{
+      const url = `${a.BaseUrl}/api/product/get` ;
+      const response = await axios.post(url , {id} , {
+        headers : {
+          'Content-Type': 'application/json' ,
         }
-    }) ;
+      }) ;
+      console.log(response.data.Fruit1) ;
+      setitem(response.data.Fruit1) ;
+    }
+
+    useEffect(()=>{
+      getFruit() ;
+    },[]) ;
 
   return (
     <div className="dd1">
       <div className="bg-dark text-light container">
-        <div className="d-flex justify-content-center align-items-center"> 
-          <div className="my-3 mx-2 dp4">
-            <div className="">
-              <div className=" card h-100">
-                <Link to={`/fruits/${param.name}`}>
-                  <img
-                    src={ob1}
-                    height={"300px"}
-                    className="card-img-top"
+        <div className=""> 
+          <div className="my-3 mx-2 ">
+           {item && <div className="d-flex">
+            <div> 
+              <img
+                    src={item.image ? item.image : ob1}
+                    className="w-25"
                     alt="..."
-                  />
-                </Link>
-
-                <div className="card-body">
-                  <h5 className="card-title">{param.name}</h5>
-                  <p className="card-text">
-                    {a.product_list[index].desc.slice(0, 10)}{" "}
+                  /></div>
+              <div className="bg-light text-dark w-100 ">
+                <div className="w-100">
+                  <h5 className="">{item.name}</h5>
+                  {item.desc && <p className="card-text">
+                    { item.desc.slice(0, 10)}{" "}
                     <small>
                       <a href="">read more</a>
                     </small>{" "}
-                  </p>
+                  </p>}
                 </div>
-                <div className="card-footer">
+                <div className="">
                   <small className="text-body-secondary">
-                    Price : {a.product_list[index].amount}RS
+                    Price : {item.amount}RS
                   </small>
                   <button
                     onClick={() => {
-                      a.addcart(a.product_list[index]._id);
+                      a.addcart(item._id);
                       toast.success("Itam Added To Cart", {
                         duration: 1000,
                         iconTheme: {
@@ -63,7 +69,7 @@ export default function Fruit() {
                   </button>
                   <button
                     onClick={() => {
-                      a.addwishlist(a.product_list._id);
+                      a.addwishlist(item._id);
                       toast.success("Itam Added To WishList", {
                         duration: 1000,
                         iconTheme: {
@@ -78,7 +84,7 @@ export default function Fruit() {
                   </button>
                 </div>
               </div>
-            </div>
+            </div>}
           </div>
         </div>
       </div>

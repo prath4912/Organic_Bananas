@@ -100,7 +100,7 @@ function App() {
         <Route path="/users/:id/forgot/:token">
           <Forgotpassword1 />
         </Route>  		
-        <Route path="/fruits/:name">
+        <Route path="/fruits/:name/:id">
           <Fruit/>
         </Route>  		
 

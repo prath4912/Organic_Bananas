@@ -3,7 +3,11 @@ const dotenv =  require("dotenv") ;
 const cors = require("cors") ;
 var bodyParser = require('body-parser') ;
 const app = express() ; 
+const cln = require("./cln") ;
+const fileUpload = require("express-fileupload") ;
 
+
+cln() ;
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -16,10 +20,14 @@ dotenv.config({path : "./config/config.env"}) ;
 
 const PORT = process.env.PORT ;
 
+
 app.use(cors()) ; 
 app.use(express.json()) ;  // request data from body as a middleware
-app.use(express.urlencoded({extended : true})) ;
+// app.use(express.urlencoded({extended : true})) ;
+app.use(fileUpload( {useTempFiles : true,
+    tempFileDir : '/tmp/'})) ;
 
+app.post("/api/test" , (req,res)=>{res.send("Succrss")} );
 
 app.use("/api/payment" , require("./routes/payment")) ;
 

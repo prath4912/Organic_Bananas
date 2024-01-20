@@ -17,7 +17,7 @@ export default function Home() {
   ];
   return (
     <>
-    <div className="container d-flex justify-content-around my-5 flex-wrap gap-2">
+    <div className="container d-flex justify-content-around my-5 flex-wrap gap-2 mt100vh">
       {arr.map((element,index) => {
         return (
           <div key={index} className="card shadow-lg border border-black" style={{width: "12rem"}}>

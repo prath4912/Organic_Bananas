@@ -279,10 +279,10 @@ router.post('/login' ,   [body('email', 'Plese enter proper email' ).isEmail()  
 
         if (!token) return res.status(400).send({ message: "Invalid link" });
         // console.log("in reset pass2") ;
-
         const salt =  bcrypt.genSaltSync(10);
         const hash =  bcrypt.hashSync( req.body.password , salt);
-        await User.updateOne({ _id: user._id ,   "password" : hash }) ; 
+        await User.updateOne({ _id: user._id },{ password : hash}) ; 
+
     
         // console.log("in reset pass2") ;
 

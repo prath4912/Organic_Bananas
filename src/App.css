@@ -7,7 +7,10 @@
 .of{
   overflow-x: visible;
 }
-
+.mt100vh{
+  padding-top: 100vh;
+  margin-top: 100vh;
+}
 
 .z10{
   z-index: 10;
@@ -268,4 +271,21 @@ color: yellow;
     height: 300px;
     overflow: hidden;
   }
+}
+
+
+
+.sidebar {
+  position: fixed;
+  right: -10vw;
+  background-color: black;
+  height: 100vh;
+  width: 10vw;
+  transition: right 0.3s ease-out;
+  z-index: 1000; 
+  margin-top: 15vh;
+}
+
+.sidebar.open {
+  right: 0; 
 }

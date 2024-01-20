@@ -109,24 +109,6 @@ const changeHandler1 = (event)=>{
               </li>
             </div>
           </div>
-
-          <div className="my-3">
-            <h5 className="">Discount</h5>
-            <div className="ms-1" style={{ listStyle: "none" }}>
-              <li>
-                <input id="fruits" type="checkbox" />{" "}
-                <label htmlFor="fruits">10%</label>
-              </li>
-            </div>
-          </div><div className="my-3">
-            <h5 className="">Availibility</h5>
-            <div className="ms-1" style={{ listStyle: "none" }}>
-              <li>
-                <input id="fruits" type="checkbox" />{" "}
-                <label htmlFor="fruits">Fruits</label>
-              </li>
-            </div>
-          </div>
         </div>
         <div className="w-100">
           <div className="w-100 d-flex dp21 bg-dark of ">
@@ -211,6 +193,7 @@ const changeHandler1 = (event)=>{
                         name={product.name}
                         desc={product.desc}
                         amount={product.amount}
+                        image = {product.image}
                       />
                     );
                   })}

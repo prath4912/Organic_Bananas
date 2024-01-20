@@ -8,13 +8,14 @@ const sendm = async(usermail , subjext , message)=>{
         host: 'smtp.gmail.com',
         port: 587,
         auth: {
-            user: 'prathmeshpawaru@gmail.com',
-            pass: 'kwkp nrwp dhyu qjgq'
+            user: 'livebailgada@gmail.com',
+            pass: 'wauz rfyt fmer zrbg'
+            
         }
     });
     
     const info = await transporter.sendMail({
-        from: '"Prathmesh Pawar" <prathmeshpawaru@gmail.com>', // sender address
+        from: '"Organic Bananas" <livebailgada@gmail.com>', // sender address
         to:usermail, // list of receivers
         subject: subjext, // Subject line
         // text: url, // plain text body

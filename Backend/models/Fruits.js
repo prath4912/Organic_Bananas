@@ -27,8 +27,10 @@ const fruitschema = new mongoose.Schema({
     type : String ,
     default : "general" ,
   },
+  image : {
+    type:String , 
+  }
 
-  
 });
 const Fruit = mongoose.model("Fruit", fruitschema);
 
