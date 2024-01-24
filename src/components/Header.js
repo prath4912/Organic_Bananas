@@ -64,21 +64,22 @@ export default function Header(props) {
       
         <nav className="m-0 p-0 navbar">
           <div className="m-0 hn1 container-fluid ">
-            <div className="d-flex flex-row justify-content-between sd1">
+            <Link to='/home'>
+            <div className="d-flex flex-row justify-content-between hover:scale-105 transition-all active:scale-90">
               <a className="navbar1 d-flex flex-row" id="a1" href="#">
                 <img
                   src={ob1}
                   alt="Logo"
                   width="50"
                   height="50"
-                  className="d-inline-block align-text-center ms-1 me-2 img-fluid"
+                  className="d-inline-block align-text-center ms-1 me-2 "
                 />
                 <div className="d-flex flex-row flex-wrap">
                   <p className="m-0 p-0 me-2">ORGANIC </p>
                   <p className="m-0 p-0"> BANANAS</p>
                 </div>
               </a>
-            </div>
+            </div></Link>
             {isSmallDevice === false ? (
               <div className="m-0 dh2">
                 <ul className=" d-flex flex-row justify-content-around dh7">
@@ -239,7 +240,7 @@ export default function Header(props) {
                           }`}
                         >
                           <Link className="nav-link " to="/products">
-                            Productsk
+                            Products
                           </Link>
                         </li>
                         <li

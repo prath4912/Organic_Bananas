@@ -14,7 +14,7 @@ const paySchema = new mongoose.Schema({
         type : String ,
         required : true ,
     }
-}); 
+},{ timestamps: true } );
 const Payment = mongoose.model('Payment', paySchema );
 
 module.exports = Payment ;

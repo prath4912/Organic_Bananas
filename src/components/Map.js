@@ -4,11 +4,13 @@ import React from 'react'
 export default function Map() {
   return (
     <div className='container-fluid bg-dark p-3 '>
+
         <div className='fx1 '>
         <div className='ad1 col-4 text-light'>
-            <h1>Address</h1> 
-            <address className="my-3 qhkvMe " itemProp="address"><div>आण्णा पवार वस्ती Near siddhnath mandir सखाराम वस्ती Umbarde</div><div>Vaduj, Maharashtra 415506</div><div>India</div></address>
-            <a className="btn btn-warning my-3 PDvGL q8cvFf" href="https://www.google.com/maps/dir//%E0%A4%A6%E0%A5%87%E0%A4%B6%E0%A5%80+%E0%A4%95%E0%A5%87%E0%A4%B3%E0%A5%80+%28Organic+Bananas%29/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bc3db553f6c68d5:0x52a95cbe196c7709!2m2!1d74.43272!2d17.5516002" target="_blank" data-tracking-element-type="6" jslog="56039; track:impression,click">Get directions</a>
+        <h1 className='text-3xl font-bold text-white'>Contact Us</h1>
+
+            <address className="my-3 " itemProp="address"><div>आण्णा पवार वस्ती Near siddhnath mandir सखाराम वस्ती Umbarde</div><div>Vaduj, Maharashtra 415506</div><div>India</div></address>
+            <a className="btn btn-warning my-3 active:scale-75 transition-all" href="https://www.google.com/maps/dir//%E0%A4%A6%E0%A5%87%E0%A4%B6%E0%A5%80+%E0%A4%95%E0%A5%87%E0%A4%B3%E0%A5%80+%28Organic+Bananas%29/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bc3db553f6c68d5:0x52a95cbe196c7709!2m2!1d74.43272!2d17.5516002" target="_blank" data-tracking-element-type="6" jslog="56039; track:impression,click">Get directions</a> <button className='btn btn-warning my-3 ms-2 active:scale-75 transition-all' >Send Message</button>
         </div>
         
     <div className='minh col-8'>

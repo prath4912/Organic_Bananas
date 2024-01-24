@@ -38,6 +38,8 @@ app.use("/api/auth" , require("./routes/auth")) ;
 app.use("/api/cart" , require("./routes/Cart")) ;
 
 app.use("/api/product" , require("./routes/product")) ;
+app.use("/api/review" , require("./routes/Review")) ;
+
 app.use("/api/wishlist" , require("./routes/Wishlist")) ;
 
 

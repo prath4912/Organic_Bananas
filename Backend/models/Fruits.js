@@ -22,16 +22,14 @@ const fruitschema = new mongoose.Schema({
   rating: {
     type: Number,
   },
-  reviews: [{type : String}],
+  reviews: [{}],
   category : {
     type : String ,
     default : "general" ,
   },
-  image : {
-    type:String , 
-  }
+  image : []
 
-});
+},{ timestamps: true } );
 const Fruit = mongoose.model("Fruit", fruitschema);
 
 module.exports = Fruit;

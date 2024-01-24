@@ -10,7 +10,7 @@ const wishschema = new mongoose.Schema({
         ref : "user" ,
         required : true
     }, 
-});
+},{ timestamps: true } );
 const Wish = mongoose.model("Wish", wishschema);
 
 module.exports = Wish;

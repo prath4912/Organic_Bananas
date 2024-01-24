@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Fruitcontext from "../context/Fruitcontext";
 import { useContext } from "react";
-import bg1 from "../images/ORGABIC.png";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function Cart(props) {
+
   const [add1, setadd] = useState("");
   var t_quantity = 0;
   var total_cost = 0;
@@ -17,46 +17,46 @@ function Cart(props) {
 
   useEffect(() => {
     a.getcart();
-  }, [a.cart]);
+  }, []);
 
   return (
-    <div className="cd2">
-      <div className="p-3 container bg-dark">
-        <h1 className="ms-3">Items </h1>
+    <div className="cd2 mb-4">
+      <div className="p-3 mx-28 bg-dark">
+        <h1 className="text-2xl text-white font-bold mb-3 ">Items</h1>
 
-        <div className="d-flex flex-row flex-wrap justify-content-center ">
-          <div className="flex-grow-1 ml">
-            {a.cart.length ? (
+        <div className="flex flex-row flex-wrap justify-around ">
+          <div className=" grow me-1 ">
+
+            {(a.cart && a.cart.length>0 ) ? (
+
               a.cart.map((cart, index) => {
                 total_cost = total_cost + cart.product.amount * cart.quantity;
                 t_quantity = t_quantity + cart.quantity ;
 
                 return (
-                  <div className="container-fluid">
-                    <div className=" card mb-3" style={{ maxWidth: "100%" }}>
-                      <div className="d-flex flex-row g-0">
+                  <div className="my-1">
+                    <div className=" ">
+                      <div className="flex flex-row">
                         <div className="">
                           <img
-                            src={bg1}
-                            className = "img rounded-start"
-                            alt="..."
+                            src={cart.product.image[0]}
+                            className = " rounded-start"
                             width={130}
                           />
                         </div>
-                        <div className="card-body w-100 d-flex flex-row  align-items-center justify-content-around
+                        <div className="flex flex-row bg-white w-full  align-items-center justify-content-around
 ">
-                          <div className="col-3">
-                            <h5 className="card-title">
-                              {" "}
-                              <b>{cart.product.name}</b>{" "}
+                          <div className="">
+                            <h5 className="">
+                              <b>{cart.product.name}</b>
                             </h5>
                           </div>
-                          <div className="col-3">
-                            <div className="d-flex me-3 mb-1 ms-2">
+                          <div className="">
+                            <div className="flex ">
                               <button
-                                className="btn btn-warning  btn-sm rounded-circle border-black mx-1"
+                                className="btn btn-warning  btn-sm rounded-circle border-black mx-1 active:scale-90 transition-all"
                                 onClick={() => {
-                                  a.subq(index);
+                                  a.subq(cart.product._id , cart.quantity);
                                 }}
                               >
                                 -
@@ -66,23 +66,23 @@ function Cart(props) {
                               </div>
                               <button
                                 onClick={() => {
-                                  a.addq(index);
+                                  a.addcart(cart.product._id);
                                 }}
-                                className="btn btn-warning  btn-sm rounded-circle border-black mx-1"
+                                className="btn btn-warning  btn-sm   rounded-circle border-black mx-1 active:scale-90 transition-all"
                               >
                                 +
-                              </button>{" "}
+                              </button>
                             </div>
                           </div>
-                          <div className="col-3">
-                            <p className="text-black fw-medium mt-2">Subtotal : {cart.quantity*cart.product.amount}RS</p>
+                          <div className="">
+                            <p className="">Subtotal : {cart.quantity * cart.product.amount}RS</p>
                           </div>
-                          <div>
+                          <div onClick={() => {
+                                a.removehandle(cart.product._id);
+                              }} >
                             <button
-                              onClick={() => {
-                                a.removehandle(index);
-                              }}
-                              className="btn btn-sm btn-warning border-black mx-2 px-3 "
+                              
+                              className="btn btn-sm btn-warning border-black px-3 active:scale-75 transition-all"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +104,7 @@ function Cart(props) {
               })
             ) : (
               <div className="h-75" style={{ color: "white" }}>
-                {" "}
+                
                 <p>Cart Is Empty</p>
                 <div className="h-50 d-flex justify-content-center align-items-center">
                   <Link

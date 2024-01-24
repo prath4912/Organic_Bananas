@@ -23,8 +23,9 @@ export default function Sidebar(props) {
         <li className="my-2 "><Link  className="nav-link" to={`/user/${a.profileData ? a.profileData.name : ""}`}>
             Profile
           </Link></li>
-        <li className="my-2 ">WishList</li>
-        <li className="my-2 ">Profile</li>
+          <li className="my-2 "><Link  className="nav-link" to={`/wishlist`}>
+            Wishlist
+          </Link></li>        <li className="my-2 ">Profile</li>
        
         <li className="mt-auto">
           <Link onClick={handlelogout} className="nav-link" to="/">

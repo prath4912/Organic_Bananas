@@ -1,16 +1,12 @@
-import React, {  useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import Fruitcontext from './Fruitcontext'
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import l1 from "../images/ORGABIC.png" ;
 
-// import dotenv from "dotenv" ;
 
 
 export default function Fruitstate(props) {
-
-
-  // dotenv.config({path : "./config/config.env"}) ;
 
   const BaseUrl = process.env.REACT_APP_BASE_URL ;
   
@@ -19,15 +15,14 @@ export default function Fruitstate(props) {
 
   const [q1 , setq1] = useState(0) ;
 
-  // const[total_page  , settotalpage] = useState(0) ;
 
   const[total_fruits , settf] = useState(0) ;
   const[total_fruits1 , settf1] = useState(0) ;
 
   const[cart , setcart] = useState([]) ;
 
-  const[s1 , sets1] = useState() ;
-  const[s11 , sets11] = useState() ;
+  const[s1 , sets1] = useState("") ;
+  const[s11 , sets11] = useState("") ;
 
   const[fi1 , setfi1] = useState(10000000) ;
   const[fi11 , setfi11] = useState(10000000) ;
@@ -37,19 +32,16 @@ export default function Fruitstate(props) {
 
 
   const [page ,setpage] = useState(0) ;
-  const [page1 ,setpage1] = useState(0) ;
 
   const [profileData , setpdata] =useState (null) ;
 
     const fetchData = (async()=>{
       setpage(page+1) ;
-      if(s1!=null)
-      {
       var url = `${BaseUrl}/api/product/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}`;
-     }
-     else if(category.length!==0)
+     if(category.length!==0)
      {
       var temp = JSON.stringify(category) ;
+      // console.log(temp); 
        url = `${BaseUrl}/api/product/getproduct?amount[lte]=${fi1}&category=${temp}&page=${page}&sort=${s1}`;
      }
      else
@@ -57,7 +49,6 @@ export default function Fruitstate(props) {
          url = `${BaseUrl}/api/product/getproduct?amount[lte]=${fi1}&page=${page}` ;
      }
 
-     console.log(url) ;
      try
      {
       const data1 = await axios.get(url,{
@@ -67,23 +58,22 @@ export default function Fruitstate(props) {
         }}) ;
      
         const data = (data1.data) ;
+        // console.log(data) ;
          temp = product_list ;
         temp =temp.concat(JSON.parse(data.f1));
         let temp1 =data.count ;
         settf(temp1) ;
-
         setproduct_list(temp) ;
-        console.log(temp) ;
       }catch(error)
       {
        alert(error  + "\nYou are Offline") ;
       }
-    }) ;
+    });
   
     const fetchData1 = (async()=>{
      try
      {
-      console.log("IN FEtch")
+      // console.log("IN FEtch")
       const url = `${BaseUrl}/api/wishlist/getwishlist` ;
       const data1 = await axios.get(url, {
         headers: {
@@ -96,21 +86,21 @@ export default function Fruitstate(props) {
         let temp1 =data.count ;
         settf1(temp1) ;
         setwishlist(temp) ;
-        console.log(wishlist) ;
-        console.log(total_fruits) ;
+       
       }catch(error)
       {
-        alert(error  + "\nYou are Offline") ;
       }
     }) ;
 
   const getcart = async()=>{
- 
-      if(localStorage.getItem("cart")) 
-      {
-        setcart(JSON.parse(localStorage.getItem("cart")) );
-      }
+    const data1 =  await axios.get(`${BaseUrl}/api/cart/get` ,{
+              headers: {
+                'Content-Type': 'application/json' ,
+                'auth-token': localStorage.getItem("token") 
+              }}) ;
+              setcart(data1.data) ;
     }
+
   const addwishlist = async (product_id)=>{
       const data1 =  await axios.post(`${BaseUrl}/api/wishlist/insert` ,{
         product: product_id ,
@@ -119,51 +109,36 @@ export default function Fruitstate(props) {
                   'Content-Type': 'application/json' ,
                   'auth-token': localStorage.getItem("token") 
                 }}) ;
-          console.log(data1) ;
   };
 
-const addcart =(p_id)=>{
+const addcart =async(p_id)=>{
 
-  const cart1 = cart ;
-  let item  ;
-
-
-product_list.forEach(( element, index) => {
-  if(element._id===p_id)
-  {
-    item = index ;
-  }
-});
-
-    const temp1 = {
-    product : product_list[item] ,
-    user : null,
-    quantity : 1
-  }
-
-  let flag = true ;
-  cart1.map((ele)=>{
-    if(ele.product._id===temp1.product._id)
-    {
-      ele.quantity = ele.quantity+1 ;
-      flag = false ;
-    }
-  })
-  if(flag)
-  {
-    cart1.push(temp1) ;
-  }
-  localStorage.setItem("cart" , JSON.stringify(cart1)) ;
-
-  setcart(cart1) ;
+  const result = await axios.post(`${BaseUrl}/api/cart/insert` ,{
+    productId: p_id ,
+    quantity : 1,
+    },{
+            headers: {
+              'Content-Type': 'application/json' ,
+              'auth-token': localStorage.getItem("token") 
+            }}) ;
+          console.log(result) ;
+          getcart() ;
 }
 
-const removehandle = (index) => {
-  const cart1 = cart ;
-  cart1.splice(index , 1) ;
-  localStorage.setItem("cart", JSON.stringify(cart1));
-  setcart(cart1) ;
-};
+const removehandle = async(p_id) => {
+  const result = await axios.post(`${BaseUrl}/api/cart/delete` ,{
+    product: p_id ,
+    },{
+            headers: {
+              'Content-Type': 'application/json' ,
+              'auth-token': localStorage.getItem("token") 
+            }}) ;
+
+            console.log(result) ;
+            getcart() ;
+}
+
+
 const deletewishlist = async(product_id) => {
 
     await axios.post(`${BaseUrl}/api/wishlist/remove` ,{
@@ -173,29 +148,25 @@ const deletewishlist = async(product_id) => {
               'Content-Type': 'application/json' ,
               'auth-token': localStorage.getItem("token") 
             }}) ;
-            // console.log(data1) ;
             fetchData1() ;
 
 };
 
-const addq =(index)=>{
 
-  if(cart[index].quantity < cart[index].product.stock)
-  {
-    cart[index].quantity =cart[index].quantity+1 ;
-    localStorage.setItem("cart" , JSON.stringify(cart)) ;
 
-  }else
+const subq = async(p_id , qunatity)=>{
+  if(qunatity>1 )
   {
-    alert("Maximum Stock Reached") ;
-  }
-}
-
-const subq = (index)=>{
-  if(cart[index].quantity > 1 )
-  {
-    cart[index].quantity =cart[index].quantity-1 ;
-    localStorage.setItem("cart" , JSON.stringify(cart)) ;
+    const result = await axios.post(`${BaseUrl}/api/cart/reduce` ,{
+      productId: p_id ,
+      quantity : 1,
+      },{
+              headers: {
+                'Content-Type': 'application/json' ,
+                'auth-token': localStorage.getItem("token") 
+              }}) ;
+            console.log(result) ;
+            getcart() ;
 
   }else
   {
@@ -285,13 +256,13 @@ const getuserdata = async ()=>{
             headers: {
               'auth-token': localStorage.getItem("token") 
             }}) ;
-            console.log(data) ;
+            // console.log(data) ;
             setpdata(data) ;
 }
 
 return (
 
-    <Fruitcontext.Provider value={{deletewishlist , addwishlist , fetchData1 ,s11 , sets11 ,fi11 , setfi11 ,category1 , setcat1 ,wishlist ,setwishlist,setpdata,profileData , getuserdata ,checkoutHandler , category , setcat,fi1,setfi1 , s1,sets1 , total_fruits , removehandle,fetchData, getcart,setcart ,page , setpage ,q1 ,addq,subq, setproduct_list, product_list , cart ,addcart ,BaseUrl }}>
+    <Fruitcontext.Provider value={{deletewishlist , addwishlist , fetchData1 ,s11 , sets11 ,fi11 , setfi11 ,category1 , setcat1 ,wishlist ,setwishlist,setpdata,profileData , getuserdata ,checkoutHandler , category , setcat,fi1,setfi1 , s1,sets1 , total_fruits , removehandle,fetchData, getcart,setcart ,page , setpage ,q1 ,subq, setproduct_list, product_list , cart ,addcart ,BaseUrl }}>
         {props.children}
     </Fruitcontext.Provider>
 

@@ -15,16 +15,15 @@ function Products() {
   
  
   return (
-    <div className="bgd1 dp1">
-      <div className="dp2 container-fluid d-flex  ">
+    <div className="pt-28 ">
+      <div className="  ">
         <div className="w-100">
-          <div className="w-100 d-flex dp21 bg-dark of ">
-            <h1 className="w-100 ">WishList <p className="p-0 m-0 small  " style={{display:"inline",fontSize:"1rem"}}>(showing 1-{a.wishlist.length} items of {a.total_fruits})</p></h1>
+          <div className="bg-black py-3 text-white">
+            <h1 className="text-2xl font-bold ms-2" >WishList <p className=" inline text-xs" >(showing 1-{a.wishlist.length} items of {a.total_fruits})</p></h1>
           </div>
-          {a.wishlist.length>0 ? <div>
+          {a.wishlist.length>0 ? 
             
-              <div className="mad">
-                <div className="d-flex flex-wrap justify-content-start gap-4">
+                <div className="flex flex-wrap justify-content-start gap-2  ">
                   {a.wishlist.map((element, index) => {
                     console.log(element);
                     return (
@@ -35,12 +34,11 @@ function Products() {
                         desc={element.product.desc}
                         amount={element.product.amount}
                         title = {"wishlist"}
+                        image = {element.product.image[0]}
                        
                       />
                     );
                   })}
-                </div>
-              </div>
           </div>:
            <div className="m-5" style={{ color: "white" }}>
            <div className="m-5 d-flex justify-content-center align-items-center">
