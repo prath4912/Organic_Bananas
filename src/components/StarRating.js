@@ -16,7 +16,7 @@ export default function StarRating(props) {
     })
 
     setrP(arr1) ;
-  }, []);
+  }, [props.id]);
 
   const [ratingPercentage  , setrP] = useState([0,0, 0, 0, 0]) ;
   const a = useContext(Fruitcontext);
@@ -71,8 +71,8 @@ export default function StarRating(props) {
 
   return (
     <div className="mx-4 ">
-      <div className="demo flex gap-3 justify-around">
-        <div className=" w-2/6">
+      <div className="demo flex flex-wrap gap-3 justify-around">
+        <div className=" lg:w-2/6">
           <div>
             <h1 className="font-extrabold text-2xl ms-2 my-2">
               Ratings & Reviews
@@ -133,8 +133,8 @@ export default function StarRating(props) {
             Submit
           </button>
         </div>
-        <div className=" w-5/12">
-          <h1 className="font-extrabold text-2xl ms-2 my-2">Reviews</h1>
+        <div className=" lg:w-5/12">
+          <h1 className="font-extrabold text-2xl lg:ms-2 my-2">Reviews</h1>
           <div className="">
             {reviewsMessage &&
               reviewsMessage.length > 0 &&

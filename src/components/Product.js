@@ -19,22 +19,21 @@ function Product(props) {
   }, []);
 
   return (
-    <div className="my-3 mx-2 dp4 shadow shadow-blue-500/50 hover:scale-105 transition-all">
-      <div className="">
-        <div className=" card h-100">
-          <Link to={`/fruits/${props.name}/${props.p_id}`}>
+    <div className="my-3 mx-2  w-60 shadow-lg bg-stone-100  shadow-black/50 hover:scale-105 transition-all ">
+        <div className="flex flex-col overflow-hidden ">
+          <Link to={`/fruits/${props.name}/${props.p_id}`} >
             <img
               src={url && url}
               height={"300px"}
-              className="card-img-top hover:scale-105 transition-all"
+              className="hover:scale-105 transition-all  "
               alt="Not Available"
             />
           </Link>
 
-          <div className="card-body">
-            <h5 className="text-center font-bold text-lg">{props.name}</h5>
+          <div className="text-black py-3 bg-white  ">
+            <h5 className="text-center font-bold text-lg ">{props.name}</h5>
             {props.desc && (
-              <p className="card-text">
+              <p className="">
                 {props.desc.slice(0, 10)}
                 <small>
                   <a href="">read more</a>
@@ -42,10 +41,13 @@ function Product(props) {
               </p>
             )}
           </div>
-          <div className="card-footer">
-            <small className="text-body-secondary">
+          <div className="bg-stone-100 border-t-2 border-zinc-300 text-black grow my-auto " >
+
+          <div className="flex justify-around items-center py-2">
+            <small className="">
               Price : {props.amount}RS
             </small>
+            <div>
             <button
               onClick={() => {
                 a.addcart(props.p_id);
@@ -57,9 +59,10 @@ function Product(props) {
                   },
                 });
               }}
-              className="btn btn-sm btn-warning border-black float-end active:scale-75 transition-all  "
+
+              className="bg-yellow-400 p-0.5 rounded border-2 border-black float-end active:scale-75 transition-all text-sm px-1 "
             >
-          Add To  <img className="inline mb-1" src={cartsym} width={"20px"} alt="" />
+          Add To  <img className="inline " src={cartsym} width={"20px"} alt="" />
             </button>
 
             {props.title == "wishlist" ? (
@@ -74,7 +77,7 @@ function Product(props) {
                     },
                   });
                 }}
-                className="btn btn-sm btn-warning border-black float-end me-1 active:scale-75 transition-all  "
+                className="bg-yellow-400 p-1 border-2 border-black float-end me-1 active:scale-75 transition-all  "
               >
                 <img  width={"20px"} className="pb-1 " src={RemoveSym} alt="" />
               </button>
@@ -90,13 +93,16 @@ function Product(props) {
                     },
                   });
                 }}
-                className="btn btn-sm btn-warning border-black float-end me-1 active:scale-75 transition-all "
+                className="bg-yellow-400 p-1 rounded border-2 border-black float-end me-1 active:scale-75 transition-all "
               >
-                <img className="pb-1" src={wishsym} width={"20px"} alt="" />
+                <img className="" src={wishsym} width={"20px"} alt="" />
               </button>
             )}
+                        </div>
+
           </div>
-        </div>
+          </div>
+
       </div>
     </div>
   );

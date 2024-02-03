@@ -1,16 +1,28 @@
-import React, {  } from 'react'
-
-
+import React from "react";
+import Home from "../components/Home";
+import arrow from "../images/right-arrow.png";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 export default function Hone() {
-
-
-
   return (
-    <div className='dh11 position-fixed z-n1'>
-      <div className='flex  justify-center h-screen  '>
-          <h1 className='font-extrabold text-purple-700 bg-purple-100 shadow-lg shadow-purple-300/50  my-auto  w-full text-center  text-7xl py-3 bg-opacity-60'>Delivering Natural Taste</h1>
-
+    <div className="bg-fixed bgimg    lg:bg-cover ">
+      <div className="pt-48 h-screen">
+        <div className="text-center my-auto  py-20  bg-black shadow-lg shadow-purple-300/50 bg-opacity-40 ">
+          <h1 style={{ WebkitTextStroke: '1px black', padding: '10px' }} className="font-extrabold   text-white my-auto  w-full text-center  text-7xl py-3 ">
+            Delivering Natural Taste
+          </h1>
+          <div className=" my-2 py-3">
+            <Link
+              to="/products"
+              className="bg-white rounded  px-4 py-2  active:scale-75 transition-all hover:bg-yellow-300 border-2 border-stone-400 "
+            >
+              Explore Products{"  "}
+              <img className="inline " src={arrow} width={"15"} alt="" />
+            </Link>
           </div>
+        </div>
+      </div>
+
+      <Home />
     </div>
-  )
+  );
 }

@@ -13,7 +13,6 @@ export default function Fruit() {
   const [item, setitem] = useState(null);
   const [quantity ,setq] = useState(1); 
   const a = useContext(Fruitcontext);
-  const [dis , setdis] = useState("");
   const [img,setimg] = useState(null) ;
   const [avgrating, setavgRating] = useState(0) ;
   const [total_ratingCount , settrc] = useState(0) ;
@@ -37,11 +36,11 @@ export default function Fruit() {
   };
 
   useEffect(() => {
+   window.scrollTo(0,0);
     setq(1) ;
     getFruit();
     getRating() ;
-
-  }, []);
+  }, [id]);
 
   
   const getRating = async()=>{
@@ -60,7 +59,7 @@ export default function Fruit() {
     <div className="pt-32  bg-white border-2 border-black">
 
       {item && (  <div className=" bg-white my-2 py-4">
-        <div className="flex justify-center">
+        <div className="flex flex-wrap justify-center">
             <div className=" ">
             {item.image.map((ele)=>{
               return <img onClick={()=>setimg(ele)} className="border-stone-300 my-0.5 border-2 border-collapse" width={"80px"} src={ele} ></img>
@@ -111,13 +110,13 @@ export default function Fruit() {
               
             </div>
         </div>
-        <div className="mt-2 flex justify-center gap-3">
-            <h4 onClick={()=>{setdis("desc")}} className="font-bold " >Description</h4>
-            <h4 onClick={()=>{setdis("review")}} className="font-bold">Storage Tips</h4>
-            <h4 onClick={()=>{setdis("storage")}} className="font-bold " >Reviews</h4>
+        <div className="bg-neutral-200 mt-3 mx-48 p-2" >
+          <h3 className=" text-lg font-semibold" >Description</h3>
+          <p>{item.desc}</p>
         </div>
-        <div className="">
-          <p className="mx-auto w-3/4 my-2">{item[dis]}</p>
+        <div className="bg-neutral-200 my-1 mx-48 p-2" >
+          <h3 className="bold text-lg font-semibold" >Storage Tips</h3>
+          <p>{item.storage}</p>
         </div>
         <StarRating id={item._id} avgrating = {avgrating} total_ratingCount = {total_ratingCount} arr = {arr} />
       </div>

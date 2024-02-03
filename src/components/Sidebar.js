@@ -19,7 +19,7 @@ export default function Sidebar(props) {
   };
   return (
     <div className="pt-4 h-100">
-      <ul className="flex-column d-flex justify-content-between h-75">
+      <ul className="flex-column d-flex justify-content-between h-75 bg-white">
         <li className="my-2 "><Link  className="nav-link" to={`/user/${a.profileData ? a.profileData.name : ""}`}>
             Profile
           </Link></li>

@@ -256,7 +256,6 @@ const getuserdata = async ()=>{
             headers: {
               'auth-token': localStorage.getItem("token") 
             }}) ;
-            // console.log(data) ;
             setpdata(data) ;
 }
 

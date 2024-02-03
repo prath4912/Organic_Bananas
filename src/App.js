@@ -13,10 +13,9 @@ import Signup from "./pages/Signup";
 import Banana from "./Fruits/Banana";
 import Contact from "./pages/Contact_us";
 import Fruitcontext from "./context/Fruitcontext";
-import Home from "./components/Home";
 import Hone from "./pages/Hone";
 import Orders from "./pages/Orders";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Account";
 import WishList from "./pages/WishList";
 import EmailVerify from "./components/EmailVerify";
 import Fruit from "./pages/Fruit";
@@ -42,7 +41,7 @@ function App() {
             <Cart checkoutHandler={a.checkoutHandler} />
           </Route>
           <Route path="/login">
-            <Login count={count} setcount={setcount} title={"Login"} />
+            <Login count={count} setcount={setcount}  />
           </Route>
           <Route path="/orders">
             <Orders />
@@ -62,7 +61,7 @@ function App() {
           <Route path="/contact_us">
             <Contact />
           </Route>
-          <Route path="/user/:name">
+          <Route path="/user/account">
             <Profile />
           </Route>
           <Route path="/wishlist">
@@ -77,9 +76,9 @@ function App() {
           <Route path="/fruits/:name/:id">
             <Fruit />
           </Route>
+          
           <Route path="/">
             <Hone />
-            <Home />
           </Route>
         </Switch>
        

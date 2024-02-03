@@ -60,11 +60,11 @@ function Products() {
     setc(count + 1);
   };
   return (
-    <div className="bgd1 pt-32">
+    <div className=" pt-40  bg-zinc-100">
       <div className="flex  ">
         <div
           style={{ minWidth: "200px" }}
-          className="bg-dark me-1 text-light p-3 rounded "
+          className="bg-zinc-800 text-white me-1  p-3 rounded hidden lg:block "
         >
           <h3 className="text-lg font-bold">Filters</h3>
           <div>
@@ -154,12 +154,12 @@ function Products() {
             <ul className="ms-1 mt-2">
               <li className="flex">
                 <input
-                  name="fruit"
-                  id="fruit"
+                  name=""
+                  id=""
                   type="checkbox"
-                  checked={formdata.fruit}
+                  checked={false}
                 />
-                <label className="ms-2" htmlFor="fruit">Include Out Of Stock</label>
+                <label className="ms-2" htmlFor="">Include Out Of Stock</label>
               </li>
              
             </ul>
@@ -168,9 +168,9 @@ function Products() {
         </div>
         
         
-        <div className="w-100">
-          <div className="w-100 flex bg-dark of ">
-            <h1 className="w-100 text-2xl text-white font-bold p-2">
+        <div className="text-white grow">
+          <div className="flex justify-between items-center px-2  bg-zinc-800  ">
+            <h1 className=" text-2xl  font-bold p-2 ">
               Fresh Fruits
               <p
                 className="text-xs inline  ms-2"
@@ -178,56 +178,28 @@ function Products() {
                 (showing 1-{a.product_list.length} items of {a.total_fruits})
               </p>
             </h1>
-            <div className="dropdown dn of">
-              <button
-                className="btn btn-secondary dropdown-toggle my-2"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+            <div className="float-right inline text-black">
+              <select
+                className="rounded"
               >
-                Sort By
-              </button>
-
-              <ul className="dropdown-menu">
-                <li
-                  onClick={() => {
+                <option value="">Sort By</option>
+                <option onClick={() => {
                     update("amount");
-                  }}
-                >
-                  <a className="dropdown-item" href="#">
-                    Price(Lowest)
-                  </a>
-                </li>
-                <li
-                  onClick={() => {
+                  }}  value="">Price(Lowest)</option>
+                   <option onClick={() => {
                     update("-amount");
-                  }}
-                >
-                  <a className="dropdown-item" href="#">
-                    Price(Highest)
-                  </a>
-                </li>
-                <li
-                  onClick={() => {
+                  }}  value="">Price(Highest)</option>
+                   <option  onClick={() => {
                     update("name");
                   }}
-                >
-                  <a className="dropdown-item" href="#">
-                    A-Z
-                  </a>
-                </li>
-                <li
-                  onClick={() => {
+                    value="">A-z</option>
+                   <option onClick={() => {
                     update("-name");
-                  }}
-                >
-                  <a className="dropdown-item" href="#">
-                    Z-A
-                  </a>
-                </li>
-              </ul>
+                  }}value="">Z-A</option>
+              </select>
+
+             
             </div>
-            <div className="dropdown dn"></div>
           </div>
           <div>
             <InfiniteScroll
@@ -242,7 +214,7 @@ function Products() {
               }
             >
               <div className="mad">
-                <div className="flex flex-wrap justify-content-start ">
+                <div className="flex flex-wrap justify-around lg:justify-start ">
                   {a.product_list.map((product, index) => {
                     return (
                       <Product

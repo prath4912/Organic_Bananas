@@ -1,35 +1,8 @@
-*{
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
 
-.of{
-  overflow-x: visible;
-}
-.mt100vh{
-  margin-top: 100vh;
-}
-
-.z10{
-  z-index: 10;
-}
-.hm1{
-  display: inline;
-}
-.dh11 {
-  width: 100%;
-  height: 100vh;
+.bgimg {
   background-image: url("./images/ob2.webp");
-  background-size: cover;
 }
-.dh1{
-  position: fixed;
-  width: 100vw;
-  z-index: 3;
-  backdrop-filter: blur(4px);
 
-}
 
 .dh1 h1{ 
   margin: 0;
@@ -69,30 +42,12 @@
   font-size: large;
 }
 
-/* Product Component */
-
-.dp1{
-  background: #acacac;
-  padding: 15px;
-  padding-top: 20vh;
-  
-}
-.dp4{
-  width: 250px;
-}
 
 
 
 
-.dp1 h1 , .cd2 h1{
-  color: #FFCF00;
-  -webkit-text-stroke: black;
-  -webkit-text-stroke-width: 0.5px;
-  letter-spacing:2px;
-  /* box-shadow: 0px 10px 0px rgb(232, 232, 232); */
 
-  padding-left: 7px;
-}
+
 
 .dp21{
   background: #616161;
@@ -133,16 +88,10 @@
   background: #000; */
 }
 
-.cd2{
-  padding-top: 20vh;
-  /* z-index: 10;
-  background: #000; */
-}
+
 
 /* Login */
-.ld1{
-  padding-top: 20vh;
-}
+
 
 .ld2{
   height: 85vh;
@@ -204,13 +153,7 @@ color: yellow;
   min-width: 450px;
   overflow: hidden;
 }
-.fx1{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
+
 .ot1{
   font-size: 5rem;
 }
@@ -251,11 +194,7 @@ color: yellow;
   
 
 
- .dh11 {
-  width: 100%;
-  height:50vh ;
-  background-size: cover;
-}
+
 .dn{
   display: none;
 }

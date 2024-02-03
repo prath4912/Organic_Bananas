@@ -20,69 +20,63 @@ function Cart(props) {
   }, []);
 
   return (
-    <div className="cd2 mb-4">
-      <div className="p-3 mx-28 bg-dark">
+    <div className="mt-40">
+      <div className="p-3 lg:mx-28 bg-zinc-800">
         <h1 className="text-2xl text-white font-bold mb-3 ">Items</h1>
 
-        <div className="flex flex-row flex-wrap justify-around ">
-          <div className=" grow me-1 ">
+        <div className="flex flex-row flex-wrap justify-aroundg">
+          <div className=" grow lg:me-1 ">
 
             {(a.cart && a.cart.length>0 ) ? (
 
-              a.cart.map((cart, index) => {
+              a.cart.map((cart) => {
                 total_cost = total_cost + cart.product.amount * cart.quantity;
                 t_quantity = t_quantity + cart.quantity ;
 
                 return (
-                  <div className="my-1">
-                    <div className=" ">
-                      <div className="flex flex-row">
+                      <div className="flex flex-row my-1">
                         <div className="">
                           <img
                             src={cart.product.image[0]}
-                            className = " rounded-start"
+                            className = "rounded-start"
                             width={130}
                           />
                         </div>
-                        <div className="flex flex-row bg-white w-full  align-items-center justify-content-around
-">
-                          <div className="">
+                        <div className="flex flex-row bg-white w-full   justify-around items-center">
+                          <div className=" w-1/4 text-center">
                             <h5 className="">
                               <b>{cart.product.name}</b>
                             </h5>
                           </div>
-                          <div className="">
-                            <div className="flex ">
+                            <div className="flex w-1/4 justify-center ">
                               <button
-                                className="btn btn-warning  btn-sm rounded-circle border-black mx-1 active:scale-90 transition-all"
+                                className="bg-yellow-400 border px-1 rounded  border-black mx-1 active:scale-90 transition-all"
                                 onClick={() => {
                                   a.subq(cart.product._id , cart.quantity);
                                 }}
                               >
                                 -
                               </button>
-                              <div className="d-inline border px-2  border-black ">
+                              <div className="bg-white border rounded-full inline  px-2  border-black ">
                                 {cart.quantity}
                               </div>
                               <button
                                 onClick={() => {
                                   a.addcart(cart.product._id);
                                 }}
-                                className="btn btn-warning  btn-sm   rounded-circle border-black mx-1 active:scale-90 transition-all"
+                                className="bg-yellow-400 px-1 border rounded border-black mx-1 active:scale-90 transition-all"
                               >
                                 +
                               </button>
-                            </div>
                           </div>
-                          <div className="">
+                          <div className="w-1/4 text-center">
                             <p className="">Subtotal : {cart.quantity * cart.product.amount}RS</p>
                           </div>
-                          <div onClick={() => {
+                          <div className="w-1/4 text-center"  onClick={() => {
                                 a.removehandle(cart.product._id);
                               }} >
-                            <button
-                              
-                              className="btn btn-sm btn-warning border-black px-3 active:scale-75 transition-all"
+                            <button                              
+                              className="bg-yellow-400 py-1 border border-black rounded px-3 active:scale-75 transition-all"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -98,15 +92,13 @@ function Cart(props) {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
                 );
               })
             ) : (
-              <div className="h-75" style={{ color: "white" }}>
+              <div className="h-75">
                 
                 <p>Cart Is Empty</p>
-                <div className="h-50 d-flex justify-content-center align-items-center">
+                <div className="h-50 d-flex justify-center items-center">
                   <Link
                     to="/products"
                     type="button"
@@ -119,21 +111,18 @@ function Cart(props) {
             )}
           </div>
 
-          <div className="">
-            <div className="  card px-4 pb-5 border border-black">
-              <div className="card-body">
-                <h5 className="card-title">Cart Details</h5>
-                <p className="card-text m-2">Total Items : {t_quantity}</p>
-                <p className="card-text m-2">Cart Subtotal : {total_cost}</p>
-                <p className="card-text m-2"> Shipping : Free</p>
-                <p className="card-text m-2 my-3">Total : {total_cost}</p>
+          <div className=" bg-white rounded h-60 p-2 px-8   border border-black">
+              <div className="">
+                <h5 className="font-semibold my-2">Cart Details</h5>
+                <p className="">Total Items : {t_quantity}</p>
+                <p className="">Cart Subtotal : {total_cost}</p>
+                <p className=""> Shipping : Free</p>
+                <p className="">Total : {total_cost}</p>
 
                 {a.cart.length ? (
                   <button
                     type="button"
-                    className="btn btn-warning border-black btn-sm"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
+                    className=" border-black my-1 bg-black text-white p-1 rounded"
                   >
                     Proceed To Buy
                   </button>
@@ -141,24 +130,21 @@ function Cart(props) {
                   <Link
                     type="button"
                     to="/products"
-                    className="border-dark btn btn-warning btn-sm"
+                    className=""
                   >
                     Shop Now
                   </Link>
                 )}
-                <p className="mt-2 card-text">
-                  <small className="text-body-secondary">Happy Health</small>
+                <p className="my-1 ">
+                  <small className="">Happy Health</small>
                 </p>
               </div>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* <!-- Button trigger modal --> */}
 
-      {/* <!-- Modal --> */}
-      <div
+      {/* <div
         className="h-75 modal fade "
         id="staticBackdrop"
         data-bs-backdrop="static"
@@ -190,6 +176,7 @@ function Cart(props) {
                   value={add1}
                   onChange={onchange}
                   placeholder=""
+                  required
                 />
                 <label for="add">Enter Delivery Address</label>
               </div>
@@ -197,7 +184,7 @@ function Cart(props) {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-primary text-white bg-black active:scale-75 transition-all"
                 data-bs-dismiss="modal"
               >
                 Close
@@ -212,14 +199,14 @@ function Cart(props) {
                     : () => props.checkoutHandler(total_cost, add1, a.cart)
                 }
                 data-bs-dismiss="modal"
-                className="btn btn-primary"
+                className="btn btn-primary bg-blue-500 text-white active:scale-75 transition-all"
               >
                 Proceed To Payment
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

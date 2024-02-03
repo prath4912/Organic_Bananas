@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="bg-body-secondary text-black">
-      <div className="  text-black text-center p-2 text-sm">
+    <div className="bg-stone-200 mt-1 text-black">
+      <div className="  text-black text-center p-2 text-xs">
         © 2003-2023, organicbananas.com, Inc. or its affiliates
       </div>
       <div className="bg-stone-300 text-center text-xs">

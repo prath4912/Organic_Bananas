@@ -138,7 +138,7 @@ router.get("/getproduct", async (req, res) => {
     }
     console.log(sortOptions) ;
     console.log(cat) ;
-   const l1 =4 ;
+   const l1 = 8 ;
   const num = Number(req.query.page) * l1;
 
     const pipeline = [
@@ -155,7 +155,7 @@ router.get("/getproduct", async (req, res) => {
       $skip : num, 
     },
     {
-      $limit : 4,
+      $limit : 8,
     }
   ];
   const c1 = await Fruit.find(query2)
