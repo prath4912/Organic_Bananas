@@ -27,10 +27,10 @@ export default function Advantages() {
     <div className='bg-white py-2'>
         <hr />
       <h1 className='font-bold text-lg text-center my-3 underline' >Why choose Organic Banana?</h1>
-      <div className='flex p-1 justify-center gap-6   w-4/5  mx-auto'>
+      <div className='flex flex-wrap lg:flex-nowrap p-1 justify-center gap-1  lg:gap-6   w-full  lg:w-4/5  mx-auto'>
             {
                 arr.map((ele)=>{
-                    return <div className=' bg-gray-100  text-center basis-1/4 pb-1' >
+                    return <div className=' bg-gray-100  text-center w-5/12 lg:basis-1/4 pb-1' >
                         <div className='p-3'>
                         <img className='mx-auto bg-white p-2 rounded-full' src={ele.icon} width={"60px"} alt="" /></div>
                         <h2 className='font-bold pb-0.5' >{ele.title}</h2>

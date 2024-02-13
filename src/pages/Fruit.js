@@ -36,6 +36,10 @@ export default function Fruit() {
   };
 
   useEffect(() => {
+    if (a.product_list.length > 0) {
+    } else {
+      a.fetchData();
+    }
    window.scrollTo(0,0);
     setq(1) ;
     getFruit();
@@ -68,7 +72,7 @@ export default function Fruit() {
             <div>
             <img
               src={img}
-              className="w-96  border-stone-400 border-2 ms-2"
+              className="w-80 lg:w-96  border-stone-400 border-2 ms-2"
               alt="..."
             />
             </div >
@@ -110,11 +114,11 @@ export default function Fruit() {
               
             </div>
         </div>
-        <div className="bg-neutral-200 mt-3 mx-48 p-2" >
+        <div className="bg-neutral-200 mt-3 mx-1 lg:mx-48 p-2" >
           <h3 className=" text-lg font-semibold" >Description</h3>
           <p>{item.desc}</p>
         </div>
-        <div className="bg-neutral-200 my-1 mx-48 p-2" >
+        <div className="bg-neutral-200 my-1 mx-1 lg:mx-48 p-2" >
           <h3 className="bold text-lg font-semibold" >Storage Tips</h3>
           <p>{item.storage}</p>
         </div>
@@ -123,7 +127,7 @@ export default function Fruit() {
       )}
             <Advantages/>
 
-      <SimillarProducts/>
+      <SimillarProducts title={"Similar Products"} id={id}  />
     </div>
   );
 }

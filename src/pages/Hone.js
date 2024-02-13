@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Home from "../components/Home";
 import arrow from "../images/right-arrow.png";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import FeaturedProducts from "../components/FeaturedProducts";
+import Fruitcontext from "../context/Fruitcontext";
 export default function Hone() {
+  const a = useContext(Fruitcontext) ;
+  useEffect(()=>{
+    if (a.product_list.length > 0) {
+    } else {
+      a.fetchData();
+    }
+  },[])
   return (
     <div className="bg-fixed bgimg    lg:bg-cover ">
       <div className="pt-48 h-screen">
@@ -21,6 +30,8 @@ export default function Hone() {
           </div>
         </div>
       </div>
+    <FeaturedProducts title={"Featured Fruits"} />
+    <FeaturedProducts title={"Fresh Veggies"} />
 
       <Home />
     </div>

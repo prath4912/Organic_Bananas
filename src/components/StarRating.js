@@ -6,19 +6,20 @@ import profile from "../images/user.jpg";
 import { MdOutlineStar } from "react-icons/md";
 import ProgressBar from "@ramonak/react-progress-bar";
 
-
 export default function StarRating(props) {
   useEffect(() => {
     getReviews();
-    let arr1 = [0,0,0,0,0] ;
-    props.arr.forEach((ele)=>{
-      arr1[ele._id-1] = ((ele.count/props.total_ratingCount)*100 ).toFixed(0);
-    })
+    let arr1 = [0, 0, 0, 0, 0];
+    props.arr.forEach((ele) => {
+      arr1[ele._id - 1] = ((ele.count / props.total_ratingCount) * 100).toFixed(
+        0
+      );
+    });
 
-    setrP(arr1) ;
+    setrP(arr1);
   }, [props.id]);
 
-  const [ratingPercentage  , setrP] = useState([0,0, 0, 0, 0]) ;
+  const [ratingPercentage, setrP] = useState([0, 0, 0, 0, 0]);
   const a = useContext(Fruitcontext);
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
@@ -71,17 +72,15 @@ export default function StarRating(props) {
 
   return (
     <div className="mx-4 ">
-      <div className="demo flex flex-wrap gap-3 justify-around">
-        <div className=" lg:w-2/6">
+      <div className="demo w-full lg:p-8 flex rounded flex-wrap gap-3 justify-around">
+        <div className="w-full px-0.5 lg:w-2/6">
           <div>
-            <h1 className="font-extrabold text-2xl ms-2 my-2">
+            <h1 className="font-bold lg:font-extrabold text-2xl ms-2 my-2">
               Ratings & Reviews
             </h1>
             <div className="flex justify-around items-center my-2">
               <div className="grow text-center">
-                <p className="font-extrabold text-3xl ">
-                  {props.avgrating}
-                </p>
+                <p className="font-bold lg:font-extrabold text-3xl ">{props.avgrating}</p>
                 <Rating
                   size={15}
                   allowFraction
@@ -92,16 +91,18 @@ export default function StarRating(props) {
                 <p>{props.total_ratingCount} ratings</p>
               </div>
               <div className=" grow">
-              {ratingPercentage.map((ele ,index)=>{
-                return <div className="flex items-center">
-                <p>{index+1}</p> <MdOutlineStar className="mx-1" /> <ProgressBar className="grow"  completed={ele} />
-              </div>
-              })}
-                
+                {ratingPercentage.map((ele, index) => {
+                  return (
+                    <div className="flex items-center">
+                      <p>{index + 1}</p> <MdOutlineStar className="mx-1" />{" "}
+                      <ProgressBar className="grow" completed={ele} />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
-          <h1 className="font-extrabold text-2xl ms-2 my-2">
+          <h1 className="font-bold lg:font-extrabold text-2xl ms-2 my-2">
             Review this Fruit
           </h1>
 
@@ -112,14 +113,13 @@ export default function StarRating(props) {
             onPointerMove={onPointerMove}
             size={50}
             transition
-            
             showTooltip
             SVGstyle={{ display: "inline" }}
           />
           <br />
           <label htmlFor="message">Write a Review</label>
           <textarea
-            className="block w-full border-2 border-black my-2 rounded"
+            className="block w-full border border-black my-2 rounded"
             onChange={handleMessage}
             value={message}
             name="message"
@@ -128,13 +128,13 @@ export default function StarRating(props) {
           ></textarea>
           <button
             onClick={handle}
-            class="btn btn-warning active:scale-90 transition-all "
+            class="border border-black p-1 rounded active:scale-90 transition-all "
           >
             Submit
           </button>
         </div>
-        <div className=" lg:w-5/12">
-          <h1 className="font-extrabold text-2xl lg:ms-2 my-2">Reviews</h1>
+        <div className="w-full lg:w-5/12">
+          <h1 className="font-bold lg:font-extrabold text-2xl lg:ms-2 my-2">Reviews</h1>
           <div className="">
             {reviewsMessage &&
               reviewsMessage.length > 0 &&
@@ -146,7 +146,7 @@ export default function StarRating(props) {
                   year: "numeric",
                 });
                 return (
-                  <div className="border-black border-2 p-2 bg-stone-200 rounded my-1">
+                  <div className="border-black border w-full lg:w-auto p-2 bg-stone-200 rounded my-1">
                     <div className=" ">
                       <img
                         className="rounded-full inline me-2"
@@ -160,7 +160,7 @@ export default function StarRating(props) {
                     <div>
                       <p className="text-sm">Reviewed on {formattedDate}</p>
 
-                      <p className="font-bold">{ele.message}</p>
+                      <p className="font-medium lg:font-bold">{ele.message}</p>
                     </div>
                   </div>
                 );

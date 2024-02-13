@@ -117,7 +117,9 @@ export default function Fruitstate(props) {
   };
 
 const addcart =async(p_id)=>{
-
+try{
+  if(localStorage.getItem("token"))
+  {
   const result = await axios.post(`${BaseUrl}/api/cart/insert` ,{
     productId: p_id ,
     quantity : 1,
@@ -127,7 +129,15 @@ const addcart =async(p_id)=>{
               'auth-token': localStorage.getItem("token") 
             }}) ;
           console.log(result) ;
-          getcart() ;
+          getcart() ;}
+else
+{
+  alert("Plese Login")
+}
+}catch(error)
+{
+  console.log(error );
+}
 }
 
 const removehandle = async(p_id) => {

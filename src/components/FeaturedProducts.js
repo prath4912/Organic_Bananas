@@ -3,9 +3,8 @@ import Fruitcontext from '../context/Fruitcontext';
 import SPcard from './SPcard';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
-export default function SimillarProducts(props) {
+export default function FeaturedProduct(props) {
     const a = useContext(Fruitcontext) ;
-    console.log(a.product_list);
   return (
     <div  >
         <div className='w-full lg:w-4/5 lg:mx-auto bg-zinc-100 rounded p-0.5 lg:p-2 my-2'>

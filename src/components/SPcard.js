@@ -8,7 +8,7 @@ import cartsym from "../images/trolley.png";
 import toast from "react-hot-toast";
 import RemoveSym from "../images/delete.png";
 
-function Product(props) {
+function SPcard(props) {
   const [url, seturl] = useState(null);
   const a = useContext(Fruitcontext);
 
@@ -19,13 +19,12 @@ function Product(props) {
   }, []);
 
   return (
-    <div className="my-3 w-44  lg:mx-2  lg:w-60 shadow-lg bg-stone-100  shadow-black/50 hover:scale-105 transition-all ">
-      <div className="flex flex-col overflow-hidden ">
+    <div  className="my-3   lg:mx-2  lg:w-60 shadow-lg bg-stone-100  shadow-black/50 hover:scale-105 transition-all ">
+      <div className="flex flex-col w-44 lg:w-full overflow-hidden ">
         <Link to={`/fruits/${props.name}/${props.p_id}`}>
           <img
             src={url && url}
-            height={"300px"}
-            className="hover:scale-105 transition-all  "
+            className="hover:scale-105 transition-all w-full lg:w-72  "
             alt="Not Available"
           />
         </Link>
@@ -41,10 +40,9 @@ function Product(props) {
             </p>
           )}
         </div>
-        <div className="bg-stone-100 border-t-2 border-zinc-300 text-black grow my-auto ">
-          <div className="flex justify-around items-center py-2">
+        <div className="bg-stone-100  border-t-2 border-zinc-300 text-black grow my-auto ">
+          <div className="flex flex-col lg:flex-row lg:justify-around gap-2 items-center py-1 lg:py-2">
             <small className="">Price : {props.amount}RS</small>
-            <div>
               <button
                 onClick={() => {
                   a.addcart(props.p_id);
@@ -56,13 +54,13 @@ function Product(props) {
                     },
                   });
                 }}
-                className="bg-yellow-400 p-0.5 rounded border-2 border-black float-end active:scale-75 transition-all text-sm px-1 "
+                className="bg-yellow-400 w-11/12 lg:w-1/2 py-0.5  lg:p-0.5 rounded border-2 border-black float-end active:scale-75 transition-all text-sm lg:px-1 "
               >
                 Add To{" "}
-                <img className="inline mb-1 " src={cartsym} width={"20px"} alt="" />
+                <img className="inline mb-1  " src={cartsym} width={"20px"} alt="" />
               </button>
 
-              {props.title == "wishlist" ? (
+              {/* {props.title == "wishlist" ? (
                 <button
                   onClick={() => {
                     a.deletewishlist(props.p_id);
@@ -74,7 +72,7 @@ function Product(props) {
                       },
                     });
                   }}
-                  className="bg-yellow-400 p-1 hidden lg:block border-2 border-black float-end me-1 active:scale-75 transition-all  "
+                  className="hidden lg:block bg-yellow-400 p-1 border-2 border-black float-end me-1 active:scale-75 transition-all  "
                 >
                   <img
                     width={"20px"}
@@ -95,12 +93,11 @@ function Product(props) {
                       },
                     });
                   }}
-                  className="bg-yellow-400 p-1 hidden lg:block rounded border-2 border-black float-end me-1 active:scale-75 transition-all "
+                  className="hidden lg:block bg-yellow-400 p-1 rounded border-2 border-black float-end me-1 active:scale-75 transition-all "
                 >
                   <img className="" src={wishsym} width={"20px"} alt="" />
                 </button>
-              )}
-            </div>
+              )} */}
           </div>
         </div>
       </div>
@@ -108,4 +105,4 @@ function Product(props) {
   );
 }
 
-export default Product;
+export default SPcard;

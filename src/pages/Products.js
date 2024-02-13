@@ -4,6 +4,7 @@ import Fruitcontext from "../context/Fruitcontext";
 import { useContext } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "../components/Spinner";
+import SPcard from "../components/SPcard";
 
 function Products() {
   const a = useContext(Fruitcontext);
@@ -229,6 +230,22 @@ function Products() {
                   })}
                 </div>
               </div>
+              {/* <div className="block lg:hidden">
+                <div className="flex flex-wrap justify-around lg:justify-start ">
+                  {a.product_list.map((product, index) => {
+                    return (
+                      <SPcard
+                        key={index}
+                        p_id={product._id}
+                        name={product.name}
+                        desc={""}
+                        amount={product.amount}
+                        image={product.image[0]}
+                      />
+                    );
+                  })}
+                </div>
+              </div> */}
             </InfiniteScroll>
           </div>
         </div>
