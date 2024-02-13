@@ -15,7 +15,7 @@ function Products() {
   
  
   return (
-    <div className="pt-28 ">
+    <div className="pt-28 lg:pt-40 ">
       <div className="  ">
         <div className="w-100">
           <div className="bg-black py-3 text-white">
@@ -23,7 +23,7 @@ function Products() {
           </div>
           {a.wishlist.length>0 ? 
             
-                <div className="flex flex-wrap justify-content-start gap-2  ">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-2  ">
                   {a.wishlist.map((element, index) => {
                     console.log(element);
                     return (
@@ -31,7 +31,7 @@ function Products() {
                         key={index}
                         p_id={element.product._id}
                         name={element.product.name}
-                        desc={element.product.desc}
+                        // desc={element.product.desc}
                         amount={element.product.amount}
                         title = {"wishlist"}
                         image = {element.product.image[0]}

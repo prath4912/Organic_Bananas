@@ -21,7 +21,7 @@ export default function Home() {
         <h1 className="text-center bg-stone-500 text-5xl py-4 text-white font-bold">
           We Offer
         </h1>
-        <div className=" flex flex-wrap justify-center gap-3  bg-opacity-90 py-4   bg-gray-200 ">
+        <div className=" flex flex-wrap justify-center gap-1 lg:gap-3  bg-opacity-90 py-4   bg-gray-200 ">
           {arr.map((element, index) => {
             return (
               <div

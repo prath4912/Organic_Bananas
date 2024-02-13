@@ -60,7 +60,7 @@ function Products() {
     setc(count + 1);
   };
   return (
-    <div className=" pt-40  bg-zinc-100">
+    <div className="pt-28 lg:pt-40  bg-zinc-100">
       <div className="flex  ">
         <div
           style={{ minWidth: "200px" }}
@@ -173,16 +173,16 @@ function Products() {
             <h1 className=" text-2xl  font-bold p-2 ">
               Fresh Fruits
               <p
-                className="text-xs inline  ms-2"
+                className="text-xs lg:inline  lg:ms-2"
               >
                 (showing 1-{a.product_list.length} items of {a.total_fruits})
               </p>
             </h1>
-            <div className="float-right inline text-black">
+            <div className="float-right  inline text-black">
               <select
                 className="rounded"
               >
-                <option value="">Sort By</option>
+                <option value="inline">Sort By</option>
                 <option onClick={() => {
                     update("amount");
                   }}  value="">Price(Lowest)</option>
@@ -208,12 +208,12 @@ function Products() {
               hasMore={a.product_list.length < a.total_fruits}
               loader={<Spinner />}
               endMessage={
-                <p className="m-0  text-center fw-bold mt-2 p-3 bg-dark text-light">
+                <p className="text-center font-bold mt-2 p-3 bg-zinc-800 text-white">
                   You are done with all Products!!
                 </p>
               }
             >
-              <div className="mad">
+              <div className="">
                 <div className="flex flex-wrap justify-around lg:justify-start ">
                   {a.product_list.map((product, index) => {
                     return (
