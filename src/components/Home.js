@@ -52,24 +52,24 @@ export default function Home() {
       <Map />
       {!localStorage.getItem("token") ? (
         <div
-          className=" pt-4 pb-2 "
+          className=" pt-4 pb-2 px-2 lg:px-0 "
         >
-          <div className="flex flex-row  justify-around">
+          <div className="flex flex-col lg:flex-row   justify-around">
             <div>
-              <h3>Sign Up For News Letter</h3>
-              <p>
+              <h3 className="font-medium" >Sign Up For News Letter</h3>
+              <p className="text-xs lg:text-sm" >
                 Get E-mail updates about our latest shop and special offers.
               </p>
             </div>
             <div className="pt-2">
               <input
-                className="p-2 px-5"
+                className="border p-2 px-5"
                 placeholder="Enter Email"
                 type="email"
                 name="mail"
                 id="mail"
               />
-              <button className="bg-warning p-2 px-5">Sign Up</button>
+              <button className="border border-neutral-400 p-2 px-5 hover:bg-black hover:text-white ">Sign Up</button>
             </div>
           </div>
         </div>

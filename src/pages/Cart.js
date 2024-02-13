@@ -16,7 +16,6 @@ function Cart(props) {
     a.getcart();
   }, []);
 
- 
   const openModal = () => setIsOpen(true);
 
   const changeHandle = (e) => {
@@ -24,24 +23,25 @@ function Cart(props) {
   };
 
   const handle = (e) => {
-    
     e.preventDefault();
     props.checkoutHandler(total_cost, address, a.cart);
     setIsOpen(false);
   };
   return (
-    <div className="mt-28 lg:mt-40">
-      <Modal isOpen={modalIsOpen} >
+    <div className="mt-28 lg:mt-40 ">
+      <Modal isOpen={modalIsOpen}>
         <div className="  lg:block lg:w-72  pt-28 lg:pt-40">
           <h1 className="font-bold my-2 text-lg">Checkout To Buy</h1>
-          <form onSubmit={
-                  !localStorage.getItem("token")
-                    ? () => {
-                        alert("Login Required");
-                      }
-                    : handle
-                }
-                action="">
+          <form
+            onSubmit={
+              !localStorage.getItem("token")
+                ? () => {
+                    alert("Login Required");
+                  }
+                : handle
+            }
+            action=""
+          >
             <div className="flex flex-col ">
               <label htmlFor="first">Enter Delivery Address</label>
               <textarea
@@ -72,7 +72,7 @@ function Cart(props) {
         </div>
       </Modal>
 
-      <div className="p-3 lg:mx-28 bg-zinc-800">
+      <div className="p-3 lg:mx-28  bg-zinc-800" style={{minHeight : "70vh"}} >
         <h1 className="text-2xl text-white font-bold mb-3 ">Items</h1>
 
         <div className="flex flex-row flex-wrap justify-aroundg">
@@ -147,13 +147,14 @@ function Cart(props) {
                 );
               })
             ) : (
-              <div className="h-75">
-                <p>Cart Is Empty</p>
-                <div className="h-50 d-flex justify-center items-center">
+              <div className="">
+                <div className="h-50 flex flex-col justify-center items-center">
+                <p className="text-white my-2" >Cart Is Empty</p>
+
                   <Link
                     to="/products"
                     type="button"
-                    className="border-white text-center btn btn-warning "
+                    className="border-white border text-center text-white p-1 rounded  "
                   >
                     Shop Now
                   </Link>
@@ -162,7 +163,7 @@ function Cart(props) {
             )}
           </div>
 
-          <div className=" bg-white rounded h-60 p-2 px-8   border border-black">
+          {a.cart.length && <div className=" bg-white rounded h-60 p-2 px-8   border border-black">
             <div className="">
               <h5 className="font-semibold my-2">Cart Details</h5>
               <p className="">Total Items : {t_quantity}</p>
@@ -170,7 +171,6 @@ function Cart(props) {
               <p className=""> Shipping : Free</p>
               <p className="">Total : {total_cost}</p>
 
-              {a.cart.length ? (
                 <button
                   onClick={openModal}
                   type="button"
@@ -178,16 +178,13 @@ function Cart(props) {
                 >
                   Proceed To Buy
                 </button>
-              ) : (
-                <Link type="button" to="/products" className="">
-                  Shop Now
-                </Link>
-              )}
+              
               <p className="my-1 ">
                 <small className="">Happy Health</small>
               </p>
             </div>
-          </div>
+          </div>}
+
         </div>
       </div>
 

@@ -93,12 +93,17 @@ export default function Fruitstate(props) {
     }) ;
 
   const getcart = async()=>{
+    try{
     const data1 =  await axios.get(`${BaseUrl}/api/cart/get` ,{
               headers: {
                 'Content-Type': 'application/json' ,
                 'auth-token': localStorage.getItem("token") 
               }}) ;
               setcart(data1.data) ;
+            }catch(error)
+            {
+              console.log(error) ;
+            }
     }
 
   const addwishlist = async (product_id)=>{

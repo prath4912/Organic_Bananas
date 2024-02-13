@@ -231,7 +231,7 @@ export default function Header(props) {
                 location.pathname === "/cart" ? "text-green-600 font-bold text-lg" : ""
               }`}
             >
-              <Link onClick={tog} className="nav-link" to="/cart">
+              <Link onClick={tog} className="" to="/cart">
                 Cart
               </Link>
             </li>
@@ -239,7 +239,7 @@ export default function Header(props) {
               <li  className={` ${
                 location.pathname === "/login" ? "text-green-600 font-bold text-lg" : ""
               }`}>
-                <Link className="" to="/login">
+                <Link onClick={tog}  className="" to="/login">
                   Login
                 </Link>
               </li>
