@@ -1,6 +1,4 @@
 const express = require("express");
-const Fruit = require("../models/Fruits");
-const User = require("../models/User");
 const fetchuser = require("../middleware/fetchuser");
 const router = express.Router();
 const Wish = require("../models/WishItems")
@@ -13,7 +11,6 @@ router.post("/insert", fetchuser,async (req, res) => {
   console.log(req.body) ;
     const user_id = req.user.id ;
     const product =  req.body.product ;
-    // console.log(user_id) ;
     const w1 = await Wish.findOne({product , user : user_id}) ;
     // console.log(w1) ;
     if(w1)

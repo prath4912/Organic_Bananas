@@ -21,6 +21,7 @@ import EmailVerify from "./components/EmailVerify";
 import Fruit from "./pages/Fruit";
 import Forgotpaasword from "./pages/Forgotpassword";
 import Forgotpassword1 from "./pages/Forgotpassword1";
+import Checkout from "./pages/Checkout";
 
 function App() {
 
@@ -76,7 +77,9 @@ function App() {
           <Route path="/fruits/:name/:id">
             <Fruit />
           </Route>
-          
+          <Route path="/checkout">
+            <Checkout />
+          </Route>
           <Route path="/">
             <Hone />
           </Route>

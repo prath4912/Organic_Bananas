@@ -1,5 +1,4 @@
 const express = require("express");
-const Fruit = require("../models/Fruits");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
@@ -10,7 +9,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config/config.env" });
 
 const JWT_SECRET = process.env.JWT_SECRET;
- 
+
 router.post(
   "/login",
   [
@@ -19,12 +18,11 @@ router.post(
   ],
   async (req, res) => {
     let success = false;
-
     const result = validationResult(req);
     if (!result.isEmpty()) {
-      return res.status(400).send({ success, errors: result.array() });  //update erroe code
+      return res.status(400).send({ success, errors: result.array() }); //update erroe code
     }
-    const { email, password } = req.body ;
+    const { email, password } = req.body;
     try {
       let user = await User.findOne({ email });
       if (!user) {
@@ -46,19 +44,17 @@ router.post(
           res.status(200).json({ admin: true, success, authtoken });
         } else {
           success = false;
-          res.status(400).json({ admin: false, success, error: "Incorrect Credentials" }); //Update status code
+          res
+            .status(400)
+            .json({ admin: false, success, error: "Incorrect Credentials" }); //Update status code
         }
       }
     } catch (error) {
-
       res
         .status(500)
-        .send({ admin: false, success, error: "some error occured" });  //update message and erroe code
+        .send({ admin: false, success, error: "some error occured" }); //update message and erroe code
     }
   }
 );
-
-
-
 
 module.exports = router;

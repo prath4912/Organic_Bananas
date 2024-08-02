@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Fruitcontext from "../context/Fruitcontext";
 import { useContext } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import Modal from "react-modal";
 
 function Cart(props) {
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [address, setAddress] = useState("");
+  
   var t_quantity = 0;
   var total_cost = 0;
 
@@ -16,61 +14,11 @@ function Cart(props) {
     a.getcart();
   }, []);
 
-  const openModal = () => setIsOpen(true);
 
-  const changeHandle = (e) => {
-    setAddress(e.target.value);
-  };
-
-  const handle = (e) => {
-    e.preventDefault();
-    props.checkoutHandler(total_cost, address, a.cart);
-    setIsOpen(false);
-  };
+ 
   return (
     <div className="mt-28 lg:mt-40 ">
-      <Modal isOpen={modalIsOpen}>
-        <div className="  lg:block lg:w-72  pt-28 lg:pt-40">
-          <h1 className="font-bold my-2 text-lg">Checkout To Buy</h1>
-          <form
-            onSubmit={
-              !localStorage.getItem("token")
-                ? () => {
-                    alert("Login Required");
-                  }
-                : handle
-            }
-            action=""
-          >
-            <div className="flex flex-col ">
-              <label htmlFor="first">Enter Delivery Address</label>
-              <textarea
-                rows={6}
-                onChange={changeHandle}
-                name="address"
-                value={address}
-                className="border-2 mb-2"
-                type="text"
-                id="address"
-                required
-              />
-              <br />
-              <button
-                className="bg-black rounded text-sm py-1 text-white active:scale-90 transition-all"
-                type="submit"
-              >
-                Proceed To Payment
-              </button>
-              <button
-                className="bg-black rounded text-sm py-1 text-white active:scale-90 transition-all my-1"
-                onClick={() => setIsOpen(false)}
-              >
-                Close
-              </button>
-            </div>
-          </form>
-        </div>
-      </Modal>
+      
 
       <div className="p-3 lg:mx-28  bg-zinc-800" style={{minHeight : "70vh"}} >
         <h1 className="text-2xl text-white font-bold mb-3 ">Items</h1>
@@ -171,13 +119,13 @@ function Cart(props) {
               <p className=""> Shipping : Free</p>
               <p className="">Total : {total_cost}</p>
 
-                <button
-                  onClick={openModal}
+                <Link
+                  to="/checkout"
                   type="button"
                   className=" border-black my-1 bg-black text-white p-1 rounded text-sm font-medium w-full mt-2"
                 >
                   Proceed To Buy
-                </button>
+                </Link>
               
               <p className="my-1 ">
                 <small className="">Happy Health</small>

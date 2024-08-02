@@ -12,21 +12,20 @@ export default function Profile() {
   const a = useContext(Fruitcontext);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [name, setname] = useState({ first: "", last: "" });
+
   useEffect(() => {
-    if(a.profileData)
-    {
-      setname({first : a.profileData.name , last :a.profileData.lastName}) ;
+    if (a.profileData) {
+      setname({ first: a.profileData.firstName, last: a.profileData.lastName });
     }
   }, []);
 
   const history = useHistory();
   const handlelogout = () => {
     localStorage.removeItem("token");
-    // props.setcount(props.count + 1);
     a.setpdata(null);
-    console.log(a.profileData);
     history.push("/login");
   };
+
   const customStyles = {
     content: {
       top: "50%",
@@ -44,7 +43,7 @@ export default function Profile() {
     e.preventDefault();
     const response = await axios.post(
       `${a.BaseUrl}/api/auth/update`,
-      { first : name.first , last:name.last },
+      { firstName: name.first, lastName: name.last },
       {
         headers: {
           "Content-Type": "application/json",
@@ -53,8 +52,8 @@ export default function Profile() {
       }
     );
     console.log(response) ;
-    a.getuserdata();
-    setIsOpen(false) ;
+    a.setpdata(response.data.pdata);
+    setIsOpen(false);
   };
 
   const changeHandle = (e) => {
@@ -62,8 +61,9 @@ export default function Profile() {
     const value = e.target.value;
     setname({ ...name, [key]: value });
   };
+
   return (
-    <div className="mt-28 lg:pt-40 mx-2 lg:mx-32 bg-stone-100 p-1 lg:px-4 lg:h-screen min-h-screen">
+    <div className="pt-20 lg:pt-40 mx-2 lg:mx-32 bg-stone-100 p-1 lg:px-4 lg:h-screen min-h-screen">
       <Modal isOpen={modalIsOpen} style={customStyles}>
         <div className="block w-72">
           <form onSubmit={handleUpdate} action="">
@@ -109,7 +109,7 @@ export default function Profile() {
             />
             <div className="inline ">
               <h3 className="inline font-semibold ">
-                {!a.profileData ? "" : a.profileData.name}
+                {!a.profileData ? "" : a.profileData.firstName  }
               </h3>
             </div>
           </div>
@@ -117,8 +117,12 @@ export default function Profile() {
           <ul className="border-2 py-2 lg:ps-2 rounded">
             <li className="border-b-2 py-2 ">Profile Information</li>
 
-            <li className="border-b-2 py-2 "><Link to="/orders" >My Orders</Link></li>
-            <li className="border-b-2 py-2 cursor-pointer "><Link to="/wishlist" >Wishlist</Link></li>
+            <li className="border-b-2 py-2 ">
+              <Link to="/orders">My Orders</Link>
+            </li>
+            <li className="border-b-2 py-2 cursor-pointer ">
+              <Link to="/wishlist">Wishlist</Link>
+            </li>
 
             <li onClick={handlelogout} className=" py-2 cursor-pointer ">
               Logout
@@ -137,10 +141,10 @@ export default function Profile() {
 
           <ul className="indent-4">
             <li className="mt-2">
-              {!a.profileData ? "" : a.profileData.name}{" "}
+              {!a.profileData ? "" : a.profileData.firstName +" "+ a.profileData.lastName}{" "}
             </li>
             <li className="mt-2">
-              Email : {!a.profileData ? "" : a.profileData.email}{" "}
+              Email : {!a.profileData ? "" : a.profileData.email }{" "}
             </li>
             <li className="mt-2">
               Mobile Number : {!a.profileData ? "" : a.profileData.contact}{" "}

@@ -12,6 +12,7 @@ export default function Hone() {
       a.fetchData();
     }
   },[])
+  
   return (
     <div className="bg-fixed bgimg    lg:bg-cover ">
       <div className="pt-48 h-screen">

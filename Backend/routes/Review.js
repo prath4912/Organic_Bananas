@@ -1,6 +1,5 @@
 const express = require("express");
 const fetchuser = require("../middleware/fetchuser");
-const User = require("../models/User");
 const router = express.Router();
 const Review = require("../models/Review");
 const mongoose  = require("mongoose")
@@ -15,8 +14,7 @@ router.post("/insert", fetchuser, async (req, res) => {
       product: req.body.product,
     });
     if (result1) {
-      console.log("edcf");
-      console.log(result1);
+      
       const message = req.body.message ? req.body.message : result1.message;
       const result = await Review.updateOne(
         { _id: result1._id },
@@ -30,8 +28,7 @@ router.post("/insert", fetchuser, async (req, res) => {
         review: req.body.review,
         message : req.body.message
       });
-      console.log("erf");
-      console.log(result);
+     
     }
 
     res.status(200).send({ success: true, Message: "True " });

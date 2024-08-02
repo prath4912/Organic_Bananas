@@ -28,8 +28,7 @@ const fruitschema = new mongoose.Schema({
     default : "general" ,
   },
   image : []
-
 },{ timestamps: true } );
-const Fruit = mongoose.model("Fruit", fruitschema);
 
+const Fruit = mongoose.model("Fruit", fruitschema);
 module.exports = Fruit;

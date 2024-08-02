@@ -55,7 +55,6 @@ router.get("/getproduct1", async (req, res) => {
     } else {
       cat = ["fruit", "vegetable", "general"];
     }
-
     const queryobj = { ...req.query };
 
     const exculdef = ["page", "sort", "category"];
@@ -66,14 +65,7 @@ router.get("/getproduct1", async (req, res) => {
     const query2 = JSON.parse(
       query1.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`)
     );
-
-    console.log(cat);
-    console.log(s1);
-    console.log(num);
-    console.log(query2);
-
     let fruits = null;
-
     fruits = await Fruit.find(query2)
       .where("category")
       .in(cat)
@@ -99,11 +91,9 @@ router.get("/getproduct1", async (req, res) => {
 
 router.get("/getproduct", async (req, res) => {
   try {
-    console.log(req.originalUrl);
     var cat = [];
     if (req.query.category) {
       cat = JSON.parse(req.query.category);
-      console.log(cat) ;
     } else {
       cat = ["fruit", "vegetable", "general"];
     }
@@ -120,53 +110,99 @@ router.get("/getproduct", async (req, res) => {
       query1.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`)
     );
 
-    
-    const sortOptions = {} ;
-    if(req.query.sort )
-    {
-      const s1 = req.query.sort ;
-        if(s1[0]=='-')
-        {
-          sortOptions[s1.slice(1)] = -1 ;
-        }else
-        {
-          sortOptions[s1] = 1 ;
-        }
-    }else
-    {
-      sortOptions["name"] = 1 ;
+    const sortOptions = {};
+    if (req.query.sort) {
+      const s1 = req.query.sort;
+      if (s1[0] == "-") {
+        sortOptions[s1.slice(1)] = -1;
+      } else {
+        sortOptions[s1] = 1;
+      }
+    } else {
+      sortOptions["name"] = 1;
     }
-    console.log(sortOptions) ;
-    console.log(cat) ;
-   const l1 = 8 ;
-  const num = Number(req.query.page) * l1;
+   
+    const l1 = 8;
+    const num = Number(req.query.page) * l1;
 
     const pipeline = [
-      { 
-        $match : query2 ,
+      {
+        $match: query2,
       },
-      { 
-      $match: { category: { $in : cat } } ,
-    },
-    {
-      $sort : sortOptions ,
-    },
-    {
-      $skip : num, 
-    },
-    {
-      $limit : 8,
-    }
-  ];
-  const c1 = await Fruit.find(query2)
-  .where("category")
-  .in(cat)
-  .countDocuments();
+      {
+        $match: { category: { $in: cat } },
+      },
+      {
+        $sort: sortOptions,
+      },
+      {
+        $skip: num,
+      },
+      {
+        $limit: 8,
+      },
+    ];
+    const c1 = await Fruit.find(query2)
+      .where("category")
+      .in(cat)
+      .countDocuments();
 
     const result = await Fruit.aggregate(pipeline);
     const f1 = JSON.stringify(result);
 
-    res.send({ success: true , f1 : f1 , count: c1  });
+    res.send({ success: true, f1: f1, count: c1 });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ success: false, message: "some error occured", error }); //update message and erroe code
+  }
+});
+
+router.get("/getfruits", async (req, res) => {
+  try {
+    var cat = [];
+
+    cat = ["fruit"];
+
+    const pipeline = [
+      {
+        $match: { category: { $in: cat } },
+      },
+      {
+        $limit: 8,
+      },
+    ];
+
+    const result = await Fruit.aggregate(pipeline);
+    const f1 = JSON.stringify(result);
+    console.log(result);
+    res.send({ success: true, f1: f1 });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ success: false, message: "some error occured", error }); //update message and erroe code
+  }
+});
+
+router.get("/getvegetables", async (req, res) => {
+  try {
+    var cat = [];
+
+    cat = ["vegetable"];
+
+    const pipeline = [
+      {
+        $match: { category: { $in: cat } },
+      },
+      {
+        $limit: 8,
+      },
+    ];
+
+    const result = await Fruit.aggregate(pipeline);
+    const f1 = JSON.stringify(result);
+    console.log(result);
+    res.send({ success: true, f1: f1 });
   } catch (error) {
     res
       .status(500)

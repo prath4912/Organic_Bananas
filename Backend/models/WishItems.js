@@ -12,7 +12,4 @@ const wishschema = new mongoose.Schema({
     }, 
 },{ timestamps: true } );
 const Wish = mongoose.model("Wish", wishschema);
-
 module.exports = Wish;
-
-

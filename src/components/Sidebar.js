@@ -7,6 +7,7 @@ export default function Sidebar(props) {
   const history = useHistory();
 
   useEffect(() => {
+    
     a.getuserdata();
   }, []);
 
