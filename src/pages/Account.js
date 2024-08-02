@@ -20,6 +20,7 @@ export default function Profile() {
   }, []);
 
   const history = useHistory();
+
   const handlelogout = () => {
     localStorage.removeItem("token");
     a.setpdata(null);
@@ -51,7 +52,7 @@ export default function Profile() {
         },
       }
     );
-    console.log(response) ;
+    console.log(response);
     a.setpdata(response.data.pdata);
     setIsOpen(false);
   };
@@ -109,7 +110,7 @@ export default function Profile() {
             />
             <div className="inline ">
               <h3 className="inline font-semibold ">
-                {!a.profileData ? "" : a.profileData.firstName  }
+                {!a.profileData ? "" : a.profileData.firstName}
               </h3>
             </div>
           </div>
@@ -141,10 +142,12 @@ export default function Profile() {
 
           <ul className="indent-4">
             <li className="mt-2">
-              {!a.profileData ? "" : a.profileData.firstName +" "+ a.profileData.lastName}{" "}
+              {!a.profileData
+                ? ""
+                : a.profileData.firstName + " " + a.profileData.lastName}{" "}
             </li>
             <li className="mt-2">
-              Email : {!a.profileData ? "" : a.profileData.email }{" "}
+              Email : {!a.profileData ? "" : a.profileData.email}{" "}
             </li>
             <li className="mt-2">
               Mobile Number : {!a.profileData ? "" : a.profileData.contact}{" "}

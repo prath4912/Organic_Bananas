@@ -11,7 +11,6 @@ export default function Fruitstate(props) {
   const [fruits, setfruits] = useState([]);
   const [vegetable, setvegetables] = useState([]);
 
-
   const [wishlist, setwishlist] = useState([]);
 
   const [q1, setq1] = useState(0);
@@ -68,7 +67,6 @@ export default function Fruitstate(props) {
 
   const fetchfruits = async () => {
     var url = `${BaseUrl}/api/product/getfruits`;
-   
 
     try {
       const data1 = await axios.get(
@@ -94,7 +92,6 @@ export default function Fruitstate(props) {
 
   const fetchvegetables = async () => {
     var url = `${BaseUrl}/api/product/getvegetables`;
-   
 
     try {
       const data1 = await axios.get(
@@ -117,7 +114,6 @@ export default function Fruitstate(props) {
       alert(error + "\nYou are Offline");
     }
   };
-
 
   const fetchData1 = async () => {
     try {
@@ -329,21 +325,19 @@ export default function Fruitstate(props) {
     rzp1.open();
   };
 
-  
-
   const getuserdata = async () => {
     try {
       if (!localStorage.getItem("token")) {
         alert("Please Login");
         return;
       }
-      
+
       const response = await axios.get(`${BaseUrl}/api/auth/getuser`, {
         headers: {
           "auth-token": localStorage.getItem("token"),
         },
       });
-  
+
       // console.log(response.data);
       setpdata(response.data);
     } catch (error) {
@@ -363,7 +357,6 @@ export default function Fruitstate(props) {
       }
     }
   };
-  
 
   return (
     <Fruitcontext.Provider
@@ -406,7 +399,7 @@ export default function Fruitstate(props) {
         fruits,
         vegetable,
         fetchfruits,
-        fetchvegetables
+        fetchvegetables,
       }}
     >
       {props.children}

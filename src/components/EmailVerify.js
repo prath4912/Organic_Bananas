@@ -3,7 +3,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Fruitcontext from "../context/Fruitcontext";
-import Error from "../components/Error"
+import Error from "../components/Error";
 import Success from "./Success";
 
 export default function EmailVerify() {
@@ -34,7 +34,7 @@ export default function EmailVerify() {
         <div className="rounded border-2 p-4 w-80 shadow-lg shadow-slate-900">
           {validUrl ? (
             <div className="">
-                <Success message = {"Email Verified"}/>
+              <Success message={"Email Verified"} />
               <Link
                 className="bg-yellow-300 border-neutral-200 w-full rounded-md px-4 active:scale-90 transition-all border-2"
                 to="/login"
@@ -44,21 +44,23 @@ export default function EmailVerify() {
             </div>
           ) : (
             <div>
-                <Error error={"Link Expired"}/>
-                <div className="my-3">
-              <Link
-                className="bg-yellow-300 border-2 border-neutral-200 w-full rounded-md px-4 active:scale-90 transition-all "
-                to="/signup"
-              >
-                Try Again
-              </Link>
+              <Error error={"Link Expired"} />
+              <div className="my-3">
+                <Link
+                  className="bg-yellow-300 border-2 border-neutral-200 w-full rounded-md px-4 active:scale-90 transition-all "
+                  to="/signup"
+                >
+                  Try Again
+                </Link>
               </div>
             </div>
           )}
           <div className="mt-4 text-sm">
-            Go Back To  
-            {" "} <p className="inline" >
-              <Link className="text-blue-500 underline" to="/login">Login</Link>
+            Go Back To{" "}
+            <p className="inline">
+              <Link className="text-blue-500 underline" to="/login">
+                Login
+              </Link>
             </p>
           </div>
         </div>

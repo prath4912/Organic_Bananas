@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState , useContext} from "react";
-
+import { useState, useContext } from "react";
 
 import Header from "./components/Header";
 import Products from "./pages/Products";
@@ -10,7 +9,7 @@ import Paymentsucces from "./pages/Paymentsucces";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Banana from "./Fruits/Banana";
+// import Banana from "./Fruits/Banana";
 import Contact from "./pages/Contact_us";
 import Fruitcontext from "./context/Fruitcontext";
 import Hone from "./pages/Hone";
@@ -24,16 +23,13 @@ import Forgotpassword1 from "./pages/Forgotpassword1";
 import Checkout from "./pages/Checkout";
 
 function App() {
-
   const a = useContext(Fruitcontext);
   const [count, setcount] = useState(0);
-
 
   return (
     <>
       <Router>
-      <Header count={count} setcount={setcount} />
-
+        <Header count={count} setcount={setcount} />
         <Switch>
           <Route path="/products">
             <Products />
@@ -42,7 +38,7 @@ function App() {
             <Cart checkoutHandler={a.checkoutHandler} />
           </Route>
           <Route path="/login">
-            <Login count={count} setcount={setcount}  />
+            <Login count={count} setcount={setcount} />
           </Route>
           <Route path="/orders">
             <Orders />
@@ -53,9 +49,9 @@ function App() {
           <Route path="/forgotpassword">
             <Forgotpaasword />
           </Route>
-          <Route path="/banana">
+          {/* <Route path="/banana">
             <Banana />
-          </Route>
+          </Route> */}
           <Route path="/payment">
             <Paymentsucces />
           </Route>
@@ -84,11 +80,9 @@ function App() {
             <Hone />
           </Route>
         </Switch>
-       
       </Router>
-   
 
-        <Footer />
+      <Footer />
     </>
   );
 }
