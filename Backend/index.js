@@ -22,7 +22,7 @@ app.use(express.json()) ;  // request data from body as a middleware
 app.use(fileUpload( {useTempFiles : true,
     tempFileDir : '/tmp/'})) ;
 
-app.post("/api/test" , (req,res)=>{res.send("Succrss")} );
+app.get("/api/test" , (req,res)=>{res.send("Success")} );
 
 app.use("/api/payment" , require("./routes/payment")) ;
 
