@@ -73,8 +73,8 @@ function App() {
           <Route path="/fruits/:name/:id">
             <Fruit />
           </Route>
-          <Route path="/checkout">
-            <Checkout />
+          <Route path="/checkout/:total_cost">
+            <Checkout   />
           </Route>
           <Route path="/">
             <Hone />

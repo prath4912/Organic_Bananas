@@ -246,14 +246,18 @@ export default function Fruitstate(props) {
   };
 
   const checkoutHandler = async (amount, add1, cart) => {
+    // alert("in ch")
     const {
       data: { key },
     } = await axios.get(`${BaseUrl}/api/payment/key`);
+    console.log(amount) ;
     const {
       data: { order },
     } = await axios.post(`${BaseUrl}/api/payment/checkout`, {
       amount,
     });
+    // console.log(data)
+
 
     const options = {
       key: key, // Enter the Key ID generated from the Dashboard

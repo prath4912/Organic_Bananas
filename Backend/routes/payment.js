@@ -15,6 +15,8 @@ var instance = new Razorpay({
 });
 
 router.get("/key", (req, res) => {
+  console.log("key") ;
+  // console.log(process.env.RAZORPAY_API_KEY)
   res.send(process.env.RAZORPAY_API_KEY);
 });
 

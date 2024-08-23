@@ -1,8 +1,14 @@
 import React, { useContext, useState } from 'react'
+import { useParams } from 'react-router-dom';
+
 import Fruitcontext from '../context/Fruitcontext';
 
-export default function Checkout(props) {
+
+export default function Checkout() {
+  const {  total_cost} = useParams();
+
   
+
   const a = useContext(Fruitcontext) ;
   const [address, setAddress] = useState("");
 
@@ -12,7 +18,8 @@ export default function Checkout(props) {
 
   const handle = (e) => {
     e.preventDefault();
-    props.checkoutHandler(props.total_cost, address, a.cart);
+    console.log(total_cost , address )
+    a.checkoutHandler(total_cost, address, a.cart);
   };
 
   return (

@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function Cart(props) {
-  
   var t_quantity = 0;
   var total_cost = 0;
 
@@ -14,13 +13,14 @@ function Cart(props) {
     a.getcart();
   }, []);
 
+  const data = {
+    name: 'John Doe',
+    age: 30,
+  };
 
- 
   return (
     <div className="mt-28 lg:mt-40 ">
-      
-
-      <div className="p-3 lg:mx-28  bg-zinc-800" style={{minHeight : "70vh"}} >
+      <div className="p-3 lg:mx-28  bg-zinc-800" style={{ minHeight: "70vh" }}>
         <h1 className="text-2xl text-white font-bold mb-3 ">Items</h1>
 
         <div className="flex flex-row flex-wrap justify-aroundg">
@@ -97,7 +97,7 @@ function Cart(props) {
             ) : (
               <div className="">
                 <div className="h-50 flex flex-col justify-center items-center">
-                <p className="text-white my-2" >Cart Is Empty</p>
+                  <p className="text-white my-2">Cart Is Empty</p>
 
                   <Link
                     to="/products"
@@ -111,28 +111,30 @@ function Cart(props) {
             )}
           </div>
 
-          {a.cart.length && <div className=" bg-white rounded h-60 p-2 px-8   border border-black">
-            <div className="">
-              <h5 className="font-semibold my-2">Cart Details</h5>
-              <p className="">Total Items : {t_quantity}</p>
-              <p className="">Cart Subtotal : {total_cost}</p>
-              <p className=""> Shipping : Free</p>
-              <p className="">Total : {total_cost}</p>
+          {a.cart.length && (
+            <div className=" bg-white rounded h-60 p-2 px-8   border border-black">
+              <div className="">
+                <h5 className="font-semibold my-2">Cart Details</h5>
+                <p className="">Total Items : {t_quantity}</p>
+                <p className="">Cart Subtotal : {total_cost}</p>
+                <p className=""> Shipping : Free</p>
+                <p className="">Total : {total_cost}</p>
 
                 <Link
-                  to="/checkout"
+                  to={`/checkout/${total_cost}`}
+                  
                   type="button"
                   className=" border-black my-1 bg-black text-white p-1 rounded text-sm font-medium w-full mt-2"
                 >
                   Proceed To Buy
                 </Link>
-              
-              <p className="my-1 ">
-                <small className="">Happy Health</small>
-              </p>
-            </div>
-          </div>}
 
+                <p className="my-1 ">
+                  <small className="">Happy Health</small>
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
