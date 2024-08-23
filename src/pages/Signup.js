@@ -17,6 +17,7 @@ function Signup() {
     name: "",
     email: "",
     password: "",
+    lastname : "" ,
   });
 
   const handlesignup = async (e) => {
@@ -32,6 +33,7 @@ function Signup() {
         name: credentials.name,
         email: credentials.email,
         password: credentials.password,
+        lastname : credentials.lastname
       },
       {
         headers: {
@@ -97,6 +99,20 @@ function Signup() {
                   value={credentials.name}
                   name="name"
                   placeholder="name"
+                  required
+                  minLength={3}
+                />
+              </div>
+              <div className="mb-3">
+              <label htmlFor="lastname" className="block mb-1 text-sm font-medium">Enter Last Name</label>
+                <input
+                  type="text"
+                  className="border-2 border-neutral-400 w-full rounded ps-1 p-0.5"
+                  id="lastname"
+                  onChange={onChange1}
+                  value={credentials.lastname}
+                  name="lastname"
+                  placeholder="lastname"
                   required
                   minLength={3}
                 />

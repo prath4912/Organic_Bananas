@@ -130,7 +130,7 @@ const Login = (props) => {
             <div className="mt-4 text-sm">
             New To Organic Bananas?
             <p>
-              <Link className="text-blue-500 underline" to="/signup"> Create an Acoount</Link>
+              <Link className="text-blue-500 underline" to="/signup"> Create an Account</Link>
             </p>
           </div>
           <div className="text-sm">

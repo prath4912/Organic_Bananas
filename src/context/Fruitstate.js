@@ -328,7 +328,7 @@ export default function Fruitstate(props) {
   const getuserdata = async () => {
     try {
       if (!localStorage.getItem("token")) {
-        alert("Please Login");
+        // alert("Please Login");
         return;
       }
 

@@ -41,8 +41,10 @@ router.post(
         const hash = bcrypt.hashSync(req.body.password, salt);
         const prathmesh = new User({
           name: req.body.name,
+          firstName : req.body.name,
           email: req.body.email,
           password: hash,
+          lastName : req.body.lastname 
         });
 
         prathmesh.save();
@@ -161,7 +163,7 @@ router.get("/users/:id/verify/:token/", async (req, res) => {
       userId: user._id,
       token: req.params.token,
     });
-
+    
     if (!token) return res.status(400).send({ message: "Invalid link" });
     await User.updateOne({ _id: user._id }, { verified: true });
     await Token.deleteMany({ userId: user._id, token: req.params.token });
