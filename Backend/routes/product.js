@@ -7,7 +7,7 @@ const imageUpload = require("../middleware/Fileupload");
 
 router.post("/get", async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const Fruit1 = await Fruit.findById(req.body.id);
     res.status(200).send({ Fruit1, mess: "Done Fruit Inserted" });
   } catch (error) {
@@ -45,7 +45,7 @@ router.post("/insert", fetchuser, isAdmin, imageUpload, async (req, res) => {
 router.get("/getproduct1", async (req, res) => {
   const l1 = 4; // limit value
   try {
-    console.log(req.query);
+    // console.log(req.query);
     const num = Number(req.query.page) * l1;
     const s1 = req.query.sort ? req.query.sort : "name";
 
@@ -79,7 +79,7 @@ router.get("/getproduct1", async (req, res) => {
       .countDocuments();
 
     const f1 = JSON.stringify(fruits);
-    console.log(f1);
+    // console.log(f1);
 
     res.status(200).send({ success: true, f1: f1, count: c1 });
   } catch (error) {
@@ -111,16 +111,16 @@ router.get("/getproduct", async (req, res) => {
     );
 
     const sortOptions = {};
-    if (req.query.sort) {
-      const s1 = req.query.sort;
-      if (s1[0] == "-") {
-        sortOptions[s1.slice(1)] = -1;
-      } else {
-        sortOptions[s1] = 1;
-      }
-    } else {
+    // if (req.query.sort) {
+    //   const s1 = req.query.sort;
+    //   if (s1[0] == "-") {
+    //     sortOptions[s1.slice(1)] = -1;
+    //   } else {
+    //     sortOptions[s1] = 1;
+    //   }
+    // } else {
       sortOptions["name"] = 1;
-    }
+    // }
    
     const l1 = 8;
     const num = Number(req.query.page) * l1;
@@ -148,9 +148,9 @@ router.get("/getproduct", async (req, res) => {
       .countDocuments();
 
     const result = await Fruit.aggregate(pipeline);
-    const f1 = JSON.stringify(result);
+    const products = JSON.stringify(result);
 
-    res.send({ success: true, f1: f1, count: c1 });
+    res.send({ success: true, products: products, count: c1 });
   } catch (error) {
     res
       .status(500)
@@ -175,7 +175,7 @@ router.get("/getfruits", async (req, res) => {
 
     const result = await Fruit.aggregate(pipeline);
     const f1 = JSON.stringify(result);
-    console.log(result);
+    // console.log(result);
     res.send({ success: true, f1: f1 });
   } catch (error) {
     res
@@ -201,7 +201,7 @@ router.get("/getvegetables", async (req, res) => {
 
     const result = await Fruit.aggregate(pipeline);
     const f1 = JSON.stringify(result);
-    console.log(result);
+    // console.log(result);
     res.send({ success: true, f1: f1 });
   } catch (error) {
     res

@@ -3,20 +3,14 @@ import ob1 from "../images/brand.png";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useState } from "react";
 import Fruitcontext from "../context/Fruitcontext";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 
 export default function Header(props) {
   const a = useContext(Fruitcontext);
   const [isSmallDevice, setisSmallDevice] = useState(false);
 
   const [isMenuOn, setisMenuOn] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
-
   
-
-  const closeSidebar = () => {
-    setShowSidebar(false);
-  };
 
   function closeMobileNavOnResize() {
     if (window.innerWidth < 768) {
@@ -49,12 +43,12 @@ export default function Header(props) {
 
   return (
     <div>
-      <div
+      {/* <div
         className={`sidebar bg-light ${showSidebar ? "open" : ""}`}
         onClick={closeSidebar}
       >
         <Sidebar count={props.count} setcount={props.setcount} />
-      </div>
+      </div> */}
 
       <div className="fixed top-0  w-screen z-20  ">
         <div className=" bg-lime-300 text-right text-xs pt-0.5 pe-2 text-black">

@@ -9,21 +9,16 @@ import toast from "react-hot-toast";
 import RemoveSym from "../images/delete.png";
 
 function Product(props) {
-  const [url, seturl] = useState(null);
   const a = useContext(Fruitcontext);
 
-  useEffect(() => {
-    if (props.image) {
-      seturl(props.image);
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="my-3 w-44  lg:mx-2  lg:w-60 shadow-lg bg-stone-100  shadow-black/50 hover:scale-105 transition-all ">
       <div className="flex flex-col overflow-hidden ">
         <Link to={`/fruits/${props.name}/${props.p_id}`}>
           <img
-            src={url && url}
+            src={props.image}
             height={"300px"}
             className="hover:scale-105 transition-all  "
             alt="Not Available"
@@ -59,7 +54,12 @@ function Product(props) {
                 className="bg-yellow-400 p-0.5 rounded border-2 border-black float-end active:scale-75 transition-all text-sm px-1 "
               >
                 Add To{" "}
-                <img className="inline mb-1 " src={cartsym} width={"20px"} alt="" />
+                <img
+                  className="inline mb-1 "
+                  src={cartsym}
+                  width={"20px"}
+                  alt=""
+                />
               </button>
 
               {props.title == "wishlist" ? (
@@ -76,12 +76,7 @@ function Product(props) {
                   }}
                   className="bg-yellow-400 p-1 hidden lg:block border-2 border-black float-end me-1 active:scale-75 transition-all  "
                 >
-                  <img
-                    width={"20px"}
-                    className=""
-                    src={RemoveSym}
-                    alt=""
-                  />
+                  <img width={"20px"} className="" src={RemoveSym} alt="" />
                 </button>
               ) : (
                 <button

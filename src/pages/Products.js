@@ -4,64 +4,56 @@ import Fruitcontext from "../context/Fruitcontext";
 import { useContext } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "../components/Spinner";
-import SPcard from "../components/SPcard";
 
 function Products() {
   const a = useContext(Fruitcontext);
-  const [count, setc] = useState(0);
-  const [formdata, setfd] = useState({ fruit: false, vegetable: false });
+
 
   useEffect(() => {
     if (a.product_list.length > 0) {
     } else {
       a.fetchData();
     }
-  }, [a.s1, a.fi1, count]);
+  }, [ a.s1, a.pricefilter,a.category ]);
 
-  const update = (ele) => {
-    if (a.s1 === ele) {
-    } else {
-      a.sets1(ele);
-      a.setpage(0);
-      a.setproduct_list([]);
-    }
-  };
-  const update1 = (ele) => {
+  // const update = (ele) => {
+  //   if (a.s1 === ele) {
+  //   } else {
+  //     a.sets1(ele);
+  //     a.setpage(0);
+  //     a.setproduct_list([]);
+  //   }
+  // };
+
+  const priceFilterchangeHandler = (event) => {
+    const ele = event.target.value;
     if (a.fi1 === ele) {
     } else {
-      a.setfi1(ele);
+      a.setpricefilter(ele);
       a.setpage(0);
       a.setproduct_list([]);
     }
   };
 
-  const changeHandler = (event) => {
-    update1(event.target.value);
-  };
-  const changeHandler1 = (event) => {
-    // setc(count+1);
+  const categoryChangeHandler = (event) => {
     const { name, checked } = event.target;
-    setfd((prev) => {
-      return { ...prev, [name]: checked };
-    });
-    const arr = a.category;
-    if (checked) {
-      arr.push(name);
-    } else {
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === name) {
-          arr.splice(i, 1);
-        }
-      }
-    }
-    console.log(arr);
-    a.setcat(arr);
+
+    a.setformdata( { ...a.formdata, [name]: checked } );
+
+    // console.log(formdata) ;
+
+    const arr = checked
+    ? [...a.category, name] 
+    : a.category.filter((cat) => cat !== name);
+
+    a.setCategory(arr);
     a.setpage(0);
     a.setproduct_list([]);
-    setc(count + 1);
   };
+
   return (
     <div className="pt-28 lg:pt-40  bg-zinc-100">
+      
       <div className="flex  ">
         <div
           style={{ minWidth: "200px" }}
@@ -73,84 +65,108 @@ function Products() {
             <ul className="ms-1 mt-2">
               <li className="flex">
                 <input
-                  onChange={changeHandler1}
+                  onChange={categoryChangeHandler}
                   name="fruit"
                   id="fruit"
                   type="checkbox"
-                  checked={formdata.fruit}
+                  checked={a.formdata.fruit}
                 />
-                <label className="ms-2" htmlFor="fruit">Fruits</label>
+                <label className="ms-2" htmlFor="fruit">
+                  Fruits
+                </label>
               </li>
               <li className="flex">
                 <input
-                className="p-0 m-0"
-                  onChange={changeHandler1}
+                  className="p-0 m-0"
+                  onChange={categoryChangeHandler}
                   name="vegetable"
                   id="Vegetable"
                   type="checkbox"
-                  checked={formdata.vegetable}
+                  checked={a.formdata.vegetable}
                 />
-                <label className="ms-2 " htmlFor="Vegetable">Vegetables</label>
+                <label className="ms-2 " htmlFor="Vegetable">
+                  Vegetables
+                </label>
               </li>
             </ul>
           </div>
-          
+
           <div className="my-3">
             <h5 className="">Price</h5>
-            <ul className="ms-1 mt-2" >
-              <li className="flex " >
+            <ul className="ms-1 mt-2">
+              <li className="flex ">
                 <input
                   value={50}
-                  onChange={changeHandler}
+                  onChange={priceFilterchangeHandler}
                   id="price1"
                   type="radio"
                   name="ch1"
+                  checked={a.pricefilter == 50}
+
                 />
-                <label className="ms-1"  htmlFor="price1">Below 50</label>
+                <label className="ms-1" htmlFor="price1">
+                  Below 50
+                </label>
               </li>
-              <li className="flex my-2" >
+              <li className="flex my-2">
                 <input
                   value={100}
-                  onChange={changeHandler}
+                  onChange={priceFilterchangeHandler}
                   id="price2"
                   type="radio"
                   name="ch1"
+                  checked={a.pricefilter == 100}
+
                 />
-                <label className="ms-1"  htmlFor="price2">Below 100</label>
+                <label className="ms-1" htmlFor="price2">
+                  Below 100
+                </label>
               </li>
-              <li className="flex my-2" >
+              <li className="flex my-2">
                 <input
                   value={200}
-                  onChange={changeHandler}
+                  onChange={priceFilterchangeHandler}
                   id="price3"
                   type="radio"
                   name="ch1"
+                  checked={a.pricefilter == 200}
+
                 />
-                <label className="ms-1"  htmlFor="price3">Below 200</label>
+                <label className="ms-1" htmlFor="price3">
+                  Below 200
+                </label>
               </li>
-              <li className="flex my-2" >
+              <li className="flex my-2">
                 <input
                   value={300}
-                  onChange={changeHandler}
+                  onChange={priceFilterchangeHandler}
                   id="price4"
                   type="radio"
                   name="ch1"
+                  checked={a.pricefilter == 300}
+
                 />
-                <label className="ms-1"  htmlFor="price4">Below 300</label>
+                <label className="ms-1" htmlFor="price4">
+                  Below 300
+                </label>
               </li>
               <li className="flex my-2">
                 <input
                   value={10000000}
-                  onChange={changeHandler}
+                  onChange={priceFilterchangeHandler}
                   id="price5"
                   type="radio"
                   name="ch1"
+                  checked={a.pricefilter == 10000000}
+
                 />
-                <label className="ms-1" htmlFor="price5">All Items</label>
+                <label className="ms-1" htmlFor="price5">
+                  All Items
+                </label>
               </li>
             </ul>
           </div>
-          <div>
+          {/* <div>
             <h5 className="">Availability</h5>
             <ul className="ms-1 mt-2">
               <li className="flex">
@@ -164,22 +180,19 @@ function Products() {
               </li>
              
             </ul>
-          </div>
-
+          </div> */}
         </div>
-        
-        
+
         <div className="text-white grow">
+
           <div className="flex justify-between items-center px-2  bg-zinc-800  ">
             <h1 className=" text-2xl  font-bold p-2 ">
               Fresh Fruits
-              <p
-                className="text-xs lg:inline  lg:ms-2"
-              >
+              <p className="text-xs lg:inline  lg:ms-2">
                 (showing 1-{a.product_list.length} items of {a.total_fruits})
               </p>
             </h1>
-            <div className="float-right  inline text-black">
+            {/* <div className="float-right  inline text-black">
               <select
                 className="rounded"
               >
@@ -200,8 +213,10 @@ function Products() {
               </select>
 
              
-            </div>
+            </div> */}
           </div>
+          {a.loading && <Spinner/>}
+
           <div>
             <InfiniteScroll
               dataLength={a.product_list.length} //This is important field to render the next data

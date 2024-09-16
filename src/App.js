@@ -12,7 +12,7 @@ import Signup from "./pages/Signup";
 // import Banana from "./Fruits/Banana";
 import Contact from "./pages/Contact_us";
 import Fruitcontext from "./context/Fruitcontext";
-import Hone from "./pages/Hone";
+import HomePage from "./pages/HomePage";
 import Orders from "./pages/Orders";
 import Profile from "./pages/Account";
 import WishList from "./pages/WishList";
@@ -77,7 +77,7 @@ function App() {
             <Checkout   />
           </Route>
           <Route path="/">
-            <Hone />
+            <HomePage />
           </Route>
         </Switch>
       </Router>
@@ -103,5 +103,5 @@ spinner
 6.Chatbot
 7.availability filter'
 8. Multilanguage Support
-
 */
+

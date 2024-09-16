@@ -5,7 +5,7 @@ import as from "../images/as.jpg";
 import fresh from "../images/fresh.jpg";
 import org from "../images/org.png";
 import Map from "./Map";
-import Plant from "../images/bananaplant.webp";
+import About from "./About";
 
 export default function Home() {
   const arr = [
@@ -28,36 +28,31 @@ export default function Home() {
                 key={index}
                 className="bg-white w-44 rounded overflow-hidden shadow-lg border border-black hover:scale-105   transition-all"
               >
-                <div className="w-36 mx-auto p-1 h-44 " >
-                <img src={element.img} className=" overflow-hidden  hover:scale-105 transition-all" alt="image" /></div>
+                <div className="w-36 mx-auto p-1 h-44 ">
+                  <img
+                    src={element.img}
+                    className=" overflow-hidden  hover:scale-105 transition-all"
+                    alt="image"
+                  />
+                </div>
                 <div className="p-2 my-2">
-                  <h5 className="text-center hover:font-bold transition-all">{element.title}</h5>
+                  <h5 className="text-center hover:font-bold transition-all">
+                    {element.title}
+                  </h5>
                 </div>
               </div>
             );
           })}
         </div>
       </div>
-      <div>
-        <div className="flex flex-wrap-reverse lg:flex-none  lg:mx-4 bg-white my-4">
-          <div className="lg:w-1/2	 p-1">
-            <h1 className="text-center font-bold text-6xl py-2">About Us</h1>
-            <p className="lg:px-4 mt-2  lg:text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed quisquam obcaecati corrupti officia autem esse? Explicabo necessitatibus doloremque ullam laudantium distinctio quisquam pariatur, sed inventore ipsa assumenda nesciunt odio similique nihil sequi quibusdam vel. Molestiae reiciendis quae quo, qui libero, blanditiis facere quos officiis cum illo saepe ullam unde quas non, rem dolore. Eaque earum atque accusamus illum dolores eligendi praesentium maxime vel fugit iure laborum deleniti aut rerum tempora eos libero, beatae laudantium rem mollitia iste nobis doloremque voluptatibus commodi officia. Nisi officia consectetur dolores adipisci nobis eveniet, in at inventore nam soluta expedita dolorum dolorem repellat asperiores explicabo rerum repellendus tempora earum saepe. Quos perferendis reiciendis numquam reprehenderit voluptatem dolorum rem minima repellendus tenetur facilis. Voluptas asperiores maiores, temporibus aspernatur tempore porro distinctio aliquam qui sed eius facilis sit ipsam officia aut quam accusamus. Perferendis, modi iure eius, sit asperiores, neque a voluptate ratione fugit eos dolore! Delectus, nulla! In harum illum voluptas et totam odit voluptate doloribus voluptatum minima aliquid esse accusamus, eligendi enim a repellat dolores, reiciendis pariatur. Laboriosam dolores cupiditate iusto obcaecati dolorum dolore assumenda esse ullam necessitatibus rem. Laboriosam commodi officiis cumque dolorum optio, placeat, eaque minus adipisci magni perferendis, et labore consectetur vitae.</p>
-          </div>
-          <div className="w-1/2 m-auto">
-          <img className="  mt-3 lg:w-2/5 m-auto lg:hover:scale-125 transition-all" src={Plant} alt="" />
-          </div>
-        </div>
-      </div>
+      <About />
       <Map />
-      {!localStorage.getItem("token") ? (
-        <div
-          className=" pt-4 pb-2 px-2 lg:px-0 "
-        >
+      {/* {!localStorage.getItem("token") ? (
+        <div className=" pt-4 pb-2 px-2 lg:px-0 ">
           <div className="flex flex-col lg:flex-row   justify-around">
             <div>
-              <h3 className="font-medium" >Sign Up For News Letter</h3>
-              <p className="text-xs lg:text-sm" >
+              <h3 className="font-medium">Sign Up For News Letter</h3>
+              <p className="text-xs lg:text-sm">
                 Get E-mail updates about our latest shop and special offers.
               </p>
             </div>
@@ -69,13 +64,15 @@ export default function Home() {
                 name="mail"
                 id="mail"
               />
-              <button className="border border-neutral-400 p-2 px-5 hover:bg-black hover:text-white ">Sign Up</button>
+              <button className="border border-neutral-400 p-2 px-5 hover:bg-black hover:text-white ">
+                Sign Up
+              </button>
             </div>
           </div>
         </div>
       ) : (
         <></>
-      )}
+      )} */}
     </div>
   );
 }

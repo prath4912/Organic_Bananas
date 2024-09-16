@@ -5,22 +5,22 @@ import Fruitcontext from "../context/Fruitcontext";
 import profile from "../images/user.jpg";
 import { MdOutlineStar } from "react-icons/md";
 import ProgressBar from "@ramonak/react-progress-bar";
+import SpinnerLoading from "./SpinnerLoading";
 
 export default function StarRating(props) {
+  const a = useContext(Fruitcontext);
+
   useEffect(() => {
     getReviews();
     let arr1 = [0, 0, 0, 0, 0];
     props.arr.forEach((ele) => {
-      arr1[ele._id - 1] = ((ele.count / props.total_ratingCount) * 100).toFixed(
-        0
-      );
+      arr1[ele._id - 1] = ((ele.count / props.total_ratingCount) * 100).toFixed(0);
     });
 
     setrP(arr1);
   }, [props.id]);
 
   const [ratingPercentage, setrP] = useState([0, 0, 0, 0, 0]);
-  const a = useContext(Fruitcontext);
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
   const [reviewsMessage, setReviews] = useState([]);
@@ -50,6 +50,8 @@ export default function StarRating(props) {
   };
 
   const handle = async () => {
+    console.log("in handle")
+    a.setloading(true);
     const result = await axios.post(
       `${a.BaseUrl}/api/review/insert`,
       {
@@ -64,6 +66,7 @@ export default function StarRating(props) {
         },
       }
     );
+    a.setloading(false) ;
   };
 
   const onPointerEnter = () => console.log("Enter");
@@ -72,6 +75,7 @@ export default function StarRating(props) {
 
   return (
     <div className="mx-4 ">
+      {a.loading && <SpinnerLoading/> }
       <div className="demo w-full lg:p-8 flex rounded flex-wrap gap-3 justify-around">
         <div className="w-full px-0.5 lg:w-2/6">
           <div>
@@ -80,7 +84,9 @@ export default function StarRating(props) {
             </h1>
             <div className="flex justify-around items-center my-2">
               <div className="grow text-center">
-                <p className="font-bold lg:font-extrabold text-3xl ">{props.avgrating}</p>
+                <p className="font-bold lg:font-extrabold text-3xl ">
+                  {props.avgrating}
+                </p>
                 <Rating
                   size={15}
                   allowFraction
@@ -134,7 +140,9 @@ export default function StarRating(props) {
           </button>
         </div>
         <div className="w-full lg:w-5/12">
-          <h1 className="font-bold lg:font-extrabold text-2xl lg:ms-2 my-2">Reviews</h1>
+          <h1 className="font-bold lg:font-extrabold text-2xl lg:ms-2 my-2">
+            Reviews
+          </h1>
           <div className="">
             {reviewsMessage &&
               reviewsMessage.length > 0 &&

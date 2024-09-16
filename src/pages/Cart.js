@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import Fruitcontext from "../context/Fruitcontext";
 import { useContext } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import SpinnerLoading from "../components/SpinnerLoading";
 
-function Cart(props) {
+function Cart() {
   var t_quantity = 0;
   var total_cost = 0;
 
@@ -13,23 +14,17 @@ function Cart(props) {
     a.getcart();
   }, []);
 
-  const data = {
-    name: 'John Doe',
-    age: 30,
-  };
-
   return (
     <div className="mt-28 lg:mt-40 ">
+      {a.loading && <SpinnerLoading />}
       <div className="p-3 lg:mx-28  bg-zinc-800" style={{ minHeight: "70vh" }}>
         <h1 className="text-2xl text-white font-bold mb-3 ">Items</h1>
-
         <div className="flex flex-row flex-wrap justify-aroundg">
           <div className=" grow lg:me-1 ">
             {a.cart && a.cart.length > 0 ? (
               a.cart.map((cart) => {
                 total_cost = total_cost + cart.product.amount * cart.quantity;
                 t_quantity = t_quantity + cart.quantity;
-
                 return (
                   <div className="flex flex-row my-1">
                     <div className="">
@@ -98,7 +93,6 @@ function Cart(props) {
               <div className="">
                 <div className="h-50 flex flex-col justify-center items-center">
                   <p className="text-white my-2">Cart Is Empty</p>
-
                   <Link
                     to="/products"
                     type="button"
@@ -113,32 +107,35 @@ function Cart(props) {
 
           {a.cart.length && (
             <div className=" bg-white rounded h-60 p-2 px-8   border border-black">
-              <div className="">
-                <h5 className="font-semibold my-2">Cart Details</h5>
-                <p className="">Total Items : {t_quantity}</p>
-                <p className="">Cart Subtotal : {total_cost}</p>
-                <p className=""> Shipping : Free</p>
-                <p className="">Total : {total_cost}</p>
+              <h5 className="font-semibold my-2">Cart Details</h5>
+              <p className="">Total Items : {t_quantity}</p>
+              <p className="">Cart Subtotal : {total_cost}</p>
+              <p className=""> Shipping : Free</p>
+              <p className="">Total : {total_cost}</p>
 
-                <Link
-                  to={`/checkout/${total_cost}`}
-                  
-                  type="button"
-                  className=" border-black my-1 bg-black text-white p-1 rounded text-sm font-medium w-full mt-2"
-                >
-                  Proceed To Buy
-                </Link>
+              <Link
+                to={`/checkout/${total_cost}`}
+                type="button"
+                className=" border-black my-1 bg-black text-white p-1 rounded text-sm font-medium w-full mt-2"
+              >
+                Proceed To Checkout
+              </Link>
 
-                <p className="my-1 ">
-                  <small className="">Happy Health</small>
-                </p>
-              </div>
+              <p className="my-1 ">
+                <small className="">Happy Health</small>
+              </p>
             </div>
           )}
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* <div
+export default Cart;
+
+{
+  /* <div
         className="h-75 modal fade "
         id="staticBackdrop"
         data-bs-backdrop="static"
@@ -200,9 +197,5 @@ function Cart(props) {
             </div>
           </div>
         </div>
-      </div> */}
-    </div>
-  );
+      </div> */
 }
-
-export default Cart;

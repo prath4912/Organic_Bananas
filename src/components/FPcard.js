@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import Fruitcontext from "../context/Fruitcontext";
-import { useContext } from "react";
 import { useEffect } from "react";
-import wishsym from "../images/bookmark.png";
-import cartsym from "../images/trolley.png";
-import toast from "react-hot-toast";
-import RemoveSym from "../images/delete.png";
+
 
 function FPcard(props) {
   const [url, seturl] = useState(null);
-  const a = useContext(Fruitcontext);
 
   useEffect(() => {
     if (props.image) {

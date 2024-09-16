@@ -41,10 +41,10 @@ router.post(
         const hash = bcrypt.hashSync(req.body.password, salt);
         const prathmesh = new User({
           name: req.body.name,
-          firstName : req.body.name,
+          firstName: req.body.name,
           email: req.body.email,
           password: hash,
-          lastName : req.body.lastname 
+          lastName: req.body.lastname,
         });
 
         prathmesh.save();
@@ -56,6 +56,7 @@ router.post(
             userId: prathmesh._id,
             token: crypto.randomBytes(32).toString("hex"),
           }).save();
+
           const url = `${process.env.BASE_URL}users/${prathmesh._id}/verify/${token.token}`;
           await sendmail(
             prathmesh.email,
@@ -87,7 +88,8 @@ router.post(
       if (!result.isEmpty()) {
         return res.status(400).send({ success: false, errors: result.array() });
       }
-      const {email,password} = req.body;
+
+      const { email, password } = req.body;
       let user = await User.findOne({ email, verified: true });
       if (!user) {
         res.status(404).send({
@@ -95,8 +97,9 @@ router.post(
           error: "We cannot find an account with that email address",
         });
       } else {
-        const cpassword = await bcrypt.compare(password, user.password);
 
+        const cpassword = await bcrypt.compare(password , user.password);
+ 
         if (cpassword) {
           const data = {
             user: {
@@ -106,8 +109,10 @@ router.post(
 
           const authtoken = jwt.sign(data, JWT_SECRET);
           success = true;
+
           res.json({ success: true, authtoken });
-        }else {
+          
+        } else {
           res
             .status(401)
             .json({ success: false, error: "Incorrect Credentials" });
@@ -163,7 +168,7 @@ router.get("/users/:id/verify/:token/", async (req, res) => {
       userId: user._id,
       token: req.params.token,
     });
-    
+
     if (!token) return res.status(400).send({ message: "Invalid link" });
     await User.updateOne({ _id: user._id }, { verified: true });
     await Token.deleteMany({ userId: user._id, token: req.params.token });

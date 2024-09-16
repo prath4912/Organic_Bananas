@@ -17,6 +17,7 @@ app.use(bodyParser.json())
 const PORT = process.env.PORT ;
 
 app.use(cors()) ; 
+
 app.use(express.json()) ;  // request data from body as a middleware
 // app.use(express.urlencoded({extended : true})) ;
 app.use(fileUpload( {useTempFiles : true,
@@ -31,6 +32,8 @@ app.use('/api/admin' , require("./routes/admin")) ;
 app.use("/api/auth" , require("./routes/auth")) ;
 
 app.use("/api/cart" , require("./routes/Cart")) ;
+app.use("/api/order" , require("./routes/order")) ;
+
 
 app.use("/api/product" , require("./routes/product")) ;
 app.use("/api/review" , require("./routes/Review")) ;
@@ -42,3 +45,4 @@ app.listen(PORT , ()=>{
 }) 
 
 
+ 

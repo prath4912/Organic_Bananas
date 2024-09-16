@@ -10,6 +10,7 @@ const sendm = async(usermail , subjext , message)=>{
             pass: 'wauz rfyt fmer zrbg'
         }
     });
+
     const info = await transporter.sendMail({
         from: '"Organic Bananas" <livebailgada@gmail.com>', // sender address
         to:usermail, // list of receivers
@@ -21,3 +22,4 @@ const sendm = async(usermail , subjext , message)=>{
 }
 
 module.exports = sendm ;
+

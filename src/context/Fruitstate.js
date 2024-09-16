@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Fruitcontext from "./Fruitcontext";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -6,45 +6,54 @@ import l1 from "../images/ORGABIC.png";
 
 export default function Fruitstate(props) {
   const BaseUrl = process.env.REACT_APP_BASE_URL;
-
+  const[loading , setloading] = useState(false) ;
   const [product_list, setproduct_list] = useState([]);
   const [fruits, setfruits] = useState([]);
   const [vegetable, setvegetables] = useState([]);
+  const [total_fruits, settf] = useState(0);
 
   const [wishlist, setwishlist] = useState([]);
-
-  const [q1, setq1] = useState(0);
-
-  const [total_fruits, settf] = useState(0);
-  const [total_fruits1, settf1] = useState(0);
-
   const [cart, setcart] = useState([]);
+
+  const [formdata, setformdata] = useState({ fruit: false, vegetable: false });
 
   const [s1, sets1] = useState("");
   const [s11, sets11] = useState("");
 
-  const [fi1, setfi1] = useState(10000000);
+  const [pricefilter, setpricefilter] = useState(10000000);
   const [fi11, setfi11] = useState(10000000);
 
-  const [category, setcat] = useState([]);
+  const [category, setCategory] = useState([]);
   const [category1, setcat1] = useState([]);
 
-  const [page, setpage] = useState(0);
+  const [page, setpage] = useState(0); // page number
 
   const [profileData, setpdata] = useState(null);
 
+
+  useEffect(()=>{
+    fetchfruits() ;
+    fetchvegetables() ;
+    getuserdata() ;
+  },[]) ;
+
   const fetchData = async () => {
+    setloading(true) ;
+    console.log("in fetchdata")
+    console.log(category) ;
     setpage(page + 1);
-    var url = `${BaseUrl}/api/product/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}`;
+    // var url = `${BaseUrl}/api/product/getproduct?amount[lte]=${fi1}&page=${page}&sort=${s1}`;
+    var url ;
+
     if (category.length !== 0) {
       var temp = JSON.stringify(category);
-      url = `${BaseUrl}/api/product/getproduct?amount[lte]=${fi1}&category=${temp}&page=${page}&sort=${s1}`;
+      url = `${BaseUrl}/api/product/getproduct?amount[lte]=${pricefilter}&category=${temp}&page=${page}&sort=${s1}`;
     } else {
-      url = `${BaseUrl}/api/product/getproduct?amount[lte]=${fi1}&page=${page}`;
+      url = `${BaseUrl}/api/product/getproduct?amount[lte]=${pricefilter}&page=${page}`;
     }
 
     try {
-      const data1 = await axios.get(
+      const response = await axios.get(
         url,
         {},
         {
@@ -54,20 +63,20 @@ export default function Fruitstate(props) {
         }
       );
 
-      const data = data1.data;
-      temp = product_list;
-      temp = temp.concat(JSON.parse(data.f1));
-      let temp1 = data.count;
-      settf(temp1);
+      const data = response.data;
+      
+      temp = [...product_list , ...JSON.parse(data.products)];
+      settf(data.count);
       setproduct_list(temp);
+      setloading(false) ;
     } catch (error) {
       alert(error + "\nYou are Offline");
     }
   };
 
   const fetchfruits = async () => {
+    console.log('fetchfruits')
     var url = `${BaseUrl}/api/product/getfruits`;
-
     try {
       const data1 = await axios.get(
         url,
@@ -80,10 +89,8 @@ export default function Fruitstate(props) {
       );
 
       const data = data1.data;
-      // console.log(data)
       var temp = fruits;
       temp = temp.concat(JSON.parse(data.f1));
-      // console.log(temp) ;
       setfruits(temp);
     } catch (error) {
       alert(error + "\nYou are Offline");
@@ -92,7 +99,6 @@ export default function Fruitstate(props) {
 
   const fetchvegetables = async () => {
     var url = `${BaseUrl}/api/product/getvegetables`;
-
     try {
       const data1 = await axios.get(
         url,
@@ -105,10 +111,8 @@ export default function Fruitstate(props) {
       );
 
       const data = data1.data;
-      // console.log(data)
       var temp = vegetable;
       temp = temp.concat(JSON.parse(data.f1));
-      // console.log(temp) ;
       setvegetables(temp);
     } catch (error) {
       alert(error + "\nYou are Offline");
@@ -116,8 +120,8 @@ export default function Fruitstate(props) {
   };
 
   const fetchData1 = async () => {
+    setloading(true );
     try {
-      // console.log("IN FEtch")
       const url = `${BaseUrl}/api/wishlist/getwishlist`;
       const data1 = await axios.get(url, {
         headers: {
@@ -129,12 +133,15 @@ export default function Fruitstate(props) {
       const data = data1.data;
       var temp = JSON.parse(data.f1);
       let temp1 = data.count;
-      settf1(temp1);
       setwishlist(temp);
     } catch (error) {}
+
+    setloading(false) ;
   };
 
   const getcart = async () => {
+    setloading(true) ;
+
     try {
       const data1 = await axios.get(`${BaseUrl}/api/cart/get`, {
         headers: {
@@ -146,9 +153,12 @@ export default function Fruitstate(props) {
     } catch (error) {
       console.log(error);
     }
+    setloading(false) ;
+
   };
 
   const addwishlist = async (product_id) => {
+    setloading(true) ;
     const data1 = await axios.post(
       `${BaseUrl}/api/wishlist/insert`,
       {
@@ -161,16 +171,18 @@ export default function Fruitstate(props) {
         },
       }
     );
+    setloading(false) ;
   };
 
-  const addcart = async (p_id) => {
+  const addcart = async (p_id , quantity =1) => {
+    setloading(true) ;
     try {
       if (localStorage.getItem("token")) {
         const result = await axios.post(
           `${BaseUrl}/api/cart/insert`,
           {
             productId: p_id,
-            quantity: 1,
+            quantity
           },
           {
             headers: {
@@ -187,9 +199,13 @@ export default function Fruitstate(props) {
     } catch (error) {
       console.log(error);
     }
+    setloading(false) ;
+
   };
 
   const removehandle = async (p_id) => {
+    setloading(true) ;
+
     const result = await axios.post(
       `${BaseUrl}/api/cart/delete`,
       {
@@ -205,9 +221,12 @@ export default function Fruitstate(props) {
 
     console.log(result);
     getcart();
+    setloading(false) ;
+
   };
 
   const deletewishlist = async (product_id) => {
+    setloading(true) ;
     await axios.post(
       `${BaseUrl}/api/wishlist/remove`,
       {
@@ -221,9 +240,12 @@ export default function Fruitstate(props) {
       }
     );
     fetchData1();
+    setloading(false) ;
   };
 
   const subq = async (p_id, qunatity) => {
+    setloading(true) ;
+
     if (qunatity > 1) {
       const result = await axios.post(
         `${BaseUrl}/api/cart/reduce`,
@@ -241,23 +263,28 @@ export default function Fruitstate(props) {
       console.log(result);
       getcart();
     } else {
-      alert("Click On Remove");
+      removehandle(p_id) ;
+      // alert("Click On Remove");
     }
+    setloading(false) ;
+
   };
 
   const checkoutHandler = async (amount, add1, cart) => {
-    // alert("in ch")
+
+    // console.log(cart) ;
+
     const {
       data: { key },
     } = await axios.get(`${BaseUrl}/api/payment/key`);
-    console.log(amount) ;
+
     const {
       data: { order },
     } = await axios.post(`${BaseUrl}/api/payment/checkout`, {
       amount,
     });
-    // console.log(data)
 
+    console.log(order) ;
 
     const options = {
       key: key, // Enter the Key ID generated from the Dashboard
@@ -268,6 +295,7 @@ export default function Fruitstate(props) {
       image: l1,
       order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       handler: async function (response) {
+
         let cart1 = JSON.stringify(cart);
         const { data } = await axios.post(
           `${BaseUrl}/api/payment/verification`,
@@ -275,8 +303,8 @@ export default function Fruitstate(props) {
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
             razorpay_signature: response.razorpay_signature,
-            add1,
-            cart1,
+            address : add1 ,
+            amount
           },
           {
             headers: {
@@ -286,7 +314,6 @@ export default function Fruitstate(props) {
         );
         if (data.success) {
           toast.success("Payment Succesful");
-
           localStorage.setItem("cart", JSON.stringify([]));
           window.location.href = `/payment?referance=${response.razorpay_payment_id}`;
         }
@@ -308,7 +335,7 @@ export default function Fruitstate(props) {
     var rzp1 = new window.Razorpay(options);
 
     rzp1.on("payment.failed", function (response) {
-      // alert(response.error.code);
+      alert(response.error.code);
       // alert(response.error.description);
       // toast((t) => (
       //   <span>
@@ -365,6 +392,10 @@ export default function Fruitstate(props) {
   return (
     <Fruitcontext.Provider
       value={{
+        formdata,
+        setformdata,
+        loading, 
+        setloading,
         deletewishlist,
         addwishlist,
         fetchData1,
@@ -381,9 +412,9 @@ export default function Fruitstate(props) {
         getuserdata,
         checkoutHandler,
         category,
-        setcat,
-        fi1,
-        setfi1,
+        setCategory,
+        pricefilter,
+        setpricefilter,
         s1,
         sets1,
         total_fruits,
@@ -393,7 +424,6 @@ export default function Fruitstate(props) {
         setcart,
         page,
         setpage,
-        q1,
         subq,
         setproduct_list,
         product_list,

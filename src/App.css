@@ -224,3 +224,13 @@ color: yellow;
 .sidebar.open {
   right: 0; 
 }
+
+.checkoutbgimg {
+  background-image: url('./images/checckout.jpg');
+  background-size: cover;
+  background-position :center; /* Centers the image */
+  /* background-repeat: no-repeat;  */
+  /* width: 100vh; */
+  height: 50vw;
+  
+}

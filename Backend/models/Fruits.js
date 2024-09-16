@@ -9,6 +9,10 @@ const fruitschema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  discount : {
+    type : Number ,
+    default : 0
+  },
   desc: {
     type: String,
   },
@@ -31,4 +35,5 @@ const fruitschema = new mongoose.Schema({
 },{ timestamps: true } );
 
 const Fruit = mongoose.model("Fruit", fruitschema);
+
 module.exports = Fruit;

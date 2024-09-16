@@ -1,23 +1,22 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Home from "../components/Home";
 import arrow from "../images/right-arrow.png";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import FeaturedProducts from "../components/FeaturedProducts";
+import SpinnerLoading from "../components/SpinnerLoading";
 import Fruitcontext from "../context/Fruitcontext";
+
 export default function Hone() {
   const a = useContext(Fruitcontext) ;
-  useEffect(()=>{
-    if (a.product_list.length > 0) {
-    } else {
-      a.fetchData();
-    }
-  },[])
-  
   return (
-    <div className="bg-fixed bgimg    lg:bg-cover ">
+    <div className="bg-fixed bgimg lg:bg-cover ">
+      {a.loading && <SpinnerLoading/> }
       <div className="pt-48 h-screen">
         <div className="text-center my-auto  py-20  bg-black shadow-lg shadow-purple-300/50 bg-opacity-40 ">
-          <h1 style={{ WebkitTextStroke: '1px black', padding: '10px' }} className="font-extrabold   text-white my-auto  w-full text-center  text-7xl py-3 ">
+          <h1
+            style={{ WebkitTextStroke: "1px black", padding: "10px" }}
+            className="font-extrabold   text-white my-auto  w-full text-center  text-7xl py-3 "
+          >
             Delivering Natural Taste
           </h1>
           <div className=" my-2 py-3">
@@ -31,9 +30,8 @@ export default function Hone() {
           </div>
         </div>
       </div>
-    <FeaturedProducts title={"Featured Fruits"} />
-    <FeaturedProducts title={"Fresh Veggies"} />
-
+      <FeaturedProducts title={"fruit"} />
+      <FeaturedProducts title={"vegetable"} /> 
       <Home />
     </div>
   );

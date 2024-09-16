@@ -33,7 +33,7 @@ const Login = (props) => {
         },
       }
     );
-      console.log("r") ;
+    console.log("r") ;
     console.log(data) ;
     const json = await data.data;
    if (json.success) {

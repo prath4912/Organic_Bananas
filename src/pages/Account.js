@@ -14,9 +14,11 @@ export default function Profile() {
   const [name, setname] = useState({ first: "", last: "" });
 
   useEffect(() => {
-    if (a.profileData) {
-      setname({ first: a.profileData.firstName, last: a.profileData.lastName });
+    if (!a.profileData) {
+      a.getuserdata() ;
     }
+    if(a.profileData)
+    setname({ first: a.profileData.firstName, last: a.profileData.lastName });
   }, []);
 
   const history = useHistory();
