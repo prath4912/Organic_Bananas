@@ -8,13 +8,43 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
-  server:
+  frontend:
     build:
       context: .
+      dockerfile: Dockerfile
     environment:
       NODE_ENV: production
+      REACT_APP_BASE_URL: http://localhost:5000
+
     ports:
       - 3000:3000
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+
+      RAZORPAY_API_KEY : rzp_test_kOhQoLz9KQjYl3
+
+      RAZORPAY_API_SECRET : s3djBnODpW0kDrZVZQujDuGB
+
+      JWT_SECRET: iamprathmesh
+
+      MONGO_URL: mongodb+srv://Prath_4912:Ramila%404912@cluster0.czlgxbm.mongodb.net/ob
+
+      BASE_URL: http://localhost:3000/
+
+      CLOUD_NAME: dwq76ot6t
+
+      CLOUD_API_KEY: 553589621132741
+
+      CLOUD_API_SECREAT: AfuN4VUpspeq4H_0e9I9gAMJzqs
+
+    ports:
+      - 5000:5000
+
 
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to

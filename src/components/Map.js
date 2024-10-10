@@ -4,10 +4,10 @@ import React from "react";
 export default function Map() {
   return (
     <div className="  bg-zinc-800 py-2 lg:p-3 ">
-      <div className="flex flex-row flex-wrap items-center justify-around">
-        <div className="px-2  text-white">
+      <div className="flex flex-row flex-wrap items-center justify-around gap-2">
+        <div className="px-2  text-white mb-5 mt-5">
           <h1 className="text-3xl font-bold text-white">Contact Us</h1>
-          <address className="my-3 " itemProp="address">
+          <address className="my-3 mb-10 " itemProp="address">
             <div>
               आण्णा पवार वस्ती Near siddhnath mandir सखाराम वस्ती Umbarde
             </div>
@@ -15,7 +15,7 @@ export default function Map() {
             <div>India</div>
           </address>
           <a
-            className="bg-yellow-500 border-2 font-bold rounded text-black border-black p-2 my-3 active:scale-75 transition-all"
+            className="bg-yellow-500 border-2 font-bold rounded text-black border-black p-2 my-  active:scale-75 transition-all"
             href="https://www.google.com/maps/dir//%E0%A4%A6%E0%A5%87%E0%A4%B6%E0%A5%80+%E0%A4%95%E0%A5%87%E0%A4%B3%E0%A5%80+%28Organic+Bananas%29/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bc3db553f6c68d5:0x52a95cbe196c7709!2m2!1d74.43272!2d17.5516002"
             target="_blank"
             data-tracking-element-type="6"
@@ -23,9 +23,9 @@ export default function Map() {
           >
             Get directions
           </a>{" "}
-          <button className="bg-yellow-500 border-2 text-sm font-bold border-black p-2 my-3 ms-2 active:scale-75 transition-all rounded text-black">
+          {/* <button className="bg-yellow-500 border-2 text-sm font-bold border-black p-2 my-3 ms-2 active:scale-75 transition-all rounded text-black">
             Send Message
-          </button>
+          </button> */}
         </div>
 
         <div className=" w-full p-1.5 lg:w-1/2">

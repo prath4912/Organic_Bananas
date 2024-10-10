@@ -10,6 +10,23 @@ FROM node:${NODE_VERSION}-alpine
 
 # Use production node environment by default.
 ENV NODE_ENV production
+ENV PORT=5000
+
+ENV RAZORPAY_API_KEY=rzp_test_kOhQoLz9KQjYl3
+
+ENV RAZORPAY_API_SECRET=s3djBnODpW0kDrZVZQujDuGB
+
+ENV JWT_SECRET=iamprathmesh
+
+ENV MONGO_URL=mongodb+srv://Prath_4912:Ramila%404912@cluster0.czlgxbm.mongodb.net/ob
+
+ENV BASE_URL=http://localhost:3000/
+
+ENV CLOUD_NAME=dwq76ot6t
+
+ENV CLOUD_API_KEY=553589621132741
+
+ENV CLOUD_API_SECREAT=AfuN4VUpspeq4H_0e9I9gAMJzqs
 
 
 WORKDIR /usr/src/app

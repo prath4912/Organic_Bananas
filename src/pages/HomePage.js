@@ -7,31 +7,31 @@ import SpinnerLoading from "../components/SpinnerLoading";
 import Fruitcontext from "../context/Fruitcontext";
 
 export default function Hone() {
-  const a = useContext(Fruitcontext) ;
+  const a = useContext(Fruitcontext);
   return (
     <div className="bg-fixed bgimg lg:bg-cover ">
-      {a.loading && <SpinnerLoading/> }
-      <div className="pt-48 h-screen">
-        <div className="text-center my-auto  py-20  bg-black shadow-lg shadow-purple-300/50 bg-opacity-40 ">
+      {a.loading && <SpinnerLoading />}
+      <div className="pt-20 h-screen">
+        <div className="text-center my-auto h-screen lg:h-auto  pt-16 lg:py-16  bg-green-900 shadow-lg shadow-green-300/50 bg-opacity-30 ">
           <h1
             style={{ WebkitTextStroke: "1px black", padding: "10px" }}
-            className="font-extrabold   text-white my-auto  w-full text-center  text-7xl py-3 "
+            className="font-extrabold    text-white my-auto  w-full text-center  text-7xl py-3 "
           >
             Delivering Natural Taste
           </h1>
-          <div className=" my-2 py-3">
+          <div className=" my-10 py-3 ">
             <Link
               to="/products"
-              className="bg-white rounded  px-4 py-2  active:scale-75 transition-all hover:bg-yellow-300 border-2 border-stone-400 "
+              className=" text-green-50 text-3xl rounded font-bold bg-green-500  px-4 py-5 mt-5  active:scale-75 transition-all hover:bg-yellow-300 border hover:text-green-800 border-white "
             >
               Explore Products{"  "}
-              <img className="inline " src={arrow} width={"15"} alt="" />
+              <img className="inline " src={arrow} width={"30"} alt="" />
             </Link>
           </div>
         </div>
       </div>
       <FeaturedProducts title={"fruit"} />
-      <FeaturedProducts title={"vegetable"} /> 
+      <FeaturedProducts title={"vegetable"} />
       <Home />
     </div>
   );

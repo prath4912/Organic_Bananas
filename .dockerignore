@@ -4,8 +4,6 @@
 # For more help, visit the .dockerignore file reference guide at
 # https://docs.docker.com/engine/reference/builder/#dockerignore-file
 
-/Backend
-/build
 **/.classpath
 **/.dockerignore
 **/.env

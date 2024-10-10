@@ -38,12 +38,12 @@ function Product(props) {
         </div>
         <div className="bg-stone-100 border-t-2 border-zinc-300 text-black grow my-auto ">
           <div className="flex justify-around items-center py-2">
-            <small className="">Price : {props.amount}RS</small>
-            <div>
+            <small className="">Price: {props.amount}RS</small>
+            {props.title == "wishlist" ? (
               <button
                 onClick={() => {
-                  a.addcart(props.p_id);
-                  toast.success("Itam Added To Cart", {
+                  a.deletewishlist(props.p_id);
+                  toast.success("Item Removed From WishList", {
                     duration: 1000,
                     iconTheme: {
                       primary: "#000",
@@ -51,51 +51,48 @@ function Product(props) {
                     },
                   });
                 }}
-                className="bg-yellow-400 p-0.5 rounded border-2 border-black float-end active:scale-75 transition-all text-sm px-1 "
+                className="bg-yellow-400 p-1  lg:block rounded border border-stone-500 float-end me-1 active:scale-75 transition-all  "
               >
-                Add To{" "}
-                <img
-                  className="inline mb-1 "
-                  src={cartsym}
-                  width={"20px"}
-                  alt=""
-                />
+                <img width={"20px"} className="" src={RemoveSym} alt="" />
               </button>
-
-              {props.title == "wishlist" ? (
-                <button
-                  onClick={() => {
-                    a.deletewishlist(props.p_id);
-                    toast.success("Item Removed From WishList", {
-                      duration: 1000,
-                      iconTheme: {
-                        primary: "#000",
-                        secondary: "#fff",
-                      },
-                    });
-                  }}
-                  className="bg-yellow-400 p-1 hidden lg:block border-2 border-black float-end me-1 active:scale-75 transition-all  "
-                >
-                  <img width={"20px"} className="" src={RemoveSym} alt="" />
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    a.addwishlist(props.p_id);
-                    toast.success("Itam Added To WishList", {
-                      duration: 1000,
-                      iconTheme: {
-                        primary: "#000",
-                        secondary: "#fff",
-                      },
-                    });
-                  }}
-                  className="bg-yellow-400 p-1 hidden lg:block rounded border-2 border-black float-end me-1 active:scale-75 transition-all "
-                >
-                  <img className="" src={wishsym} width={"20px"} alt="" />
-                </button>
-              )}
-            </div>
+            ) : (
+              <button
+                onClick={() => {
+                  a.addwishlist(props.p_id);
+                  toast.success("Itam Added To WishList", {
+                    duration: 1000,
+                    iconTheme: {
+                      primary: "#000",
+                      secondary: "#fff",
+                    },
+                  });
+                }}
+                className="bg-yellow-400 p-1 hidden lg:block rounded border border-black float-end me-1 active:scale-75 transition-all "
+              >
+                <img className="" src={wishsym} width={"20px"} alt="" />
+              </button>
+            )}
+            <button
+              onClick={() => {
+                a.addcart(props.p_id);
+                toast.success("Itam Added To Cart", {
+                  duration: 1000,
+                  iconTheme: {
+                    primary: "#000",
+                    secondary: "#fff",
+                  },
+                });
+              }}
+              className="bg-yellow-400 p-0.5 rounded border border-black float-end active:scale-75 transition-all text-sm lg:px-1 "
+            >
+              Add To{" "}
+              <img
+                className="inline mb-1 "
+                src={cartsym}
+                width={"20px"}
+                alt=""
+              />
+            </button>
           </div>
         </div>
       </div>

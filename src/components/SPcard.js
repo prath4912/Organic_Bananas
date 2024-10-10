@@ -19,7 +19,7 @@ function SPcard(props) {
   }, []);
 
   return (
-    <div  className="my-3   lg:mx-2  lg:w-60 shadow-lg bg-stone-100  shadow-black/50 hover:scale-105 transition-all ">
+    <div className="my-3   lg:mx-2  lg:w-60 shadow-lg bg-stone-100  shadow-green-700/50 hover:scale-105 transition-all ">
       <div className="flex flex-col w-44 lg:w-full overflow-hidden ">
         <Link to={`/fruits/${props.name}/${props.p_id}`}>
           <img
@@ -40,27 +40,32 @@ function SPcard(props) {
             </p>
           )}
         </div>
-        <div className="bg-stone-100  border-t-2 border-zinc-300 text-black grow my-auto ">
+        <div className="bg-stone-100  border-t border-green-300 text-black grow my-auto ">
           <div className="flex flex-col lg:flex-row lg:justify-around gap-2 items-center py-1 lg:py-2">
             <small className="">Price : {props.amount}RS</small>
-              <button
-                onClick={() => {
-                  a.addcart(props.p_id);
-                  toast.success("Itam Added To Cart", {
-                    duration: 1000,
-                    iconTheme: {
-                      primary: "#000",
-                      secondary: "#fff",
-                    },
-                  });
-                }}
-                className="bg-yellow-400 w-11/12 lg:w-1/2 py-0.5  lg:p-0.5 rounded border-2 border-black float-end active:scale-75 transition-all text-sm lg:px-1 "
-              >
-                Add To{" "}
-                <img className="inline mb-1  " src={cartsym} width={"20px"} alt="" />
-              </button>
+            <button
+              onClick={() => {
+                a.addcart(props.p_id);
+                toast.success("Itam Added To Cart", {
+                  duration: 1000,
+                  iconTheme: {
+                    primary: "#000",
+                    secondary: "#fff",
+                  },
+                });
+              }}
+              className="bg-yellow-400 w-11/12 lg:w-1/2 py-0.5  lg:p-0.5 rounded border border-black float-end active:scale-75 transition-all text-sm lg:px-1 "
+            >
+              Add To{" "}
+              <img
+                className="inline mb-1  "
+                src={cartsym}
+                width={"20px"}
+                alt=""
+              />
+            </button>
 
-              {/* {props.title == "wishlist" ? (
+            {/* {props.title == "wishlist" ? (
                 <button
                   onClick={() => {
                     a.deletewishlist(props.p_id);

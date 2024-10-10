@@ -40,7 +40,7 @@ function Cart() {
                           <b>{cart.product.name}</b>
                         </h5>
                       </div>
-                      <div className="flex w-1/4 justify-center ">
+                      <div className="flex flex-col gap-0.5 lg:gap-0 lg:flex-row lg:w-1/4 justify-center ">
                         <button
                           className="bg-yellow-400 border px-1 rounded  border-black mx-1 active:scale-90 transition-all"
                           onClick={() => {
@@ -106,7 +106,7 @@ function Cart() {
           </div>
 
           {a.cart.length && (
-            <div className=" bg-white rounded h-60 p-2 px-8   border border-black">
+            <div className=" w-full lg:w-auto  bg-white rounded h-60 p-2 px-8   border border-black">
               <h5 className="font-semibold my-2">Cart Details</h5>
               <p className="">Total Items : {t_quantity}</p>
               <p className="">Cart Subtotal : {total_cost}</p>

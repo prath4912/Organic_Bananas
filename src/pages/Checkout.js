@@ -47,7 +47,7 @@ export default function Checkout() {
               id="address"
               required
             />
-            <label htmlFor="first">Enter Order Notes(Optional)</label>
+            {/* <label htmlFor="first">Enter Order Notes(Optional)</label>
             <textarea
               rows={6}
               onChange={noteschangeHandle}
@@ -56,8 +56,7 @@ export default function Checkout() {
               className="border-2 mb-2"
               type="text"
               id="address"
-              required
-            />
+            /> */}
             <br />
             <button
               className="bg-black rounded text-sm py-1 text-white active:scale-90 transition-all"

@@ -4,36 +4,38 @@
 # If you need more help, visit the Dockerfile reference guide at
 # https://docs.docker.com/engine/reference/builder/
 
+ARG NODE_VERSION=20.12.0
 
-FROM node:20.12.0
+FROM node:${NODE_VERSION}-alpine
 
 # Use production node environment by default.
-ENV NODE_ENV production
+ENV NODE_ENV=production
+ENV REACT_APP_BASE_URL=http://localhost:5000
+
 
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+# Download dependencies as a separate step to take advantage of Docker's caching.
+# Leverage a cache mount to /root/.npm to speed up subsequent builds.
+# Leverage a bind mounts to package.json and package-lock.json to avoid having to copy them into
+# into this layer.
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --omit=dev
 
-ENV REACT_APP_BASE_URL=http://localhost:5000
+RUN mkdir -p /usr/src/app/node_modules/.cache && \
+    chown -R node:node /usr/src/app/node_modules/.cache
 
+# Run the application as a non-root user.
+USER node
 
-RUN npm install
-
-
+# Copy the rest of the source files into the image.
 COPY . .
 
-
-
-# RUN npm config set registry https://registry.npmjs.org/
-
-# RUN npm install -g npm@10.8.1
-
-# RUN npm cache clean --force
-
-# RUN npm ci
-
+# Expose the port that the application listens on.
 EXPOSE 3000
 
-
-CMD [ "npm", "start" ]
+# Run the application.
+CMD npm start

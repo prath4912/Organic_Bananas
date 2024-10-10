@@ -4,9 +4,9 @@ import Plant from "../images/bananaplant.webp";
 export default function About() {
   return (
     <div>
-      <div className="flex flex-wrap-reverse lg:flex-none  lg:mx-4 bg-white my-4">
+      <div className="flex flex-wrap-reverse lg:flex-none  lg:mx-4 bg-white my-4 bg-gradient-to-r to-green-100 p-5 rounded-md from-green-900">
         <div className="lg:w-1/2	 p-1">
-          <h1 className="text-center font-bold text-6xl py-2">About Us</h1>
+          <h1 className="text-center font-bold text-6xl from-black to-white text text-gradient-to-r lg:text-slate-300 py-2">About Us</h1>
           <p className="lg:px-4 mt-2  lg:text-center">
             Organic Bananas is India's fastest growing online Vegitable and
             Fruit store.With over 200+ products and you will find everything you

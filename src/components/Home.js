@@ -17,26 +17,26 @@ export default function Home() {
   ];
   return (
     <div className="bg-stone-200  ">
-      <div className="  ">
-        <h1 className="text-center bg-stone-500 text-5xl py-4 text-white font-bold">
+      <div className=" my-28">
+        <h1 className="text-center  text-5xl py-4 text-white font-bold bg-lime-600">
           We Offer
         </h1>
-        <div className=" flex flex-wrap justify-center gap-1 lg:gap-3  bg-opacity-90 py-4   bg-gray-200 ">
+        <div className="my-12 flex flex-wrap justify-center gap-1 lg:gap-10  bg-opacity-90 py-4   bg-gray-200 ">
           {arr.map((element, index) => {
             return (
               <div
                 key={index}
-                className="bg-white w-44 rounded overflow-hidden shadow-lg border border-black hover:scale-105   transition-all"
+                className="bg-white w-44 rounded shadow-lg shadow-lime-200 overflow-hidden shadow-lg border border-zinc-400 lg:hover:scale-105   transition-all"
               >
                 <div className="w-36 mx-auto p-1 h-44 ">
                   <img
                     src={element.img}
-                    className=" overflow-hidden  hover:scale-105 transition-all"
+                    className=" overflow-hidden  lg:hover:scale-105 transition-all"
                     alt="image"
                   />
                 </div>
                 <div className="p-2 my-2">
-                  <h5 className="text-center hover:font-bold transition-all">
+                  <h5 className="text-center  lg:hover:font-bold transition-all">
                     {element.title}
                   </h5>
                 </div>

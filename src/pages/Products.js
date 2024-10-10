@@ -52,12 +52,12 @@ function Products() {
   };
 
   return (
-    <div className="pt-28 lg:pt-40  bg-zinc-100">
+    <div className="pt-28 lg:pt-32  bg-zinc-100">
       
-      <div className="flex  ">
+      <div className="flex flex-col lg:flex-row">
         <div
           style={{ minWidth: "200px" }}
-          className="bg-zinc-800 text-white me-1  p-3 rounded hidden lg:block "
+          className="bg-zinc-800 text-white me-1  p-3 lg:rounded  lg:block mb-1 lg:mb-0 ms-1 lg:ms-0 "
         >
           <h3 className="text-lg font-bold">Filters</h3>
           <div>

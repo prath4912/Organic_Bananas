@@ -14,7 +14,9 @@ export default function StarRating(props) {
     getReviews();
     let arr1 = [0, 0, 0, 0, 0];
     props.arr.forEach((ele) => {
-      arr1[ele._id - 1] = ((ele.count / props.total_ratingCount) * 100).toFixed(0);
+      arr1[ele._id - 1] = ((ele.count / props.total_ratingCount) * 100).toFixed(
+        0
+      );
     });
 
     setrP(arr1);
@@ -50,7 +52,7 @@ export default function StarRating(props) {
   };
 
   const handle = async () => {
-    console.log("in handle")
+    console.log("in handle");
     a.setloading(true);
     const result = await axios.post(
       `${a.BaseUrl}/api/review/insert`,
@@ -66,7 +68,7 @@ export default function StarRating(props) {
         },
       }
     );
-    a.setloading(false) ;
+    a.setloading(false);
   };
 
   const onPointerEnter = () => console.log("Enter");
@@ -75,11 +77,11 @@ export default function StarRating(props) {
 
   return (
     <div className="mx-4 ">
-      {a.loading && <SpinnerLoading/> }
+      {a.loading && <SpinnerLoading />}
       <div className="demo w-full lg:p-8 flex rounded flex-wrap gap-3 justify-around">
         <div className="w-full px-0.5 lg:w-2/6">
           <div>
-            <h1 className="font-bold lg:font-extrabold text-2xl ms-2 my-2">
+            <h1 className="font-bold lg:font-extrabold text-2xl lg:ms-2 my-2">
               Ratings & Reviews
             </h1>
             <div className="flex justify-around items-center my-2">
@@ -108,7 +110,8 @@ export default function StarRating(props) {
               </div>
             </div>
           </div>
-          <h1 className="font-bold lg:font-extrabold text-2xl ms-2 my-2">
+          <div className=" my-2 lg:my-0" >
+          <h1 className="font-bold lg:font-extrabold text-2xl lg:ms-2 my-2">
             Review this Fruit
           </h1>
 
@@ -122,8 +125,10 @@ export default function StarRating(props) {
             showTooltip
             SVGstyle={{ display: "inline" }}
           />
+          </div>
           <br />
-          <label htmlFor="message">Write a Review</label>
+
+          <label htmlFor="message" className="" >Write a Review</label>
           <textarea
             className="block w-full border border-black my-2 rounded"
             onChange={handleMessage}
@@ -154,7 +159,7 @@ export default function StarRating(props) {
                   year: "numeric",
                 });
                 return (
-                  <div className="border-black border w-full lg:w-auto p-2 bg-stone-200 rounded my-1">
+                  <div className="border-black border w-full lg:w-auto p-2 bg-stone-100 rounded my-1">
                     <div className=" ">
                       <img
                         className="rounded-full inline me-2"

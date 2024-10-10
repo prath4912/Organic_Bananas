@@ -65,7 +65,7 @@ export default function Fruit() {
         },
       }
     );
-    
+
     setavgRating(result.data.rating);
     settrc(result.data.total_count);
     setarr(result.data.arr);
@@ -73,12 +73,12 @@ export default function Fruit() {
   };
 
   return (
-    <div className="pt-32  bg-white border-2 border-black">
+    <div className="pt-24 lg:pt-32  bg-white border-2 border-black">
       {/* {a.loading && <SpinnerLoading/>} */}
       {item && (
         <div className=" bg-white my-2 py-4">
-          <div className="flex flex-wrap justify-center">
-            <div className=" ">
+          <div className="flex flex-row flex-wrap justify-center">
+            <div className="flex lg:block ">
               {item.image.map((ele) => {
                 return (
                   <img

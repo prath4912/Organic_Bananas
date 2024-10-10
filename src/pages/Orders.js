@@ -28,29 +28,19 @@ export default function Orders() {
     setarr(result.data);
   };
 
-  // const arr = [
-  //   { id: 1, status: "deliverd", Payment: "completed", products: ["ac", "e"] },
-  //   { id: 1, status: "deliverd", Payment: "completed", products: ["ac", "e"] },
-  //   {
-  //     id: 1,
-  //     status: "deliverd",
-  //     Payment: "completed",
-  //     products: ["ac", "e", "rw"],
-  //   },
-  // ];
   return (
     <div className="mt-28 lg:mt-40 lg:mx-32">
       <div className="">
-        <h1 className="font-bold text-lg my-4">Your Orders</h1>
+        <h1 className="font-bold text-lg my-4 ms-1">Your Orders</h1>
         <hr className="" />
         {/* <ul className="flex gap-8 my-2 ms-3">
           <a className="underline">Orders</a>
           <a className="underline">Cancelled Orders</a>
         </ul> */}
-        <div className="p-4">
+        <div className="p-0.5 lg:p-4">
           {arr.map((ele) => {
             return (
-              <div className=" mb-3 border border-black">
+              <div className=" mb-3 border border-zinc-600">
                 <div className="flex text-xs gap-2 justify-around p-2 bg-stone-200">
                   <div>
                     <p className="">Order Placed</p>
@@ -67,7 +57,7 @@ export default function Orders() {
                     <p className="text-sm">&#8377; {ele.amount}</p>
                   </div>
                   <div>
-                    <p className="" >Status</p>
+                    <p className="">Status</p>
                     <p>{ele.status}</p>
                   </div>
                   {/* <div className="text-xs">
@@ -117,11 +107,16 @@ export default function Orders() {
                         <div className="grow text-center">
                           <h5 className="">{item.product.name}</h5>
                         </div>
-                        <div className=" text-center grow ">
+                        <div className="hidden lg:block text-center grow ">
                           <p>{item.quantity} kg</p>
                         </div>
                         <div className=" text-center grow ">
-                          <p>{(item.product.amount * (1 - item.product.discount / 100))*item.quantity} Rs</p>
+                          <p>
+                            {item.product.amount *
+                              (1 - item.product.discount / 100) *
+                              item.quantity}{" "}
+                            Rs
+                          </p>
                         </div>
                         <div className="grow text-center">
                           <Link
