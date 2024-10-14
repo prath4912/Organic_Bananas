@@ -1,4 +1,4 @@
 # Organic Bananas
 
 # ER Diagram
-![ER Diagram](./images/logo.png)
+![ER Diagram](./ERDiagram.png)
